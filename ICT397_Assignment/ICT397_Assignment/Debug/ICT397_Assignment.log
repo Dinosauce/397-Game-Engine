@@ -1,2 +1,41 @@
-﻿  Matrix.cpp
-  ICT397_Assignment.vcxproj -> X:\Study\Uni\Yr3_S1\ICT397 - Adv Game Design\Assignment\ICT397_Assignment\Debug\ICT397_Assignment.exe
+﻿Build started 4/23/2017 16:59:50.
+     1>Project "E:\Perth Things\Murdoch\2017 S1\ICT397\ICT397_project\397-Game-Engine\ICT397_Assignment\ICT397_Assignment\ICT397_Assignment.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Iinclude /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp Graphics.cpp main.cpp Matrix.cpp Vector3.cpp World.cpp
+         World.cpp
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(8): warning C4003: not enough actual parameters for macro 'CreateWindowA'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(8): error C2059: syntax error : 'constant'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(21): warning C4003: not enough actual parameters for macro 'CreateWindowA'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(21): error C2059: syntax error : 'constant'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(36): warning C4003: not enough actual parameters for macro 'CreateWindowA'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(36): error C2059: syntax error : 'constant'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\world.cpp(12): warning C4003: not enough actual parameters for macro 'CreateWindowA'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\world.cpp(12): error C2059: syntax error : ','
+         Vector3.cpp
+         Matrix.cpp
+         main.cpp
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(8): warning C4003: not enough actual parameters for macro 'CreateWindowA'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(8): error C2059: syntax error : 'constant'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(21): warning C4003: not enough actual parameters for macro 'CreateWindowA'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(21): error C2059: syntax error : 'constant'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(36): warning C4003: not enough actual parameters for macro 'CreateWindowA'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(36): error C2059: syntax error : 'constant'
+         Graphics.cpp
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(8): warning C4003: not enough actual parameters for macro 'CreateWindowA'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(8): error C2059: syntax error : 'constant'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(21): warning C4003: not enough actual parameters for macro 'CreateWindowA'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(21): error C2059: syntax error : 'constant'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(36): warning C4003: not enough actual parameters for macro 'CreateWindowA'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.h(36): error C2059: syntax error : 'constant'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.cpp(7): warning C4003: not enough actual parameters for macro 'CreateWindowA'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.cpp(7): error C2062: type 'int' unexpected
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.cpp(7): error C2143: syntax error : missing ';' before '{'
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.cpp(7): error C2447: '{' : missing function header (old-style formal list?)
+     1>e:\perth things\murdoch\2017 s1\ict397\ict397_project\397-game-engine\ict397_assignment\ict397_assignment\graphics.cpp(31): warning C4305: 'argument' : truncation from 'double' to 'GLclampf'
+         Camera.cpp
+         Generating Code...
+     1>Done Building Project "E:\Perth Things\Murdoch\2017 S1\ICT397\ICT397_project\397-Game-Engine\ICT397_Assignment\ICT397_Assignment\ICT397_Assignment.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:11.50
