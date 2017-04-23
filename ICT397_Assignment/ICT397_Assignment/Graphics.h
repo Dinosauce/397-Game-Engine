@@ -5,7 +5,7 @@ class Graphics{
 		Graphics(){};
 		~Graphics(){};
 
-		virtual void CreateWindow(int width, int height, char* window_name, int* argc, char* argv[]) = 0;
+		virtual void CreateNewWindow(int width, int height, char* window_name, int* argc, char* argv[]) = 0;
 		virtual void DestroyWindow(int width, int height) = 0;
 		
 	protected:
@@ -18,7 +18,7 @@ class Graphics{
 
 
 class OpenGL : public Graphics{
-	void CreateWindow(int width, int height, char* window_name, int* argc, char* argv[]);
+	void CreateNewWindow(int width, int height, char* window_name, int* argc, char* argv[]);
 	void DestroyWindow(int width, int height);
 
 	public: 
@@ -33,7 +33,7 @@ class OpenGL : public Graphics{
 
 
 class DirectX : public Graphics{
-	void CreateWindow(int width, int height, char* window_name, int* argc, char* argv[]){};
+	void CreateNewWindow(int width, int height, char* window_name, int* argc, char* argv[]){};
 	void DestroyWindow(int width, int height){};
 };
 

@@ -4,7 +4,7 @@
 int Graphics::screen_width;
 int Graphics::screen_height;
 
-void OpenGL::CreateWindow(int width, int height, char* window_name, int* argc, char* argv[]){
+void OpenGL::CreateNewWindow(int width, int height, char* window_name, int* argc, char* argv[]){
 	glutInit(argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(0, 0);
