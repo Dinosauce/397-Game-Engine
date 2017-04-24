@@ -30,6 +30,8 @@
 
 *.pdb
 *.sdf
+*.suo
+*.opensdf
 
 ICT397_Assignment/Debug/
 ICT397_Assignment/Release/
