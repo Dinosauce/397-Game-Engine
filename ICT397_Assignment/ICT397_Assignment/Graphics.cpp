@@ -3,6 +3,7 @@
 
 int Graphics::screen_width;
 int Graphics::screen_height;
+GameObject OpenGL::DrawGrid;
 
 void OpenGL::CreateNewWindow(int width, int height, char* window_name, int* argc, char* argv[]){
 	glutInit(argc, argv);
