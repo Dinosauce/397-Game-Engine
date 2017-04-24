@@ -29,10 +29,13 @@ void OpenGL::DestroyWindow(int width, int height){
 void OpenGL::Initialize(){
 	// set background (sky colour)
 	glClearColor(97.0 / 255.0, 140.0 / 255.0, 185.0 / 255.0, 1.0);
+	DrawGrid.LoadGameObject("3Dmodels/grid.obj");
 }
 
 void OpenGL::Display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	DrawGrid.ShowGameObject();
 
 	glFlush();
 	glutSwapBuffers();
