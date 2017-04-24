@@ -2,6 +2,7 @@
 #define GRAPHICS_H
 
 #include <GL/glut.h>
+#include <time.h>
 
 class Graphics{
 	public:
@@ -9,11 +10,11 @@ class Graphics{
 		~Graphics(){};
 
 		virtual void CreateGameWindow(int width, int height, char* window_name, int* argc, char* argv[]) = 0;
-		virtual void SetKeyboardFunc(void(*func)(unsigned char, int, int)) = 0;
+		virtual void SetKeyboardDownFunc(void(*func)(unsigned char, int, int)) = 0;
+		virtual void SetKeyboardUpFunc(void(*func)(unsigned char, int, int)) = 0;
 		
 	protected:
 		static int screen_width, screen_height;
-		void(*OpenGLKeyboardFunc)(unsigned char, int, int);
 
 	//virtual bool renderTriangleStrip(Vertices* v);
 	//virtual bool renderModel(Model* m);
@@ -24,8 +25,12 @@ class Graphics{
 class OpenGL : public Graphics{
 	void CreateGameWindow(int width, int height, char* window_name, int* argc, char* argv[]);
 	
-	void SetKeyboardFunc(void(*func)(unsigned char, int, int)){
-		OpenGLKeyboardFunc = func;
+	void SetKeyboardDownFunc(void(*func)(unsigned char, int, int)){
+		OpenGLKeyboardDownFunc = func;
+	};
+
+	void SetKeyboardUpFunc(void(*func)(unsigned char, int, int)){
+		OpenGLKeyboardUpFunc = func;
 	};
 	
 	public: 
@@ -35,13 +40,20 @@ class OpenGL : public Graphics{
 		static void Initialize();
 		static void Display();
 		static void Reshape(int width, int height);
+		static void IncrementFrameCount();
+
+		static clock_t last_clock;
+		static int frame_count;
+		void(*OpenGLKeyboardDownFunc)(unsigned char, int, int);
+		void(*OpenGLKeyboardUpFunc)(unsigned char, int, int);
 };
 
 
 
 class DirectX : public Graphics{
 	void CreateGameWindow(int width, int height, char* window_name, int* argc, char* argv[]){};
-	void SetKeyboardFunc(void(*func)(unsigned char, int, int)){};
+	void SetKeyboardDownFunc(void(*func)(unsigned char, int, int)){};
+	void SetKeyboardUpFunc(void(*func)(unsigned char, int, int)){};
 };
 
 class GraphicsFactory{

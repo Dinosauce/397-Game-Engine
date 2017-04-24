@@ -10,10 +10,15 @@ class Control{
 		Control(){};
 		~Control(){};
 
-		static void OpenGLKeyboardFunc(unsigned char key, int x, int y);
+		static void SetCameraPtr(Camera* new_cam_ptr){
+			cam = new_cam_ptr;
+		};
+
+		static void OpenGLKeyboardDownFunc(unsigned char key, int x, int y);
+		static void OpenGLKeyboardUpFunc(unsigned char key, int x, int y);
 
 	private:
-		Camera* cam;
+		static Camera* cam;
 };
 
 #endif

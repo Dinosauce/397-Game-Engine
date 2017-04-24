@@ -1,10 +1,39 @@
 #include "Control.h"
 
-void Control::OpenGLKeyboardFunc(unsigned char key, int x, int y){
-	switch (key){
+Camera* Control::cam;
 
+void Control::OpenGLKeyboardDownFunc(unsigned char key, int x, int y){
+	switch (key){
+		case 'w':
+		case 'W':
+			cam->MoveForward();
+			break;
+
+		case 's':
+		case 'S':
+			cam->MoveBackward();
+			break;
+
+		case 'a':
+		case 'A':
+			cam->MoveLeft();
+			break;
+
+		case 'd':
+		case 'D':
+			cam->MoveRight();
+			break;
 
 		case 27:
 			exit(0);
+
+		default:
+			break;
 	}
+
+	glutPostRedisplay();
+}
+
+void Control::OpenGLKeyboardUpFunc(unsigned char key, int x, int y){
+
 }

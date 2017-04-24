@@ -1,7 +1,8 @@
 #include "Camera.h"
+#include <iostream>
 
 Camera::Camera(){
-	camera_mov_spd = 10.0;
+	camera_mov_spd = 1.0;
 	camera_rot_spd = 5.0;
 	move_vector.x = 0.0f; move_vector.y = 0.0f; move_vector.z = 0.0;
 
@@ -79,5 +80,5 @@ void Camera::PreventFastDiagMove(){
 	Move(move_vector);
 
 	// Reset back to zero and wait for next movement
-	//move_vector = Vector3::Zero();
+	move_vector = Vector3::Zero();
 }
