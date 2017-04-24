@@ -3,6 +3,8 @@
 
 int Graphics::screen_width;
 int Graphics::screen_height;
+clock_t OpenGL::last_clock = 0;
+int OpenGL::frame_count = 0;
 
 void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* argc, char* argv[]){
 	glutInit(argc, argv);
@@ -15,10 +17,13 @@ void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* arg
 
 	Initialize();
 
+	glutIgnoreKeyRepeat(1);
+	glutKeyboardFunc(OpenGLKeyboardDownFunc);
+	glutKeyboardUpFunc(OpenGLKeyboardUpFunc);
+
 	glutDisplayFunc(Display);
 	glutIdleFunc(Display);
 	glutReshapeFunc(Reshape);
-	glutKeyboardFunc(OpenGLKeyboardFunc);
 
 	glutMainLoop();
 }
@@ -31,7 +36,10 @@ void OpenGL::Initialize(){
 void OpenGL::Display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glFlush();
+
+	IncrementFrameCount();
+
+	//glFlush();
 	glutSwapBuffers();
 	glutPostRedisplay();
 }
@@ -52,6 +60,17 @@ void OpenGL::Reshape(int width, int height){
 	glViewport(0, 0, screen_width, screen_height);
 	gluPerspective(45.0, ratio, 0.1f, 1000.0f);
 	glMatrixMode(GL_MODELVIEW);
+}
+
+void OpenGL::IncrementFrameCount(){
+	double t = ((GLdouble)(clock() - last_clock)) / (GLdouble)CLOCKS_PER_SEC;
+	frame_count++;
+
+	//reset after t
+	if (t > 0.1){
+		frame_count = 0;
+		last_clock = clock();
+	}
 }
 
 Graphics* GraphicsFactory::Create(char* type){

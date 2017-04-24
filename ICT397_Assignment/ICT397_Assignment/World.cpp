@@ -8,10 +8,12 @@ World::World(){
 	if (! SetOpenGLGraphics())
 		std::cout << "error set openGL graphics. " << std::endl;
 	
+	control.SetCameraPtr(&cam);
 }
 
 void World::RunGame(int* argc, char* argv[]){
-	graphic_handler->SetKeyboardFunc(Control::OpenGLKeyboardFunc);
+	graphic_handler->SetKeyboardDownFunc(Control::OpenGLKeyboardDownFunc);
+	graphic_handler->SetKeyboardUpFunc(Control::OpenGLKeyboardUpFunc);
 	graphic_handler->CreateGameWindow(screen_width, screen_height, "Grid Grunt", argc, argv);
 }
 
