@@ -9,7 +9,7 @@ World::World(){
 }
 
 void World::RunGame(int* argc, char* argv[]){
-	graphic_handler->CreateWindow(screen_width, screen_height, "Grid Grunt", argc, argv);
+	graphic_handler->CreateNewWindow(screen_width, screen_height, "Grid Grunt", argc, argv);
 }
 
 bool World::SetOpenGLGraphics(){
