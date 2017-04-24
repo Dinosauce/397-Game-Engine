@@ -3,9 +3,8 @@
 
 int Graphics::screen_width;
 int Graphics::screen_height;
-GameObject OpenGL::DrawGrid;
 
-void OpenGL::CreateNewWindow(int width, int height, char* window_name, int* argc, char* argv[]){
+void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* argc, char* argv[]){
 	glutInit(argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(0, 0);
@@ -17,26 +16,20 @@ void OpenGL::CreateNewWindow(int width, int height, char* window_name, int* argc
 	Initialize();
 
 	glutDisplayFunc(Display);
-
+	glutIdleFunc(Display);
 	glutReshapeFunc(Reshape);
+	glutKeyboardFunc(OpenGLKeyboardFunc);
 
 	glutMainLoop();
-}
-
-void OpenGL::DestroyWindow(int width, int height){
-
 }
 
 void OpenGL::Initialize(){
 	// set background (sky colour)
 	glClearColor(97.0 / 255.0, 140.0 / 255.0, 185.0 / 255.0, 1.0);
-	DrawGrid.LoadGameObject("3Dmodels/grid.obj");
 }
 
 void OpenGL::Display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	DrawGrid.ShowGameObject();
 
 	glFlush();
 	glutSwapBuffers();
@@ -60,8 +53,6 @@ void OpenGL::Reshape(int width, int height){
 	gluPerspective(45.0, ratio, 0.1f, 1000.0f);
 	glMatrixMode(GL_MODELVIEW);
 }
-
-
 
 Graphics* GraphicsFactory::Create(char* type){
 	std::string type_str = type;

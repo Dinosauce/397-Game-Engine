@@ -1,4 +1,9 @@
+#ifndef WORLD_H
+#define WORLD_H
+
 #include "Graphics.h"
+#include "Camera.h"
+#include "Control.h"
 #include <iostream>
 
 class World{
@@ -26,7 +31,6 @@ class World{
 		// graphics
 		bool SetOpenGLGraphics();
 
-
 		// initialize terrai, load objects and put in container
 		void LoadWorld();
 		void UnloadWorld();
@@ -34,11 +38,18 @@ class World{
 
 
 	private:
-
 		bool game_done;
 		int screen_width, screen_height;
 
 		// graphics
 		GraphicsFactory graphics_factory;
 		Graphics* graphic_handler;
+
+		// camera
+		Camera cam;
+
+		// control
+		Control control;
 };
+
+#endif
