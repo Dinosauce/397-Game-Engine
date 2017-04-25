@@ -14,6 +14,7 @@ class Control{
 			cam = new_cam_ptr;
 		};
 
+
 		static void OpenGLKeyboardDownFunc(unsigned char key, int x, int y);
 		static void OpenGLKeyboardUpFunc(unsigned char key, int x, int y);
 

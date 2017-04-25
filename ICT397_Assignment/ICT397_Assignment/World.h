@@ -4,6 +4,7 @@
 #include "Graphics.h"
 #include "Camera.h"
 #include "Control.h"
+#include "GameTime.h"
 #include <iostream>
 
 class World{
@@ -50,6 +51,9 @@ class World{
 
 		// control
 		Control control;
+
+		// game time
+		GameTime game_time;
 };
 
 #endif

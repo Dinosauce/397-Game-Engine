@@ -6,11 +6,13 @@ Camera::Camera(){
 	camera_rot_spd = 5.0;
 	move_vector.x = 0.0f; move_vector.y = 0.0f; move_vector.z = 0.0;
 
-	MoveTo(Vector3(), Vector3());
+	MoveTo(Vector3(-1.0, 0.0, -1.0), Vector3());
+	is_moving = false;
 }
 
 void Camera::MoveForward(){
 	move_vector.z = 1;
+	is_moving = true;
 
 	// Normalize the vector so that it does not move faster diagonally
 	if (move_vector != Vector3::Zero())
@@ -19,6 +21,7 @@ void Camera::MoveForward(){
 
 void Camera::MoveBackward(){
 	move_vector.z = -1;
+	is_moving = true;
 
 	// Normalize the vector so that it does not move faster diagonally
 	if (move_vector != Vector3::Zero())
@@ -27,6 +30,7 @@ void Camera::MoveBackward(){
 
 void Camera::MoveLeft(){
 	move_vector.x = 1;
+	is_moving = true;
 
 	// Normalize the vector so that it does not move faster diagonally
 	if (move_vector != Vector3::Zero())
@@ -35,6 +39,7 @@ void Camera::MoveLeft(){
 
 void Camera::MoveRight(){
 	move_vector.x = -1;
+	is_moving = true;
 
 	// Normalize the vector so that it does not move faster diagonally
 	if (move_vector != Vector3::Zero())

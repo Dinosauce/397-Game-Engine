@@ -8,7 +8,11 @@ World::World(){
 	if (! SetOpenGLGraphics())
 		std::cout << "error set openGL graphics. " << std::endl;
 	
+	cam.SetGameTimePtr(&game_time);
 	control.SetCameraPtr(&cam);
+	graphic_handler->SetCameraPtr(&cam);
+	graphic_handler->SetGameTimePtr(&game_time);
+	
 }
 
 void World::RunGame(int* argc, char* argv[]){

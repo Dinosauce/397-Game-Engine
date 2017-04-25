@@ -35,5 +35,19 @@ void Control::OpenGLKeyboardDownFunc(unsigned char key, int x, int y){
 }
 
 void Control::OpenGLKeyboardUpFunc(unsigned char key, int x, int y){
+	switch (key){
+	case 'w':
+	case 'W':
+	case 's':
+	case 'S':
+	case 'a':
+	case 'A':
+	case 'd':
+	case 'D':
+		cam->SetIsMoving(false);
+		break;
 
+	default:
+		break;
+	}
 }

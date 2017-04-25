@@ -1,10 +1,12 @@
 #include "Graphics.h"
 #include <string>
+#include "Vector3.h"
 
 int Graphics::screen_width;
 int Graphics::screen_height;
-clock_t OpenGL::last_clock = 0;
-int OpenGL::frame_count = 0;
+
+Camera* Graphics::cam;
+GameTime* Graphics::game_time;
 
 void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* argc, char* argv[]){
 	glutInit(argc, argv);
@@ -36,8 +38,15 @@ void OpenGL::Initialize(){
 void OpenGL::Display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
-	IncrementFrameCount();
+	CallLookAt();
+	
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glBegin(GL_POLYGON);
+		glVertex3i(0, 0, 10);
+		glVertex3i(10, 0, 10);
+		glVertex3i(10, 10, 10);
+		glVertex3i(0, 10, 10);
+	glEnd();
 
 	//glFlush();
 	glutSwapBuffers();
@@ -62,15 +71,12 @@ void OpenGL::Reshape(int width, int height){
 	glMatrixMode(GL_MODELVIEW);
 }
 
-void OpenGL::IncrementFrameCount(){
-	double t = ((GLdouble)(clock() - last_clock)) / (GLdouble)CLOCKS_PER_SEC;
-	frame_count++;
+void OpenGL::CallLookAt(){
+	glLoadIdentity();
+	gluLookAt(cam->GetCameraPos().x, cam->GetCameraPos().y, cam->GetCameraPos().z,
+		cam->GetCameraLookAt().x, cam->GetCameraLookAt().y, cam->GetCameraLookAt().z,
+		0, 1, 0);
 
-	//reset after t
-	if (t > 0.1){
-		frame_count = 0;
-		last_clock = clock();
-	}
 }
 
 Graphics* GraphicsFactory::Create(char* type){

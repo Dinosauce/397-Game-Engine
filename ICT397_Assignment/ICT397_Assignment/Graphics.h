@@ -2,7 +2,9 @@
 #define GRAPHICS_H
 
 #include <GL/glut.h>
-#include <time.h>
+#include "Camera.h"
+#include "GameTime.h"
+#include "Control.h"
 
 class Graphics{
 	public:
@@ -12,9 +14,19 @@ class Graphics{
 		virtual void CreateGameWindow(int width, int height, char* window_name, int* argc, char* argv[]) = 0;
 		virtual void SetKeyboardDownFunc(void(*func)(unsigned char, int, int)) = 0;
 		virtual void SetKeyboardUpFunc(void(*func)(unsigned char, int, int)) = 0;
-		
+
+		void SetCameraPtr(Camera* new_cam_ptr){
+			cam = new_cam_ptr;
+		};
+
+		void SetGameTimePtr(GameTime* new_game_time_ptr){
+			game_time = new_game_time_ptr;
+		}
+
 	protected:
 		static int screen_width, screen_height;
+		static Camera* cam;
+		static GameTime* game_time;
 
 	//virtual bool renderTriangleStrip(Vertices* v);
 	//virtual bool renderModel(Model* m);
@@ -40,10 +52,8 @@ class OpenGL : public Graphics{
 		static void Initialize();
 		static void Display();
 		static void Reshape(int width, int height);
-		static void IncrementFrameCount();
+		static void CallLookAt();
 
-		static clock_t last_clock;
-		static int frame_count;
 		void(*OpenGLKeyboardDownFunc)(unsigned char, int, int);
 		void(*OpenGLKeyboardUpFunc)(unsigned char, int, int);
 };
