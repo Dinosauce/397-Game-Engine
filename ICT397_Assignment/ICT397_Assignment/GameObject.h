@@ -1,3 +1,5 @@
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
 #include "ObjectLoader.h"
 
 class GameObject
@@ -12,7 +14,6 @@ class GameObject
 		ObjectLoader OL;
 		bool res;
 		const char * pathName;
-		std::vector< glm::vec3 > vertices;
-		std::vector< glm::vec2 > uvs;
-		std::vector< glm::vec3 > normals;
 };
+
+#endif

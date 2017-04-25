@@ -5,6 +5,7 @@ int Graphics::screen_width;
 int Graphics::screen_height;
 clock_t OpenGL::last_clock = 0;
 int OpenGL::frame_count = 0;
+GameObject OpenGL::ObjectGrids;
 
 void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* argc, char* argv[]){
 	glutInit(argc, argv);
@@ -31,6 +32,9 @@ void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* arg
 void OpenGL::Initialize(){
 	// set background (sky colour)
 	glClearColor(97.0 / 255.0, 140.0 / 255.0, 185.0 / 255.0, 1.0);
+
+	ObjectGrids.LoadGameObject("3Dmodels/grid.obj");
+
 }
 
 void OpenGL::Display(){
@@ -38,6 +42,8 @@ void OpenGL::Display(){
 
 
 	IncrementFrameCount();
+
+	ObjectGrids.ShowGameObject();
 
 	//glFlush();
 	glutSwapBuffers();
