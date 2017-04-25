@@ -3,6 +3,8 @@
 Camera* Control::cam;
 
 void Control::OpenGLKeyboardDownFunc(unsigned char key, int x, int y){
+	
+
 	switch (key){
 		case 'w':
 		case 'W':
@@ -40,11 +42,13 @@ void Control::OpenGLKeyboardUpFunc(unsigned char key, int x, int y){
 	case 'W':
 	case 's':
 	case 'S':
+		cam->SetIsMovingFB(false);
+		break;
 	case 'a':
 	case 'A':
 	case 'd':
 	case 'D':
-		cam->SetIsMoving(false);
+		cam->SetIsMovingLR(false);
 		break;
 
 	default:

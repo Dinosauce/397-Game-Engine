@@ -4,46 +4,67 @@
 Camera::Camera(){
 	camera_mov_spd = 1.0;
 	camera_rot_spd = 5.0;
-	move_vector.x = 0.0f; move_vector.y = 0.0f; move_vector.z = 0.0;
+	//move_vector.x = 0.0f; move_vector.y = 0.0f; move_vector.z = 0.0;
 
 	MoveTo(Vector3(-1.0, 0.0, -1.0), Vector3());
-	is_moving = false;
+	is_moving_fb = false;
+	is_moving_lr = false;
+}
+
+void Camera::CheckCamera(){
+	if (is_moving_fb || is_moving_lr){
+		PreventFastDiagMove();
+	}
+	
+	if (!is_moving_fb)
+		move_vector.z = 0.0;
+	if (!is_moving_lr)
+		move_vector.x = 0.0;
+	
 }
 
 void Camera::MoveForward(){
 	move_vector.z = 1;
-	is_moving = true;
+	is_moving_fb = true;
 
 	// Normalize the vector so that it does not move faster diagonally
 	if (move_vector != Vector3::Zero())
-		PreventFastDiagMove();
+		move_vector.Normalize();
+		move_vector = move_vector * camera_mov_spd;
+		Move(move_vector);
 }
 
 void Camera::MoveBackward(){
 	move_vector.z = -1;
-	is_moving = true;
+	is_moving_fb = true;
 
 	// Normalize the vector so that it does not move faster diagonally
 	if (move_vector != Vector3::Zero())
-		PreventFastDiagMove();
+		move_vector.Normalize();
+		move_vector = move_vector * camera_mov_spd;
+		Move(move_vector);
 }
 
 void Camera::MoveLeft(){
 	move_vector.x = 1;
-	is_moving = true;
+	is_moving_lr = true;
 
 	// Normalize the vector so that it does not move faster diagonally
 	if (move_vector != Vector3::Zero())
-		PreventFastDiagMove();
+		move_vector.Normalize();
+		move_vector = move_vector * camera_mov_spd;
+		Move(move_vector);
 }
 
 void Camera::MoveRight(){
 	move_vector.x = -1;
-	is_moving = true;
+	is_moving_lr = true;
 
 	// Normalize the vector so that it does not move faster diagonally
 	if (move_vector != Vector3::Zero())
-		PreventFastDiagMove();
+		move_vector.Normalize();
+		move_vector = move_vector * camera_mov_spd;
+		Move(move_vector);
 }
 
 void Camera::MoveTo(Vector3 new_pos, Vector3 new_rot){
@@ -83,7 +104,4 @@ void Camera::PreventFastDiagMove(){
 	move_vector.Normalize();
 	move_vector = move_vector * camera_mov_spd;
 	Move(move_vector);
-
-	// Reset back to zero and wait for next movement
-	move_vector = Vector3::Zero();
 }

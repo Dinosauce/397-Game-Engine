@@ -38,7 +38,10 @@ void OpenGL::Initialize(){
 void OpenGL::Display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	game_time->GetElapsedTime();
+	cam->CheckCamera();
 	CallLookAt();
+
 	
 	glColor3f(1.0f, 0.0f, 0.0f);
 	glBegin(GL_POLYGON);

@@ -14,9 +14,12 @@ class Camera{
 		void MoveLeft();
 		void MoveRight();
 
-		bool IsMoving(){ return is_moving; };
-		void SetIsMoving(bool new_state){ is_moving = new_state; };
-		void PreventFastDiagMove();
+		bool IsMovingFB(){ return is_moving_fb; };
+		bool IsMovingLR(){ return is_moving_lr; };
+		void SetIsMovingFB(bool new_state){ is_moving_fb = new_state; };
+		void SetIsMovingLR(bool new_state){ is_moving_lr = new_state; };
+		void CheckCamera();
+		
 
 		Vector3 GetCameraPos(){ return camera_pos; };
 
@@ -31,6 +34,7 @@ class Camera{
 		void UpdateLookAt();
 		Vector3 PreviewMove(Vector3 amount);
 		void Move(Vector3 scale);
+		void PreventFastDiagMove();
 
 		Vector3 camera_pos;
 		Vector3 camera_rot;
@@ -39,7 +43,8 @@ class Camera{
 		Vector3 camera_look_at;
 
 		Vector3 move_vector;
-		bool is_moving;
+		bool is_moving_fb;
+		bool is_moving_lr;
 
 		GameTime* game_time;
 		float delta_time;
