@@ -5,13 +5,20 @@
 
 class GameTime{
 	public:
-		GameTime(){};
+		GameTime(){
+			last_clock = 0.0;
+			last_clock_fps = 0.0;
+		};
 
-		double GetElapsedTime();
+		double GetElapsedTimeSecond();
+		int GetFps();
 
 		clock_t last_clock;
-		int frame_count;
 		double delta_time;
+
+		double delta_time_fps;
+		clock_t last_clock_fps;
+		int frame_count;
 		int fps;
 };
 

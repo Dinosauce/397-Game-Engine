@@ -4,6 +4,8 @@
 
 int Graphics::screen_width;
 int Graphics::screen_height;
+double Graphics::elapsed_time_second;
+int Graphics::fps;
 
 Camera* Graphics::cam;
 GameTime* Graphics::game_time;
@@ -22,6 +24,8 @@ void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* arg
 	glutIgnoreKeyRepeat(1);
 	glutKeyboardFunc(OpenGLKeyboardDownFunc);
 	glutKeyboardUpFunc(OpenGLKeyboardUpFunc);
+	glutWarpPointer(width / 2, height / 2);
+	glutPassiveMotionFunc(OpenGLPassiveMouseFunc);
 
 	glutDisplayFunc(Display);
 	glutIdleFunc(Display);
@@ -38,10 +42,11 @@ void OpenGL::Initialize(){
 void OpenGL::Display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	game_time->GetElapsedTime();
+	elapsed_time_second = game_time->GetElapsedTimeSecond();
+	fps = game_time->GetFps();
+	cam->SetCameraSpdWithDT(elapsed_time_second);
 	cam->CheckCamera();
 	CallLookAt();
-
 	
 	glColor3f(1.0f, 0.0f, 0.0f);
 	glBegin(GL_POLYGON);
