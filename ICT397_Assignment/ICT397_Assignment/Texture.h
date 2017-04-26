@@ -3,7 +3,6 @@
 
 #include <GL/glew.h>
 #include <gl/gl.h>
-#include "stb_image.h"
 #include <map>
 #include <iostream>
 using namespace std;

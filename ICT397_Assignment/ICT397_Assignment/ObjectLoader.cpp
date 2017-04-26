@@ -166,6 +166,7 @@ void ObjectLoader::MeshEntry::Init(const std::vector<Vertex>& Vertices, const st
 
 void ObjectLoader::Render()
 {
+	glEnable(GL_TEXTURE_2D);
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
