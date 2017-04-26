@@ -35,7 +35,7 @@ void OpenGL::Initialize(){
 	glewInit();
 	
 
-	ObjectGrids.LoadGameObject("3Dmodels/grid.obj");
+	ObjectGrids.LoadGameObject("3Dmodels/terrain/grid.obj");
 
 }
 

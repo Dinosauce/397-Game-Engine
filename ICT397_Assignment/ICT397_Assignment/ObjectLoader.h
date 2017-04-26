@@ -9,7 +9,7 @@
 #include <assimp/mesh.h>  
 #include <assimp/postprocess.h>
 #include <assimp/texture.h>// Post processing fla
-//#include "Texture.h"
+#include "Texture.h"
 using namespace std;
 
 struct Vertex
@@ -43,7 +43,7 @@ private:
 
 	void InitMesh(unsigned int Index, const aiMesh* paiMesh);
 
-	//bool InitMaterials(const aiScene* pScene, const string& filename);
+	bool InitMaterials(const aiScene* pScene, const string& filename);
 
 	void Clear();
 
@@ -64,7 +64,7 @@ private:
 	};
 
 	vector<MeshEntry> m_Entries;
-	//vector<Texture*> m_Textures;
+	vector<Texture*> m_Textures;
 };
 
 #endif

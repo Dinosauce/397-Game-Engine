@@ -38,7 +38,7 @@ bool ObjectLoader::LoadMesh(const string& filename)
 bool ObjectLoader::InitFromScene(const aiScene* pScene, const std::string& Filename)
 {
 	m_Entries.resize(pScene->mNumMeshes);
-	//m_Textures.resize(pScene->mNumMaterials);
+	m_Textures.resize(pScene->mNumMaterials);
 
 	for (unsigned int i = 0; i < m_Entries.size(); i++)
 	{
@@ -46,15 +46,15 @@ bool ObjectLoader::InitFromScene(const aiScene* pScene, const std::string& Filen
 		InitMesh(i, paiMesh);
 	}
 
-	return true;//InitMaterials(pScene, Filename);
+	return InitMaterials(pScene, Filename);
 }
 
 void ObjectLoader::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 {
 	m_Entries[Index].MaterialIndex = paiMesh->mMaterialIndex;
 
-	std::vector<Vertex> Vertices;
-	std::vector<unsigned int> indices;
+	vector<Vertex> Vertices;
+	vector<unsigned int> indices;
 
 	const aiVector3D Zero3D(0.0f, 0.0f, 0.0f);
 
@@ -80,7 +80,7 @@ void ObjectLoader::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 	m_Entries[Index].Init(Vertices, indices);
 }
 
-/*
+
 bool ObjectLoader::InitMaterials(const aiScene* pScene, const std::string& Filename)
 {
 	std::string::size_type SlashIndex = Filename.find_last_of("/");
@@ -114,9 +114,9 @@ bool ObjectLoader::InitMaterials(const aiScene* pScene, const std::string& Filen
 			{
 				std::string FullPath = Dir + "/" + Path.data;
 
-				m_Textures[i] = new Texture(GL_TEXTURE_2D, FullPath.c_str());
+				m_Textures[i] = new Texture();
 
-				if (!m_Textures[i]->Load())
+				if (!m_Textures[i]->Load(FullPath.c_str(), i, GL_RGBA, GL_RGBA, 0, 0))
 				{
 					printf("Error loading texture '%s' \n", FullPath.c_str());
 					delete m_Textures[i];
@@ -129,15 +129,11 @@ bool ObjectLoader::InitMaterials(const aiScene* pScene, const std::string& Filen
 				}
 			}
 		}
-		if (!m_Textures[i])
-		{
-			m_Textures[i] = new Texture(GL_TEXTURE_2D, "../Content/white.png");
-			Ret = m_Textures[i]->Load();
-		}
+
 	}
 	return Ret;
 }
-*/
+
 
 ObjectLoader::MeshEntry::MeshEntry()
 {
@@ -182,11 +178,11 @@ void ObjectLoader::Render()
 		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)20);
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Entries[i].IB);
-		/*const unsigned int MaterialIndex = m_Entries[i].MaterialIndex;
+		const unsigned int MaterialIndex = m_Entries[i].MaterialIndex;
 		if (MaterialIndex < m_Textures.size() && m_Textures[MaterialIndex])
 		{
-			m_Textures[MaterialIndex]->Bind(GL_TEXTURE0);
-		}*/
+			m_Textures[MaterialIndex]->Bind(MaterialIndex);
+		}
 		glDrawElements(GL_TRIANGLES, m_Entries[i].NumIndices, GL_UNSIGNED_INT, 0);
 	}
 
