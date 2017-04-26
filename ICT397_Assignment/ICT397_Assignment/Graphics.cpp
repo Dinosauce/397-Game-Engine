@@ -31,6 +31,7 @@ void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* arg
 void OpenGL::Initialize(){
 	// set background (sky colour)
 	glClearColor(97.0 / 255.0, 140.0 / 255.0, 185.0 / 255.0, 1.0);
+	glewInit();
 }
 
 void OpenGL::Display(){
