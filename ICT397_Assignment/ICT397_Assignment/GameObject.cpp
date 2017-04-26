@@ -8,13 +8,13 @@ GameObject::GameObject()
 void GameObject::LoadGameObject(const char *path)
 {
 	pathName = path;
-	res = OL.loadOBJ(pathName, vertices, uvs, normals);
+	res = OL.LoadMesh(pathName);
 }
 
 void GameObject::ShowGameObject()
 {
 	if (res)
 	{
-		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
+		OL.Render();
 	}
 }

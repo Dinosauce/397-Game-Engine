@@ -1,6 +1,7 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
+#include "GameObject.h"
 #include <GL/glut.h>
 #include <time.h>
 
@@ -46,6 +47,8 @@ class OpenGL : public Graphics{
 		static int frame_count;
 		void(*OpenGLKeyboardDownFunc)(unsigned char, int, int);
 		void(*OpenGLKeyboardUpFunc)(unsigned char, int, int);
+
+		static GameObject ObjectGrids;
 };
 
 

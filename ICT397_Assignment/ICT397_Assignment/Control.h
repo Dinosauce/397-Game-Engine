@@ -1,7 +1,7 @@
 #ifndef CONTROL_H
 #define CONTROL_H
 
-#include <GL\glut.h>
+#include <GL/glut.h>
 #include <stdlib.h>
 #include "Camera.h"
 
