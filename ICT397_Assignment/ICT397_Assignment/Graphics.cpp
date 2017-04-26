@@ -32,6 +32,8 @@ void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* arg
 void OpenGL::Initialize(){
 	// set background (sky colour)
 	glClearColor(97.0 / 255.0, 140.0 / 255.0, 185.0 / 255.0, 1.0);
+	glewInit();
+	
 
 	ObjectGrids.LoadGameObject("3Dmodels/grid.obj");
 
@@ -39,7 +41,11 @@ void OpenGL::Initialize(){
 
 void OpenGL::Display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glLoadIdentity();
 
+	gluLookAt(-150, 100, 50,
+		0, 40, -20,
+		0, 1, 0);
 
 	IncrementFrameCount();
 
@@ -64,8 +70,9 @@ void OpenGL::Reshape(int width, int height){
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glViewport(0, 0, screen_width, screen_height);
-	gluPerspective(45.0, ratio, 0.1f, 1000.0f);
+	gluPerspective(90.0, ratio, 0.1f, 1000.0f);
 	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 }
 
 void OpenGL::IncrementFrameCount(){
