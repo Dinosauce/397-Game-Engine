@@ -2,7 +2,6 @@
 #define CONTROL_H
 
 #include <GL\glut.h>
-#include <stdlib.h>
 #include "Camera.h"
 
 class Control{

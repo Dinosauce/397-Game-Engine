@@ -43,7 +43,7 @@ void OpenGL::Display(){
 
 	elapsed_time_second = game_time->GetElapsedTimeSecond();
 	fps = game_time->GetFps();
-	cam->SetCameraSpdWithDT(elapsed_time_second);
+	cam->SetCameraSpdWithDT((float)elapsed_time_second);
 	cam->CheckCamera();
 	CallLookAt();
 	

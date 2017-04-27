@@ -1,4 +1,5 @@
 #include "Control.h"
+#include <stdlib.h>
 
 Camera* Control::cam;
 int Control::mouse_x_org = 0;
