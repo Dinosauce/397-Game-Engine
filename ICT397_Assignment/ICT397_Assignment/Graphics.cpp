@@ -1,6 +1,5 @@
 #include "Graphics.h"
 #include <string>
-#include "Vector3.h"
 
 int Graphics::screen_width;
 int Graphics::screen_height;

@@ -28,15 +28,15 @@ void Camera::SetCameraRotation(float delta_x, float delta_y){
 	rotation_buffer.y -= 0.01f * delta_y * camera_rot_spd_with_dt;
 
 	// No move over the ground and back to the top
-	if (rotation_buffer.y < GameMathHelp::ToRadians(-75.0f))
-		rotation_buffer.y = rotation_buffer.y - (rotation_buffer.y - GameMathHelp::ToRadians(-75.0f));
+	if (rotation_buffer.y < MathHelp::ToRadians(-75.0f))
+		rotation_buffer.y = rotation_buffer.y - (rotation_buffer.y - MathHelp::ToRadians(-75.0f));
 
-	if (rotation_buffer.y > GameMathHelp::ToRadians(75.0f))
-		rotation_buffer.y = rotation_buffer.y - (rotation_buffer.y - GameMathHelp::ToRadians(75.0f));
+	if (rotation_buffer.y > MathHelp::ToRadians(75.0f))
+		rotation_buffer.y = rotation_buffer.y - (rotation_buffer.y - MathHelp::ToRadians(75.0f));
 
 	camera_rot = Vector3(
-		-GameMathHelp::Clamp(rotation_buffer.y, GameMathHelp::ToRadians(-75.0f), GameMathHelp::ToRadians(75.0f)),
-		-GameMathHelp::WrapAngle(rotation_buffer.x),
+		-MathHelp::Clamp(rotation_buffer.y, MathHelp::ToRadians(-75.0f), MathHelp::ToRadians(75.0f)),
+		-MathHelp::WrapAngle(rotation_buffer.x),
 		0.0
 		);
 	UpdateLookAt();

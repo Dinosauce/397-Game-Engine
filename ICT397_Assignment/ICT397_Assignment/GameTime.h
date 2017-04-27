@@ -6,8 +6,8 @@
 class GameTime{
 	public:
 		GameTime(){
-			last_clock = 0.0;
-			last_clock_fps = 0.0;
+			last_clock = 0;
+			last_clock_fps = 0;
 		};
 
 		double GetElapsedTimeSecond();

@@ -1,15 +1,14 @@
 #include "GameTime.h"
-#include <iostream>
 
 double GameTime::GetElapsedTimeSecond(){
-	delta_time = ((double)clock() - (double)last_clock) / CLOCKS_PER_SEC;
+	delta_time = (double)(clock() - last_clock) / CLOCKS_PER_SEC;
 	last_clock = clock();
 	
 	return delta_time;
 }
 
 int GameTime::GetFps(){
-	delta_time_fps = ((double)clock() - (double)last_clock_fps) / CLOCKS_PER_SEC;
+	delta_time_fps = (double)(clock() - last_clock_fps) / CLOCKS_PER_SEC;
 	frame_count++;
 
 	//reset after 1 s
