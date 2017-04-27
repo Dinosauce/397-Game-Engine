@@ -3,11 +3,11 @@
 // ==========================
 // MathHelp
 // ==========================
-float MathHelp::ToRadians(float degrees){
+float MathHelp::ToRadians(const float & degrees){
 	return (degrees * _PI / 180);
 }
 
-float MathHelp::Clamp(float value, float min, float max){
+float MathHelp::Clamp(const float & value, const float & min, const float & max){
 	if (value < min){
 		return min;
 	}
@@ -17,7 +17,7 @@ float MathHelp::Clamp(float value, float min, float max){
 	return value;
 }
 
-float MathHelp::FloatMod(float var1, float var2){
+float MathHelp::FloatMod(const float & var1, const float & var2){
 	if (var2 == 0.0)
 		return var1;
 
@@ -51,7 +51,7 @@ float MathHelp::FloatMod(float var1, float var2){
 	return rem;
 }
 
-float MathHelp::WrapAngle(float angle){
+float MathHelp::WrapAngle(const float & angle){
 	return (FloatMod((angle + _PI), _TWO_PI) - _PI);
 }
 
@@ -243,7 +243,7 @@ Matrix Matrix::operator *(const Matrix &var2){
 	return ret;
 }
 
-Matrix Matrix::CreateRotationX(float rad){
+Matrix Matrix::CreateRotationX(const float & rad){
 	Matrix ret = Identity();
 
 	ret.matrix[1][1] = cos(rad);
@@ -254,7 +254,7 @@ Matrix Matrix::CreateRotationX(float rad){
 	return ret;
 }
 
-Matrix Matrix::CreateRotationY(float rad){
+Matrix Matrix::CreateRotationY(const float & rad){
 	Matrix ret = Identity();
 
 	ret.matrix[0][0] = cos(rad);
@@ -265,7 +265,7 @@ Matrix Matrix::CreateRotationY(float rad){
 	return ret;
 }
 
-Matrix Matrix::CreateRotationZ(float rad){
+Matrix Matrix::CreateRotationZ(const float & rad){
 	Matrix ret;
 
 	ret.matrix[0][0] = cos(rad);

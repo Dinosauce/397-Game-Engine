@@ -1,11 +1,11 @@
 #include "Control.h"
-#include <stdlib.h>
 
 Camera* Control::cam;
 int Control::mouse_x_org = 0;
 int Control::mouse_y_org = 1;
 int Control::screen_width = 0;
 int Control::screen_height = 0;
+void(*Control::QuitGame)();
 
 void Control::OpenGLKeyboardDownFunc(unsigned char key, int x, int y){
 	
@@ -32,7 +32,7 @@ void Control::OpenGLKeyboardDownFunc(unsigned char key, int x, int y){
 			break;
 
 		case 27:
-			exit(0);
+			QuitGame();
 
 		default:
 			break;

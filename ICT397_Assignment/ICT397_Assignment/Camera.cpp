@@ -22,7 +22,7 @@ void Camera::CheckCamera(){
 		move_vector.x = 0.0;
 }
 
-void Camera::SetCameraRotation(float delta_x, float delta_y){
+void Camera::SetCameraRotation(const float & delta_x, const float & delta_y){
 	// Cache mouse location
 	rotation_buffer.x -= 0.01f * delta_x * camera_rot_spd_with_dt;
 	rotation_buffer.y -= 0.01f * delta_y * camera_rot_spd_with_dt;
@@ -90,7 +90,7 @@ void Camera::MoveRight(){
 	}
 }
 
-void Camera::MoveTo(Vector3 new_pos, Vector3 new_rot){
+void Camera::MoveTo(const Vector3 & new_pos, const Vector3 & new_rot){
 	camera_pos = new_pos;
 	camera_rot = new_rot;
 	UpdateLookAt();
@@ -107,7 +107,7 @@ void Camera::UpdateLookAt(){
 	camera_look_at = camera_pos + look_at_offset;
 }
 
-Vector3 Camera::PreviewMove(Vector3 amount){
+Vector3 Camera::PreviewMove(const Vector3 & amount){
 	//Create a rotate matrix
 	Matrix rotate = Matrix::CreateRotationY(camera_rot.y);
 
@@ -119,7 +119,7 @@ Vector3 Camera::PreviewMove(Vector3 amount){
 	return camera_pos + movement;
 }
 
-void Camera::Move(Vector3 scale){
+void Camera::Move(const Vector3 & scale){
 	MoveTo(PreviewMove(scale), camera_rot);
 }
 

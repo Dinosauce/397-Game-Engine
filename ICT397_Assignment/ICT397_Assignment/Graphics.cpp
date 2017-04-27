@@ -3,11 +3,14 @@
 
 int Graphics::screen_width;
 int Graphics::screen_height;
-double Graphics::elapsed_time_second;
-int Graphics::fps;
+void(*Graphics::WorldInitialize)();
+void(*Graphics::WorldUpdate)();
+Vector3 Graphics::camera_pos;
+Vector3 Graphics::camera_look_at;
 
-Camera* Graphics::cam;
-GameTime* Graphics::game_time;
+void(*OpenGL::OpenGLKeyboardDownFunc)(unsigned char, int, int);
+void(*OpenGL::OpenGLKeyboardUpFunc)(unsigned char, int, int);
+void(*OpenGL::OpenGLPassiveMouseFunc)(int, int);
 
 void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* argc, char* argv[]){
 	glutInit(argc, argv);
@@ -36,15 +39,20 @@ void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* arg
 void OpenGL::Initialize(){
 	// set background (sky colour)
 	glClearColor(97.0 / 255.0, 140.0 / 255.0, 185.0 / 255.0, 1.0);
+
+	WorldInitialize();
 }
 
 void OpenGL::Display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	/*
 	elapsed_time_second = game_time->GetElapsedTimeSecond();
 	fps = game_time->GetFps();
-	cam->SetCameraSpdWithDT((float)elapsed_time_second);
+	cam->SetCameraSpdWithDT(elapsed_time_second);
 	cam->CheckCamera();
+	*/
+
+	WorldUpdate();
 	CallLookAt();
 	
 	glColor3f(1.0f, 0.0f, 0.0f);
@@ -80,10 +88,9 @@ void OpenGL::Reshape(int width, int height){
 
 void OpenGL::CallLookAt(){
 	glLoadIdentity();
-	gluLookAt(cam->GetCameraPos().x, cam->GetCameraPos().y, cam->GetCameraPos().z,
-		cam->GetCameraLookAt().x, cam->GetCameraLookAt().y, cam->GetCameraLookAt().z,
+	gluLookAt(camera_pos.x, camera_pos.y, camera_pos.z,
+		camera_look_at.x, camera_look_at.y, camera_look_at.z,
 		0, 1, 0);
-
 }
 
 Graphics* GraphicsFactory::Create(char* type){
