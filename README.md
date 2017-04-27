@@ -4,7 +4,7 @@
 Game engine requirements
 ===========================================================
 Graphic Engine using openGL? 
-N
+Y
 Own scene manager? 
 N
 
@@ -12,7 +12,7 @@ Physics Engine?
 N
 
 Model-View-Controller framework? 
-N
+Y
 
 3D terrain - Topic 4 + 5? 
 N
@@ -48,16 +48,16 @@ N
 N
 
 Movement for main character (player)
-N
+Y
 
 Key actions: WASD movement, M help menu, K wireframe for terrain, X quit, SPACE shoot
-N
+Y
 
 Mouse actions: same as FPS game. No button requirement (BUT we can make our own? left click for shoot instead of SPACE?)
-N
+Y
 
 Cam position initialized at the CENTRE of the terrain (Realllly? )
-N
+Y
 
 Quit game credits - COOLEST selfies here~ 
 N
