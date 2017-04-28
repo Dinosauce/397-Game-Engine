@@ -3,8 +3,14 @@
 
 int Graphics::screen_width;
 int Graphics::screen_height;
-clock_t OpenGL::last_clock = 0;
-int OpenGL::frame_count = 0;
+void(*Graphics::WorldInitialize)();
+void(*Graphics::WorldUpdate)();
+Vector3 Graphics::camera_pos;
+Vector3 Graphics::camera_look_at;
+
+void(*OpenGL::OpenGLKeyboardDownFunc)(unsigned char, int, int);
+void(*OpenGL::OpenGLKeyboardUpFunc)(unsigned char, int, int);
+void(*OpenGL::OpenGLPassiveMouseFunc)(int, int);
 
 void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* argc, char* argv[]){
 	glutInit(argc, argv);
@@ -20,6 +26,8 @@ void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* arg
 	glutIgnoreKeyRepeat(1);
 	glutKeyboardFunc(OpenGLKeyboardDownFunc);
 	glutKeyboardUpFunc(OpenGLKeyboardUpFunc);
+	glutWarpPointer(width / 2, height / 2);
+	glutPassiveMotionFunc(OpenGLPassiveMouseFunc);
 
 	glutDisplayFunc(Display);
 	glutIdleFunc(Display);
@@ -31,13 +39,29 @@ void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* arg
 void OpenGL::Initialize(){
 	// set background (sky colour)
 	glClearColor(97.0 / 255.0, 140.0 / 255.0, 185.0 / 255.0, 1.0);
+
+	WorldInitialize();
 }
 
 void OpenGL::Display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	/*
+	elapsed_time_second = game_time->GetElapsedTimeSecond();
+	fps = game_time->GetFps();
+	cam->SetCameraSpdWithDT(elapsed_time_second);
+	cam->CheckCamera();
+	*/
 
-
-	IncrementFrameCount();
+	WorldUpdate();
+	CallLookAt();
+	
+	glColor3f(1.0, 0.0, 0.0);
+	glBegin(GL_POLYGON);
+		glVertex3i(0, 0, 10);
+		glVertex3i(10, 0, 10);
+		glVertex3i(10, 10, 10);
+		glVertex3i(0, 10, 10);
+	glEnd();
 
 	//glFlush();
 	glutSwapBuffers();
@@ -45,32 +69,28 @@ void OpenGL::Display(){
 }
 
 void OpenGL::Reshape(int width, int height){
-	float ratio;
+	double ratio;
 
 	screen_width = width;
 	screen_height = height;
 
 	// prevent divide by zero
 	if (screen_height == 0) screen_height = 1;
-	ratio = 1.0f * screen_width / screen_height;
+	ratio = 1.0 * screen_width / screen_height;
 
 	// Reset the coordinate system before modifying
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glViewport(0, 0, screen_width, screen_height);
-	gluPerspective(45.0, ratio, 0.1f, 1000.0f);
+	gluPerspective(45.0, ratio, 0.1, 1000.0);
 	glMatrixMode(GL_MODELVIEW);
 }
 
-void OpenGL::IncrementFrameCount(){
-	double t = ((GLdouble)(clock() - last_clock)) / (GLdouble)CLOCKS_PER_SEC;
-	frame_count++;
-
-	//reset after t
-	if (t > 0.1){
-		frame_count = 0;
-		last_clock = clock();
-	}
+void OpenGL::CallLookAt(){
+	glLoadIdentity();
+	gluLookAt(camera_pos.x, camera_pos.y, camera_pos.z,
+		camera_look_at.x, camera_look_at.y, camera_look_at.z,
+		0, 1, 0);
 }
 
 Graphics* GraphicsFactory::Create(char* type){
