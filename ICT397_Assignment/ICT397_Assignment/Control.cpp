@@ -9,51 +9,56 @@ int(*Control::GetGameStatus)();
 void(*Control::SetGameStatus)(const int &);
 
 void Control::OpenGLKeyboardDownFunc(unsigned char key, int x, int y){
-	
+	if (GetGameStatus() == GAME_PLAYING){
+		switch (key){
+			case 'w':
+			case 'W':
+				cam->MoveForward();
+				break;
 
-	switch (key){
-		case 'w':
-		case 'W':
-			cam->MoveForward();
-			break;
+			case 's':
+			case 'S':
+				cam->MoveBackward();
+				break;
 
-		case 's':
-		case 'S':
-			cam->MoveBackward();
-			break;
+			case 'a':
+			case 'A':
+				cam->MoveLeft();
+				break;
 
-		case 'a':
-		case 'A':
-			cam->MoveLeft();
-			break;
+			case 'd':
+			case 'D':
+				cam->MoveRight();
+				break;
 
-		case 'd':
-		case 'D':
-			cam->MoveRight();
-			break;
-
-		case 'x':
-		case 'X':
-			if (GetGameStatus() == GAME_MAIN_MENU)
-				SetGameStatus(GAME_PLAYING);
-			else if (GetGameStatus() == GAME_PLAYING)
-				SetGameStatus(GAME_MAIN_MENU);
-			break;
-
-		case 'm':
-		case 'M':
-			if (GetGameStatus() == GAME_HELP_MENU)
-				SetGameStatus(GAME_PLAYING);
-			else if (GetGameStatus() == GAME_PLAYING)
+			case 'm':
+			case 'M':
 				SetGameStatus(GAME_HELP_MENU);
-			break;
+				break;
 
-		case 27:
-			SetGameStatus(GAME_DONE);
-			break;
+			case 27:
+				SetGameStatus(GAME_MAIN_MENU);
+				break;
 
-		default:
-			break;
+			case 'x':
+			case 'X':
+				SetGameStatus(GAME_DONE);
+				break;
+
+			default:
+				break;
+		}
+	}
+
+	else if (GetGameStatus() == GAME_MAIN_MENU || GetGameStatus() == GAME_HELP_MENU){
+		switch (key){
+			case 27:
+				SetGameStatus(GAME_PLAYING);
+				break;
+
+			default:
+				break;
+		}
 	}
 
 	glutPostRedisplay();

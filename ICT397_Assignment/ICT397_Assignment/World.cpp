@@ -29,12 +29,12 @@ World::World(){
 }
 
 void World::Initialize(){
-	/*
-	texture2d.SetTextureCount(2);
-	texture2d.LoadRawTexture2D("src", 10, 10, GAME_MAIN_MENU_TEXTURE);
-	texture2d.LoadRawTexture2D("src", 10, 10, GAME_HELP_MENU_TEXTURE);
-	texture2d.LoadRawTexture2D("src", 10, 10, CREDIT_TEXTURE);
-	*/
+	
+	texture2d.SetTextureCount(3);
+	texture2d.LoadRawTexture2D("pictures/GameMenu.raw", 512, 512, GAME_MAIN_MENU_TEXTURE);
+	//texture2d.LoadRawTexture2D("src", 10, 10, GAME_HELP_MENU_TEXTURE);
+	texture2d.LoadRawTexture2D("pictures/Credit.raw", 512, 512, CREDIT_TEXTURE);
+	
 }
 
 void World::Update(){
@@ -45,9 +45,23 @@ void World::Update(){
 	graphic_handler->SetCameraPos(cam.GetCameraPos());
 	graphic_handler->SetCameraLookAt(cam.GetCameraLookAt());
 
-	if (GetGameStatus() == GAME_DONE){
-		GameDestruction();
-		exit(0);
+	if (GetGameStatus() != GAME_PLAYING){
+		if (GetGameStatus() == GAME_DONE){
+			GameDestruction();
+			exit(0);
+		}
+
+		if (GetGameStatus() == GAME_MAIN_MENU){
+			texture2d.Display2DTexture(512, 512, 0, 0, GAME_MAIN_MENU_TEXTURE);
+		}
+
+		if (GetGameStatus() == GAME_HELP_MENU){
+			texture2d.Display2DTexture(512, 512, 0, 0, GAME_HELP_MENU_TEXTURE);
+		}
+
+		if (GetGameStatus() == GAME_CREDIT_PAGE){
+			texture2d.Display2DTexture(512, 512, 0, 0, CREDIT_TEXTURE);
+		}
 	}
 }
 
@@ -60,6 +74,7 @@ void World::RunGame(int* argc, char* argv[]){
 
 void World::GameDestruction(){
 	delete graphic_handler;
+	texture2d.Clear();
 }
 
 bool World::SetOpenGLGraphics(){

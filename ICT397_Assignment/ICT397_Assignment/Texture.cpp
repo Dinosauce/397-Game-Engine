@@ -34,7 +34,12 @@ void Texture2D::Clear(){
 	}
 }
 
-void Texture2D::Display2DTexture(const int & width, const int & height, const int & pos_x, const int & pos_y, const GLuint & temp_img){
+void Texture2D::Display2DTexture(const int & width, const int & height, const int & pos_x, const int & pos_y, const int & temp_img_no){
+	// clear the color draw b4
+	glColor4f(1.0, 1.0, 1.0, 0.0);
+
+	glEnable(GL_TEXTURE_2D);
+
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
@@ -48,9 +53,10 @@ void Texture2D::Display2DTexture(const int & width, const int & height, const in
 	glLoadIdentity();
 
 	// display exit screen or welcome screen
-	glBindTexture(GL_TEXTURE_2D, temp_img);
+	glBindTexture(GL_TEXTURE_2D, m_texture[temp_img_no]);
 	
 	// display image
+	glBegin(GL_QUADS);
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(pos_x, pos_y, 0.0);
 	glTexCoord2f(0.0, 1.0);
@@ -58,11 +64,14 @@ void Texture2D::Display2DTexture(const int & width, const int & height, const in
 	glTexCoord2f(1.0, 1.0);
 	glVertex3f(pos_x+width, pos_y+height, 0.0);
 	glTexCoord2f(1.0, 0.0);
-	glVertex3f(pos_x+width, pos_y+height, 0.0);
+	glVertex3f(pos_x+width, pos_y, 0.0);
+	glEnd();
 	
 	// Reset Perspective Projection
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
+
+	glDisable(GL_TEXTURE_2D);
 }

@@ -27,9 +27,10 @@ public:
 	/**
 	* to display the texture on screen in 2d
 	* @param size of the img
-	* @param texture will be displayed
+	* @param position of the texture
+	* @param texture id will be displayed
 	*/
-	static void Display2DTexture(const int & width, const int & height, const int & pos_x, const int & pos_y, const GLuint & temp_img);
+	static void Display2DTexture(const int & width, const int & height, const int & pos_x, const int & pos_y, const int & temp_img_no);
 
 	/**
 	* clear memory used to store textures

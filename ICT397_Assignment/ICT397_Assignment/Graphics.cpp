@@ -23,15 +23,14 @@ void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* arg
 
 	Initialize();
 
+	glutDisplayFunc(Display);
+	glutReshapeFunc(Reshape);
+
+
 	glutIgnoreKeyRepeat(1);
 	glutKeyboardFunc(OpenGLKeyboardDownFunc);
 	glutKeyboardUpFunc(OpenGLKeyboardUpFunc);
-	glutWarpPointer(width / 2, height / 2);
 	glutPassiveMotionFunc(OpenGLPassiveMouseFunc);
-
-	glutDisplayFunc(Display);
-	glutIdleFunc(Display);
-	glutReshapeFunc(Reshape);
 
 	glutMainLoop();
 }
@@ -52,9 +51,8 @@ void OpenGL::Display(){
 	cam->CheckCamera();
 	*/
 
-	WorldUpdate();
 	CallLookAt();
-	
+
 	glColor3f(1.0, 0.0, 0.0);
 	glBegin(GL_POLYGON);
 		glVertex3i(0, 0, 10);
@@ -62,6 +60,9 @@ void OpenGL::Display(){
 		glVertex3i(10, 10, 10);
 		glVertex3i(0, 10, 10);
 	glEnd();
+	
+
+	WorldUpdate();
 
 	//glFlush();
 	glutSwapBuffers();

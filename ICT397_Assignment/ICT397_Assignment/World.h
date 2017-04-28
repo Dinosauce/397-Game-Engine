@@ -33,10 +33,11 @@ class World{
 
 		/**
 		* Destructor
-		* but in glut, it will exit directly without deleting
+		* but in glut, it will exit through QuitGame
 		*/
 		~World(){
 			delete graphic_handler;
+			texture2d.Clear();
 		};
 
 		/**
