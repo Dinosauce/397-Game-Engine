@@ -55,7 +55,7 @@ void OpenGL::Display(){
 	WorldUpdate();
 	CallLookAt();
 	
-	glColor3f(1.0f, 0.0f, 0.0f);
+	glColor3f(1.0, 0.0, 0.0);
 	glBegin(GL_POLYGON);
 		glVertex3i(0, 0, 10);
 		glVertex3i(10, 0, 10);
@@ -69,20 +69,20 @@ void OpenGL::Display(){
 }
 
 void OpenGL::Reshape(int width, int height){
-	float ratio;
+	double ratio;
 
 	screen_width = width;
 	screen_height = height;
 
 	// prevent divide by zero
 	if (screen_height == 0) screen_height = 1;
-	ratio = 1.0f * screen_width / screen_height;
+	ratio = 1.0 * screen_width / screen_height;
 
 	// Reset the coordinate system before modifying
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glViewport(0, 0, screen_width, screen_height);
-	gluPerspective(45.0, ratio, 0.1f, 1000.0f);
+	gluPerspective(45.0, ratio, 0.1, 1000.0);
 	glMatrixMode(GL_MODELVIEW);
 }
 

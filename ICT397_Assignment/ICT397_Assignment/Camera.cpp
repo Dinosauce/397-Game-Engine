@@ -22,20 +22,20 @@ void Camera::CheckCamera(){
 		move_vector.x = 0.0;
 }
 
-void Camera::SetCameraRotation(const float & delta_x, const float & delta_y){
+void Camera::SetCameraRotation(const double & delta_x, const double & delta_y){
 	// Cache mouse location
 	rotation_buffer.x -= 0.01f * delta_x * camera_rot_spd_with_dt;
 	rotation_buffer.y -= 0.01f * delta_y * camera_rot_spd_with_dt;
 
 	// No move over the ground and back to the top
-	if (rotation_buffer.y < MathHelp::ToRadians(-75.0f))
-		rotation_buffer.y = rotation_buffer.y - (rotation_buffer.y - MathHelp::ToRadians(-75.0f));
+	if (rotation_buffer.y < MathHelp::ToRadians(-75.0))
+		rotation_buffer.y = rotation_buffer.y - (rotation_buffer.y - MathHelp::ToRadians(-75.0));
 
-	if (rotation_buffer.y > MathHelp::ToRadians(75.0f))
-		rotation_buffer.y = rotation_buffer.y - (rotation_buffer.y - MathHelp::ToRadians(75.0f));
+	if (rotation_buffer.y > MathHelp::ToRadians(75.0))
+		rotation_buffer.y = rotation_buffer.y - (rotation_buffer.y - MathHelp::ToRadians(75.0));
 
 	camera_rot = Vector3(
-		-MathHelp::Clamp(rotation_buffer.y, MathHelp::ToRadians(-75.0f), MathHelp::ToRadians(75.0f)),
+		-MathHelp::Clamp(rotation_buffer.y, MathHelp::ToRadians(-75.0), MathHelp::ToRadians(75.0)),
 		-MathHelp::WrapAngle(rotation_buffer.x),
 		0.0
 		);

@@ -25,10 +25,18 @@ World::World(){
 	control.SetQuitGameFunc(QuitGame);
 	graphic_handler->SetWorldInitializeFunc(Initialize);
 	graphic_handler->SetWorldUpdateFunc(Update);
+	texture2d.SetScreenSize(screen_width, screen_height);
+
+	std::cout << GAME_DONE << std::endl;
 }
 
 void World::Initialize(){
-
+	/*
+	texture2d.SetTextureCount(2);
+	texture2d.LoadRawTexture2D("src", 10, 10, GAME_MAIN_MENU_TEXTURE);
+	texture2d.LoadRawTexture2D("src", 10, 10, GAME_HELP_MENU_TEXTURE);
+	texture2d.LoadRawTexture2D("src", 10, 10, CREDIT_TEXTURE);
+	*/
 }
 
 void World::Update(){

@@ -22,7 +22,7 @@ class Graphics{
 		* @param arguments from main()
 		*/
 		virtual void CreateGameWindow(int width, int height, char* window_name, int* argc, char* argv[]) = 0;
-		
+
 		/**
 		* virtual method - to set the openGL keyboard down function
 		* @param keyboard down function
@@ -92,7 +92,8 @@ class OpenGL : public Graphics{
 	* @param arguments from main()
 	*/
 	void CreateGameWindow(int width, int height, char* window_name, int* argc, char* argv[]);
-	
+
+
 	/**
 	* Set methods for private variables and function pointers
 	* @param new value

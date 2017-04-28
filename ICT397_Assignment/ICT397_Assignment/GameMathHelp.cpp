@@ -3,11 +3,11 @@
 // ==========================
 // MathHelp
 // ==========================
-float MathHelp::ToRadians(const float & degrees){
+double MathHelp::ToRadians(const double & degrees){
 	return (degrees * _PI / 180);
 }
 
-float MathHelp::Clamp(const float & value, const float & min, const float & max){
+double MathHelp::Clamp(const double & value, const double & min, const double & max){
 	if (value < min){
 		return min;
 	}
@@ -17,13 +17,13 @@ float MathHelp::Clamp(const float & value, const float & min, const float & max)
 	return value;
 }
 
-float MathHelp::FloatMod(const float & var1, const float & var2){
+double MathHelp::doubleMod(const double & var1, const double & var2){
 	if (var2 == 0.0)
 		return var1;
 
-	float rem = var1 - var2 * floor(var1 / var2);
+	double rem = var1 - var2 * floor(var1 / var2);
 
-	// Handle boundary cases resulted from float cut off
+	// Handle boundary cases resulted from double cut off
 	if (var2 > 0){
 		if (rem >= var2)
 			return 0;
@@ -51,14 +51,14 @@ float MathHelp::FloatMod(const float & var1, const float & var2){
 	return rem;
 }
 
-float MathHelp::WrapAngle(const float & angle){
-	return (FloatMod((angle + _PI), _TWO_PI) - _PI);
+double MathHelp::WrapAngle(const double & angle){
+	return (doubleMod((angle + _PI), _TWO_PI) - _PI);
 }
 
 // ==========================
 // Vector3
 // ==========================
-Vector3::Vector3(float var1, float var2, float var3){
+Vector3::Vector3(double var1, double var2, double var3){
 	x = var1;
 	y = var2;
 	z = var3;
@@ -94,7 +94,7 @@ Vector3 Vector3::operator *(const Vector3 &var2){
 	return ret;
 }
 
-Vector3 Vector3::operator *(const float &scale){
+Vector3 Vector3::operator *(const double &scale){
 	Vector3 ret;
 	ret.x = this->x * scale;
 	ret.y = this->y * scale;
@@ -129,22 +129,22 @@ bool Vector3::operator !=(const Vector3 &var2){
 }
 
 Vector3 Vector3::UnitX(){
-	Vector3 ret(1.0f, 0.0f, 0.0f);
+	Vector3 ret(1.0, 0.0, 0.0);
 	return ret;
 }
 
 Vector3 Vector3::UnitY(){
-	Vector3 ret(0.0f, 1.0f, 0.0f);
+	Vector3 ret(0.0, 1.0, 0.0);
 	return ret;
 }
 
 Vector3 Vector3::UnitZ(){
-	Vector3 ret(0.0f, 0.0f, 1.0f);
+	Vector3 ret(0.0, 0.0, 1.0);
 	return ret;
 }
 
 Vector3 Vector3::Zero(){
-	Vector3 ret(0.0f, 0.0f, 0.0f);
+	Vector3 ret(0.0, 0.0, 0.0);
 	return ret;
 }
 
@@ -158,8 +158,8 @@ Vector3 Vector3::Transform(const Vector3 &vector3, const Matrix &matrix){
 	return ret;
 }
 
-float Vector3::Distance(const Vector3 &var1, const Vector3 &var2){
-	return (float)sqrt(
+double Vector3::Distance(const Vector3 &var1, const Vector3 &var2){
+	return (double)sqrt(
 		(var1.x - var2.x) * (var1.x - var2.x) +
 		(var1.y - var2.y) * (var1.y - var2.y) +
 		(var1.z - var2.z) * (var1.z - var2.z)
@@ -169,8 +169,8 @@ float Vector3::Distance(const Vector3 &var1, const Vector3 &var2){
 void Vector3::Normalize(){
 	Vector3 this_vector(this->x, this->y, this->z);
 
-	float factor = Distance(this_vector, Vector3::Zero());
-	factor = 1.0f / factor;
+	double factor = Distance(this_vector, Vector3::Zero());
+	factor = 1.0 / factor;
 
 	this->x *= factor;
 	this->y *= factor;
@@ -183,7 +183,7 @@ void Vector3::Normalize(){
 Matrix::Matrix(){
 	for (int i = 0; i < SIZE; i++){
 		for (int j = 0; j < SIZE; j++){
-			matrix[i][j] = 0.0f;
+			matrix[i][j] = 0.0;
 		}
 	}
 }
@@ -196,10 +196,10 @@ Matrix::Matrix(const Matrix &new_matrix){
 	}
 }
 
-Matrix::Matrix(float m00, float m01, float m02, float m03,
-	float m10, float m11, float m12, float m13,
-	float m20, float m21, float m22, float m23,
-	float m30, float m31, float m32, float m33){
+Matrix::Matrix(double m00, double m01, double m02, double m03,
+	double m10, double m11, double m12, double m13,
+	double m20, double m21, double m22, double m23,
+	double m30, double m31, double m32, double m33){
 	matrix[0][0] = m00;
 	matrix[0][1] = m01;
 	matrix[0][2] = m02;
@@ -243,7 +243,7 @@ Matrix Matrix::operator *(const Matrix &var2){
 	return ret;
 }
 
-Matrix Matrix::CreateRotationX(const float & rad){
+Matrix Matrix::CreateRotationX(const double & rad){
 	Matrix ret = Identity();
 
 	ret.matrix[1][1] = cos(rad);
@@ -254,7 +254,7 @@ Matrix Matrix::CreateRotationX(const float & rad){
 	return ret;
 }
 
-Matrix Matrix::CreateRotationY(const float & rad){
+Matrix Matrix::CreateRotationY(const double & rad){
 	Matrix ret = Identity();
 
 	ret.matrix[0][0] = cos(rad);
@@ -265,7 +265,7 @@ Matrix Matrix::CreateRotationY(const float & rad){
 	return ret;
 }
 
-Matrix Matrix::CreateRotationZ(const float & rad){
+Matrix Matrix::CreateRotationZ(const double & rad){
 	Matrix ret;
 
 	ret.matrix[0][0] = cos(rad);
@@ -277,10 +277,10 @@ Matrix Matrix::CreateRotationZ(const float & rad){
 }
 
 Matrix Matrix::Identity(){
-	Matrix ret(1.0f, 0.0f, 0.0f, 0.0f,
-		0.0f, 1.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, 1.0f, 0.0f,
-		0.0f, 0.0f, 0.0f, 1.0f);
+	Matrix ret(1.0, 0.0, 0.0, 0.0,
+		0.0, 1.0, 0.0, 0.0,
+		0.0, 0.0, 1.0, 0.0,
+		0.0, 0.0, 0.0, 1.0);
 
 	return ret;
 }

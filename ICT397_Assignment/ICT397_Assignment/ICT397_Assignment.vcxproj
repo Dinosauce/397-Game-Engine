@@ -70,14 +70,18 @@
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Control.h" />
     <ClInclude Include="GameMathHelp.h" />
+    <ClInclude Include="GameStatus.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureMap.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

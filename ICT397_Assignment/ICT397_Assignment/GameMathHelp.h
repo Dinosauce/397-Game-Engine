@@ -3,8 +3,8 @@
 
 #include <math.h>
 
-#define _PI 3.14159265359f /// PI in float
-#define _TWO_PI 6.28318530717f /// 2PI in float
+#define _PI 3.14159265359 /// PI in double
+#define _TWO_PI 6.28318530717 /// 2PI in double
 
 /**
 * MathHelp class - Plentoon Games
@@ -17,7 +17,7 @@ class MathHelp{
 		* @param input degrees
 		* @return output radians
 		*/
-		static float ToRadians(const float & degrees);
+		static double ToRadians(const double & degrees);
 
 		/**
 		* Restricts a value to be within a specified range
@@ -26,27 +26,27 @@ class MathHelp{
 		* @param max of the range
 		* @return either the input value or the range value
 		*/
-		static float Clamp(const float & value, const float & min, const float & max);
+		static double Clamp(const double & value, const double & min, const double & max);
 
 		/**
-		* Float modulo function (remainder has same sign as the divisor)
+		* double modulo function (remainder has same sign as the divisor)
 		* @param dividend
 		* @param divisor
 		* @return remainder
 		*/
-		static float FloatMod(const float & var1, const float & var2);
+		static double doubleMod(const double & var1, const double & var2);
 
 		/**
 		* Reduces a given angle to a value between pi and -pi
 		* @param input angle
 		* @return value after wrapped between pi and -pi
 		*/
-		static float WrapAngle(const float & angle);
+		static double WrapAngle(const double & angle);
 };
 
 /**
 * Matrix class - Plentoon Games
-* stores a matrix with size 4x4 in float
+* stores a matrix with size 4x4 in double
 * reference from XNA
 */
 class Matrix{
@@ -66,10 +66,10 @@ class Matrix{
 		* Ctor with set values
 		* @param set values from [0,0] to [4,4], top down, left to right
 		*/
-		Matrix(float m00, float m01, float m02, float m03,
-			float m10, float m11, float m12, float m13,
-			float m20, float m21, float m22, float m23,
-			float m30, float m31, float m32, float m33);
+		Matrix(double m00, double m01, double m02, double m03,
+			double m10, double m11, double m12, double m13,
+			double m20, double m21, double m22, double m23,
+			double m30, double m31, double m32, double m33);
 
 		/**
 		* overrided plus operator - add two matrixes
@@ -90,24 +90,24 @@ class Matrix{
 		* @param radians value
 		* @return result matrix
 		*/
-		static Matrix CreateRotationX(const float & rad);
+		static Matrix CreateRotationX(const double & rad);
 	
 		/**
 		* create a rotation matrix in y-axis with object matrix and input radians
 		* @param radians value
 		* @return result matrix
 		*/
-		static Matrix CreateRotationY(const float & rad);
+		static Matrix CreateRotationY(const double & rad);
 	
 		/**
 		* create a rotation matrix in z-axis with object matrix and input radians
 		* @param radians value
 		* @return result matrix
 		*/
-		static Matrix CreateRotationZ(const float & rad);
+		static Matrix CreateRotationZ(const double & rad);
 
 		/// matrix
-		float matrix[4][4];
+		double matrix[4][4];
 
 		/// matrix size
 		static const int SIZE = 4;
@@ -122,7 +122,7 @@ class Matrix{
 
 /**
 * Vector3 class - Plentoon Games
-* stores a vector with x, y, z in float
+* stores a vector with x, y, z in double
 * reference from XNA
 */
 class Vector3{
@@ -131,7 +131,7 @@ class Vector3{
 		* Ctor
 		* default elements = 0.0
 		*/
-		Vector3(){ x = y = z = 0.0f; };
+		Vector3(){ x = y = z = 0.0; };
 
 		/**
 		* Copy Ctor
@@ -142,7 +142,7 @@ class Vector3{
 		* Ctor with set values
 		* @param set values x, y, z
 		*/
-		Vector3(float var1, float var2, float var3);
+		Vector3(double var1, double var2, double var3);
 
 		/**
 		* overrided plus operator - add two vectors
@@ -170,7 +170,7 @@ class Vector3{
 		* @param scale value
 		* @return result vector
 		*/
-		Vector3 operator *(const float & scale);
+		Vector3 operator *(const double & scale);
 		
 		/**
 		* overrided division operator - divide two vectors
@@ -227,9 +227,9 @@ class Vector3{
 
 		/**
 		* calculate the distance between two vectors
-		* @return distance in float
+		* @return distance in double
 		*/
-		float Distance(const Vector3 & var1, const Vector3 & var2);
+		double Distance(const Vector3 & var1, const Vector3 & var2);
 
 		/**
 		* normalize the current vector object
@@ -237,7 +237,7 @@ class Vector3{
 		void Normalize(); 
 		
 		/// vector values
-		float x, y, z;
+		double x, y, z;
 };
 
 #endif

@@ -66,8 +66,8 @@ class Camera{
 		void SetIsMovingFB(const bool & new_state){ is_moving_fb = new_state; };
 		void SetIsMovingLR(const bool & new_state){ is_moving_lr = new_state; };
 		void SetIsRotating(const bool & new_state){ is_rotating = new_state; };
-		void SetCameraRotation(const float & delta_x, const float & delta_y);
-		void SetCameraSpdWithDT(const float & new_delta_time){
+		void SetCameraRotation(const double & delta_x, const double & delta_y);
+		void SetCameraSpdWithDT(const double & new_delta_time){
 			camera_mov_spd_with_dt = camera_mov_spd * new_delta_time;
 			camera_rot_spd_with_dt = camera_rot_spd * new_delta_time;
 		};
@@ -119,16 +119,16 @@ class Camera{
 		Vector3 camera_rot;
 
 		/// camera movement speed without delta time - different pc cause different spd
-		const float camera_mov_spd = 50.0;
+		const double camera_mov_spd = 50.0;
 
 		/// camera movement speed with delta time - different pc cause different spd
-		float camera_mov_spd_with_dt;
+		double camera_mov_spd_with_dt;
 
 		/// camera rotate speed without delta time - different pc cause different spd
-		const float camera_rot_spd = 20.0;
+		const double camera_rot_spd = 20.0;
 
 		/// camera rotate speed with delta time - different pc cause different spd
-		float camera_rot_spd_with_dt;
+		double camera_rot_spd_with_dt;
 
 		/// vector that the camera is looking at
 		Vector3 camera_look_at;

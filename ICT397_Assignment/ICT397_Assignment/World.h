@@ -5,6 +5,9 @@
 #include "Camera.h"
 #include "Control.h"
 #include "GameTime.h"
+#include "Texture.h"
+#include "GameStatus.h"
+#include "TextureMap.h"
 #include <iostream>
 
 /**
@@ -102,6 +105,9 @@ class World{
 
 		/// game time object
 		static GameTime game_time;
+
+		/// texture object
+		static Texture2D texture2d;
 };
 
 #endif
