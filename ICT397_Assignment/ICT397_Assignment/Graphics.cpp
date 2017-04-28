@@ -82,7 +82,7 @@ void OpenGL::Reshape(int width, int height){
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glViewport(0, 0, screen_width, screen_height);
-	gluPerspective(45.0, ratio, 0.1, 1000.0);
+	gluPerspective(45.0, ratio, 0.01, 1000.0);
 	glMatrixMode(GL_MODELVIEW);
 }
 

@@ -2,7 +2,7 @@
 
 int World::screen_width;
 int World::screen_height;
-bool World::game_done;
+int World::game_status;
 GraphicsFactory World::graphics_factory;
 Graphics* World::graphic_handler;
 Camera World::cam;
@@ -13,21 +13,19 @@ double World::elapsed_time_second;
 int World::fps;
 
 World::World(){
-	game_done = false;
+	game_status = GAME_PLAYING;
 	screen_width = 800;
 	screen_height = 600;
 
-	if (! SetOpenGLGraphics())
+	if (! SetOpenGLGraphics())	
 		std::cout << "error set openGL graphics. " << std::endl;
 	
 	control.SetCameraPtr(&cam);
 	control.SetScreenSize(screen_width, screen_height);
-	control.SetQuitGameFunc(QuitGame);
+	control.SetGameStatusFunc(SetGameStatus, GetGameStatus);
 	graphic_handler->SetWorldInitializeFunc(Initialize);
 	graphic_handler->SetWorldUpdateFunc(Update);
 	texture2d.SetScreenSize(screen_width, screen_height);
-
-	std::cout << GAME_DONE << std::endl;
 }
 
 void World::Initialize(){
@@ -47,7 +45,7 @@ void World::Update(){
 	graphic_handler->SetCameraPos(cam.GetCameraPos());
 	graphic_handler->SetCameraLookAt(cam.GetCameraLookAt());
 
-	if (IsGameDone()){
+	if (GetGameStatus() == GAME_DONE){
 		GameDestruction();
 		exit(0);
 	}

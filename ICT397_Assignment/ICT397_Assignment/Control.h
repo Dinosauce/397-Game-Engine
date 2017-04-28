@@ -4,6 +4,7 @@
 #include <GL\glut.h>
 #include <stdlib.h>
 #include "Camera.h"
+#include "GameStatus.h"
 
 /**
 * Control class - Plentoon Games
@@ -31,8 +32,9 @@ class Control{
 			screen_height = height;
 		}
 
-		static void SetQuitGameFunc(void(*func)()){
-			QuitGame = func;
+		static void SetGameStatusFunc(void(*set_func)(const int &), int(*get_func)()){
+			SetGameStatus = set_func;
+			GetGameStatus = get_func;
 		}
 
 		/**
@@ -65,8 +67,11 @@ class Control{
 		/// screen width and height of the current game window
 		static int screen_width, screen_height;
 
-		/// Quit game function pointer from World class
-		static void(*QuitGame)();
+		/// set game status function pointer from World class
+		static void(*SetGameStatus)(const int &);
+
+		/// get game status function pointer from World class
+		static int(*GetGameStatus)();
 };
 
 #endif

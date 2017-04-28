@@ -49,12 +49,12 @@ class World{
 		* return the game status
 		* @return game status
 		*/
-		static bool IsGameDone(){ return game_done; };
+		static int GetGameStatus(){ return game_status; };
 
 		/**
-		* quit the game
+		* Set game status
 		*/
-		static void QuitGame(){ game_done = true; };
+		static void SetGameStatus(const int & new_status){ game_status = new_status; };
 
 		/**
 		* delete the game objects and class objects before exit the program
@@ -80,7 +80,7 @@ class World{
 
 	private:
 		/// game status
-		static bool game_done;
+		static int game_status;
 
 		/// size of game window
 		static int screen_width, screen_height; 

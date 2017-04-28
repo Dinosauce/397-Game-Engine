@@ -5,7 +5,8 @@ int Control::mouse_x_org = 0;
 int Control::mouse_y_org = 1;
 int Control::screen_width = 0;
 int Control::screen_height = 0;
-void(*Control::QuitGame)();
+int(*Control::GetGameStatus)();
+void(*Control::SetGameStatus)(const int &);
 
 void Control::OpenGLKeyboardDownFunc(unsigned char key, int x, int y){
 	
@@ -31,8 +32,25 @@ void Control::OpenGLKeyboardDownFunc(unsigned char key, int x, int y){
 			cam->MoveRight();
 			break;
 
+		case 'x':
+		case 'X':
+			if (GetGameStatus() == GAME_MAIN_MENU)
+				SetGameStatus(GAME_PLAYING);
+			else if (GetGameStatus() == GAME_PLAYING)
+				SetGameStatus(GAME_MAIN_MENU);
+			break;
+
+		case 'm':
+		case 'M':
+			if (GetGameStatus() == GAME_HELP_MENU)
+				SetGameStatus(GAME_PLAYING);
+			else if (GetGameStatus() == GAME_PLAYING)
+				SetGameStatus(GAME_HELP_MENU);
+			break;
+
 		case 27:
-			QuitGame();
+			SetGameStatus(GAME_DONE);
+			break;
 
 		default:
 			break;
