@@ -1,0 +1,2 @@
+assimp-master
+http://www.assimp.org/main_doc.html
