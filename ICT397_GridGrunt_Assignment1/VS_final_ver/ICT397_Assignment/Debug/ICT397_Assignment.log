@@ -1,0 +1,33 @@
+﻿  World.cpp
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\world.cpp(190): warning C4244: 'argument' : conversion from 'int' to 'GLfloat', possible loss of data
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\world.cpp(197): warning C4244: 'argument' : conversion from 'int' to 'GLfloat', possible loss of data
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\world.cpp(206): warning C4244: 'argument' : conversion from 'int' to 'GLfloat', possible loss of data
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\world.cpp(213): warning C4244: 'argument' : conversion from 'int' to 'GLfloat', possible loss of data
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\world.cpp(222): warning C4244: 'argument' : conversion from 'int' to 'GLfloat', possible loss of data
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\world.cpp(223): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+  Texture.cpp
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\texture.cpp(51): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\texture.cpp(61): warning C4244: 'argument' : conversion from 'const int' to 'GLfloat', possible loss of data
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\texture.cpp(63): warning C4244: 'argument' : conversion from 'const int' to 'GLfloat', possible loss of data
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\texture.cpp(65): warning C4244: 'argument' : conversion from 'const int' to 'GLfloat', possible loss of data
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\texture.cpp(67): warning C4244: 'argument' : conversion from 'const int' to 'GLfloat', possible loss of data
+  ParticleEmmitter.cpp
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\particleemmitter.cpp(85): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\particleemmitter.cpp(86): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\particleemmitter.cpp(87): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\particleemmitter.cpp(103): warning C4305: '=' : truncation from 'double' to 'float'
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\particleemmitter.cpp(118): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\particleemmitter.cpp(125): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+  ObjectLoader.cpp
+  Mesh.cpp
+  main.cpp
+  Graphics.cpp
+x:\study\uni\yr3_s1\ict397 - adv game design\assignment\ass1_final\ict397_gridgrunt_assignment1\vs_final_ver\ict397_assignment\graphics.cpp(41): warning C4305: 'argument' : truncation from 'double' to 'GLclampf'
+  GameTime.cpp
+  GameObject.cpp
+  GameMathHelp.cpp
+  GameAsset.cpp
+  Control.cpp
+  Camera.cpp
+  Generating Code...
+  ICT397_Assignment.vcxproj -> X:\Study\Uni\Yr3_S1\ICT397 - Adv Game Design\Assignment\Ass1_final\ICT397_GridGrunt_Assignment1\VS_final_ver\Debug\ICT397_Assignment.exe

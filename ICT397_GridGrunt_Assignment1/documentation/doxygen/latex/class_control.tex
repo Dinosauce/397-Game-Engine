@@ -1,0 +1,88 @@
+\hypertarget{class_control}{
+\section{Control Class Reference}
+\label{class_control}\index{Control@{Control}}
+}
+{\tt \#include $<$Control.h$>$}
+
+Collaboration diagram for Control:\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hyperlink{class_control_a730aeda4517f40bc48ba1e46ebded77}{Control} ()
+\end{CompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{CompactItemize}
+\item 
+static void \hyperlink{class_control_8505fd512015d12eee7dff4c986cbbc6}{SetCameraPtr} (\hyperlink{class_camera}{Camera} $\ast$new\_\-cam\_\-ptr)
+\item 
+static \hyperlink{class_camera}{Camera} $\ast$ \hyperlink{class_control_5785fa3a36503f7ebda1d5e6e1760223}{GetCameraPtr} ()
+\item 
+static void \hyperlink{class_control_350ec7cf720a55964bdde6a0ddf4b7bf}{OpenGLKeyboardDownFunc} (unsigned char key, int x, int y)
+\item 
+static void \hyperlink{class_control_c822fb376b27f30d756bbb2643ec6250}{OpenGLKeyboardUpFunc} (unsigned char key, int x, int y)
+\item 
+static void \hyperlink{class_control_ff386577c26a1672e516606a423320d3}{OpenGLMouseMovementFunc} (int x, int y)
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_control}{Control} class - Plentoon Games Read user input and make changes in the game world Can be separated as different input devices by inheritance, in the future development 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_control_a730aeda4517f40bc48ba1e46ebded77}{
+\index{Control@{Control}!Control@{Control}}
+\index{Control@{Control}!Control@{Control}}
+\subsubsection[Control]{\setlength{\rightskip}{0pt plus 5cm}Control::Control ()\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{class_control_a730aeda4517f40bc48ba1e46ebded77}
+
+
+Ctor 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_control_8505fd512015d12eee7dff4c986cbbc6}{
+\index{Control@{Control}!SetCameraPtr@{SetCameraPtr}}
+\index{SetCameraPtr@{SetCameraPtr}!Control@{Control}}
+\subsubsection[SetCameraPtr]{\setlength{\rightskip}{0pt plus 5cm}static void Control::SetCameraPtr ({\bf Camera} $\ast$ {\em new\_\-cam\_\-ptr})\hspace{0.3cm}{\tt  \mbox{[}inline, static\mbox{]}}}}
+\label{class_control_8505fd512015d12eee7dff4c986cbbc6}
+
+
+Set Method of private variables \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em new}]value \end{description}
+\end{Desc}
+\hypertarget{class_control_5785fa3a36503f7ebda1d5e6e1760223}{
+\index{Control@{Control}!GetCameraPtr@{GetCameraPtr}}
+\index{GetCameraPtr@{GetCameraPtr}!Control@{Control}}
+\subsubsection[GetCameraPtr]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Camera}$\ast$ Control::GetCameraPtr ()\hspace{0.3cm}{\tt  \mbox{[}inline, static\mbox{]}}}}
+\label{class_control_5785fa3a36503f7ebda1d5e6e1760223}
+
+
+Get Method of private variables \begin{Desc}
+\item[Returns:]value of the variables \end{Desc}
+\hypertarget{class_control_350ec7cf720a55964bdde6a0ddf4b7bf}{
+\index{Control@{Control}!OpenGLKeyboardDownFunc@{OpenGLKeyboardDownFunc}}
+\index{OpenGLKeyboardDownFunc@{OpenGLKeyboardDownFunc}!Control@{Control}}
+\subsubsection[OpenGLKeyboardDownFunc]{\setlength{\rightskip}{0pt plus 5cm}void Control::OpenGLKeyboardDownFunc (unsigned char {\em key}, \/  int {\em x}, \/  int {\em y})\hspace{0.3cm}{\tt  \mbox{[}static\mbox{]}}}}
+\label{class_control_350ec7cf720a55964bdde6a0ddf4b7bf}
+
+
+Keyboard Down function for openGL For activating the camera movement wasd \hypertarget{class_control_c822fb376b27f30d756bbb2643ec6250}{
+\index{Control@{Control}!OpenGLKeyboardUpFunc@{OpenGLKeyboardUpFunc}}
+\index{OpenGLKeyboardUpFunc@{OpenGLKeyboardUpFunc}!Control@{Control}}
+\subsubsection[OpenGLKeyboardUpFunc]{\setlength{\rightskip}{0pt plus 5cm}void Control::OpenGLKeyboardUpFunc (unsigned char {\em key}, \/  int {\em x}, \/  int {\em y})\hspace{0.3cm}{\tt  \mbox{[}static\mbox{]}}}}
+\label{class_control_c822fb376b27f30d756bbb2643ec6250}
+
+
+Keyboard Up function for openGL For deactivating the camera movement wasd \hypertarget{class_control_ff386577c26a1672e516606a423320d3}{
+\index{Control@{Control}!OpenGLMouseMovementFunc@{OpenGLMouseMovementFunc}}
+\index{OpenGLMouseMovementFunc@{OpenGLMouseMovementFunc}!Control@{Control}}
+\subsubsection[OpenGLMouseMovementFunc]{\setlength{\rightskip}{0pt plus 5cm}void Control::OpenGLMouseMovementFunc (int {\em x}, \/  int {\em y})\hspace{0.3cm}{\tt  \mbox{[}static\mbox{]}}}}
+\label{class_control_ff386577c26a1672e516606a423320d3}
+
+
+Mouse Passive Movement function for openGL For controlling the camera rotation 
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+X:/Study/Uni/Yr3\_\-S1/ICT397 - Adv Game Design/Assignment/temp/TEETTETETETEMMMMMP/Assignment\_\-KinPan/ICT397\_\-GridGrunt\_\-Assignment1/VS/ICT397\_\-Assignment/Control.h\item 
+X:/Study/Uni/Yr3\_\-S1/ICT397 - Adv Game Design/Assignment/temp/TEETTETETETEMMMMMP/Assignment\_\-KinPan/ICT397\_\-GridGrunt\_\-Assignment1/VS/ICT397\_\-Assignment/Control.cpp\end{CompactItemize}
