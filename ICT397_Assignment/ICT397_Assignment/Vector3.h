@@ -27,6 +27,11 @@ class Vector3{
 
 		static Vector3 Transform(const Vector3 &vector3, const Matrix &matrix);
 		float Distance(const Vector3 &var1, const Vector3 &var2);
+
+		/**
+		 * Returns a Vector which has been clamped between the given minimum and maximum postions.
+		 */
+		Vector3 Clamp(Vector3 min, Vector3 max);
 		void Normalize();
 };
 

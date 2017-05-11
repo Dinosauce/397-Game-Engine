@@ -42,7 +42,10 @@
     <ClCompile Include="ObjectLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
+    <ClCompile Include="ClSphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClAABB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,13 +68,19 @@
     <ClInclude Include="Control.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ObjectLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClSphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClAABB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

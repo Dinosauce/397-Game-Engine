@@ -108,6 +108,28 @@ float Vector3::Distance(const Vector3 &var1, const Vector3 &var2){
 		);
 }
 
+Vector3 Vector3::Clamp(Vector3 min, Vector3 max)
+{//Jayden Grant
+	Vector3 out = Vector3(x, y, z);
+
+	if (x > max.x)
+		out.x = max.x;
+	else if (x < min.x)
+		out.x = min.x;
+
+	if (y > max.y)
+		out.y = max.y;
+	else if (y < min.y)
+		out.y = min.y;
+
+	if (z > max.z)
+		out.z = max.z;
+	else if (z < min.z)
+		out.z = min.z;
+
+	return out;
+}
+
 void Vector3::Normalize(){
 	Vector3 this_vector(this->x, this->y, this->z);
 	
