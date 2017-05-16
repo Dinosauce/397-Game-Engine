@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="MD2">
+      <UniqueIdentifier>{f896ce18-0dc8-4afd-a508-808e13c06501}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,6 +45,24 @@
     <ClCompile Include="ObjectLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="md2Files\md2Header.cpp">
+      <Filter>MD2</Filter>
+    </ClCompile>
+    <ClCompile Include="md2Files\md2Loader.cpp">
+      <Filter>MD2</Filter>
+    </ClCompile>
+    <ClCompile Include="md2Files\vector\vector.cpp">
+      <Filter>MD2</Filter>
+    </ClCompile>
+    <ClCompile Include="md2Files\vector\vector2D.cpp">
+      <Filter>MD2</Filter>
+    </ClCompile>
+    <ClCompile Include="md2Files\math\myMath.cpp">
+      <Filter>MD2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -67,6 +88,30 @@
     </ClInclude>
     <ClInclude Include="ObjectLoader.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="md2Files\dr_pcx.h">
+      <Filter>MD2</Filter>
+    </ClInclude>
+    <ClInclude Include="md2Files\md2Header.h">
+      <Filter>MD2</Filter>
+    </ClInclude>
+    <ClInclude Include="md2Files\md2Loader.h">
+      <Filter>MD2</Filter>
+    </ClInclude>
+    <ClInclude Include="md2Files\vector\vector.h">
+      <Filter>MD2</Filter>
+    </ClInclude>
+    <ClInclude Include="md2Files\vector\vector2D.h">
+      <Filter>MD2</Filter>
+    </ClInclude>
+    <ClInclude Include="md2Files\math\myMath.h">
+      <Filter>MD2</Filter>
+    </ClInclude>
+    <ClInclude Include="md2Files\timer.h">
+      <Filter>MD2</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

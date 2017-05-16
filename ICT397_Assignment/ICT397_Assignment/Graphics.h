@@ -2,6 +2,7 @@
 #define GRAPHICS_H
 
 #include "GameObject.h"
+#include "md2Files\md2Loader.h"
 #include <GL/glut.h>
 #include <time.h>
 

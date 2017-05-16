@@ -6,6 +6,7 @@ int Graphics::screen_height;
 clock_t OpenGL::last_clock = 0;
 int OpenGL::frame_count = 0;
 GameObject OpenGL::ObjectGrids;
+md2Loader model;
 
 void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* argc, char* argv[]){
 	glutInit(argc, argv);
@@ -35,7 +36,8 @@ void OpenGL::Initialize(){
 	glewInit();
 	
 
-	ObjectGrids.LoadGameObject("3Dmodels/terrain/grid.obj");
+	//ObjectGrids.LoadGameObject("3Dmodels/terrain/grid.obj");
+	model.loadModel("md2Files/testmodel/tris.MD2", "md2Files/testmodel/skin.pcx");
 
 }
 
@@ -49,7 +51,8 @@ void OpenGL::Display(){
 
 	IncrementFrameCount();
 
-	ObjectGrids.ShowGameObject();
+	//ObjectGrids.ShowGameObject();
+	model.render();
 
 	//glFlush();
 	glutSwapBuffers();

@@ -44,12 +44,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;md2Files;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;SDL.lib;glew32.lib;assimp.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freeglut.lib;SDL.lib;glew32.lib;assimp.lib;glew32s.lib;glfw.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -73,7 +74,13 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="md2Files\math\myMath.cpp" />
+    <ClCompile Include="md2Files\md2Header.cpp" />
+    <ClCompile Include="md2Files\md2Loader.cpp" />
+    <ClCompile Include="md2Files\vector\vector.cpp" />
+    <ClCompile Include="md2Files\vector\vector2D.cpp" />
     <ClCompile Include="ObjectLoader.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -83,7 +90,15 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="md2Files\dr_pcx.h" />
+    <ClInclude Include="md2Files\math\myMath.h" />
+    <ClInclude Include="md2Files\md2Header.h" />
+    <ClInclude Include="md2Files\md2Loader.h" />
+    <ClInclude Include="md2Files\timer.h" />
+    <ClInclude Include="md2Files\vector\vector.h" />
+    <ClInclude Include="md2Files\vector\vector2D.h" />
     <ClInclude Include="ObjectLoader.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
