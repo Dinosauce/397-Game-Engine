@@ -6,6 +6,8 @@
 #include "Vector3.h"
 #include "ClAABB.h"
 class ClAABB;
+#include "ClRay.h"
+class ClRay;
 
 /**
  * Represents a collision sphere centered on a point.
@@ -77,6 +79,10 @@ public:
 	* @brief Returns true when the AABB intersects with the sphere
 	*/
 	bool Intersects(ClAABB &a);
+	/**
+	* @brief Returns true then the Ray intersects the Sphere
+	*/
+	bool Intersects(ClRay &r);
 };
 
 #endif

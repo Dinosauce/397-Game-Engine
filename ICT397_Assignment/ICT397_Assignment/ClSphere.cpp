@@ -66,3 +66,8 @@ bool ClSphere::Intersects(ClAABB &a)
 {
 	return a.Intersects(*this);
 }
+
+bool ClSphere::Intersects(ClRay &r)
+{
+	return r.Intersects(*this);
+}

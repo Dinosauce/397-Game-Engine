@@ -135,3 +135,8 @@ bool ClAABB::Intersects(ClAABB &a)
 		a.min.y < max.y &&
 		a.min.z < max.z;
 }
+
+bool ClAABB::Intersects(ClRay &r)
+{
+	return r.Intersects(*this);
+}

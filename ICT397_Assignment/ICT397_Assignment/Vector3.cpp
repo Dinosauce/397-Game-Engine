@@ -140,3 +140,8 @@ void Vector3::Normalize(){
 	this->y *= factor;
 	this->z *= factor;
 }
+
+float Vector3::Dot(const Vector3 &v)
+{
+	return ((x * v.x) + (y * v.y) + (z * v.z));
+}

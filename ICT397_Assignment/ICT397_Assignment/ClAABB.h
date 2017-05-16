@@ -6,6 +6,8 @@
 #include "Vector3.h"
 #include "ClSphere.h"
 class ClSphere;
+#include "ClRay.h"
+class ClRay;
 
 
 /**
@@ -83,6 +85,11 @@ public:
 	* @brief Returns true when the AABBs intersect
 	*/
 	bool Intersects(ClAABB &a);
+
+	/**
+	* @brief Returns true then the Ray intersects the AABB
+	*/
+	bool Intersects(ClRay &r);
 
 };
 
