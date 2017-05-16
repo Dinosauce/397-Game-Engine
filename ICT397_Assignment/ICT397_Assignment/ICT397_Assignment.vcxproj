@@ -74,6 +74,7 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ClAABB.cpp" />
+    <ClCompile Include="ClRay.cpp" />
     <ClCompile Include="ClSphere.cpp" />
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -87,6 +88,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ClAABB.h" />
+    <ClInclude Include="ClRay.h" />
     <ClInclude Include="ClSphere.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Control.h" />

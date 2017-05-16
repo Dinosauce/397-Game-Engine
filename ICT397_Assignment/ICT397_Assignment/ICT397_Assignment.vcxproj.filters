@@ -48,6 +48,9 @@
     <ClCompile Include="ClAABB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ClRay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Collision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClRay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
