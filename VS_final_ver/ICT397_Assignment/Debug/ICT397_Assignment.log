@@ -1,1 +1,31 @@
-﻿  ICT397_Assignment.vcxproj -> X:\Study\Uni\Yr3_S1\ICT397 - Adv Game Design\Assignment\Ass1_final\ICT397_GridGrunt_Assignment1\VS_final_ver\Debug\ICT397_Assignment.exe
+﻿Build started 19-May-17 6:56:10 PM.
+     1>Project "D:\work\Uni_Murdoch\ICT397\Master\397-Game-Engine\VS_final_ver\ICT397_Assignment\ICT397_Assignment.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         D:\vs2013\VC\bin\CL.exe /c /Iinclude /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt World.cpp
+         World.cpp
+     1>d:\work\uni_murdoch\ict397\master\397-game-engine\vs_final_ver\ict397_assignment\world.cpp(190): warning C4244: 'argument' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>d:\work\uni_murdoch\ict397\master\397-game-engine\vs_final_ver\ict397_assignment\world.cpp(197): warning C4244: 'argument' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>d:\work\uni_murdoch\ict397\master\397-game-engine\vs_final_ver\ict397_assignment\world.cpp(206): warning C4244: 'argument' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>d:\work\uni_murdoch\ict397\master\397-game-engine\vs_final_ver\ict397_assignment\world.cpp(213): warning C4244: 'argument' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>d:\work\uni_murdoch\ict397\master\397-game-engine\vs_final_ver\ict397_assignment\world.cpp(222): warning C4244: 'argument' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>d:\work\uni_murdoch\ict397\master\397-game-engine\vs_final_ver\ict397_assignment\world.cpp(223): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+       Link:
+         D:\vs2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\work\Uni_Murdoch\ICT397\Master\397-Game-Engine\VS_final_ver\Debug\ICT397_Assignment.exe" /INCREMENTAL /NOLOGO /LIBPATH:lib freeglut.lib assimp.lib SDL.lib glew32.lib lua5.1.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\work\Uni_Murdoch\ICT397\Master\397-Game-Engine\VS_final_ver\Debug\ICT397_Assignment.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\work\Uni_Murdoch\ICT397\Master\397-Game-Engine\VS_final_ver\Debug\ICT397_Assignment.lib" /MACHINE:X86 Debug\Camera.obj
+         Debug\Control.obj
+         Debug\GameAsset.obj
+         Debug\GameMathHelp.obj
+         Debug\GameObject.obj
+         Debug\GameTime.obj
+         Debug\Graphics.obj
+         Debug\main.obj
+         Debug\Mesh.obj
+         Debug\ObjectLoader.obj
+         Debug\ParticleEmmitter.obj
+         Debug\Texture.obj
+         Debug\World.obj
+         ICT397_Assignment.vcxproj -> D:\work\Uni_Murdoch\ICT397\Master\397-Game-Engine\VS_final_ver\Debug\ICT397_Assignment.exe
+     1>Done Building Project "D:\work\Uni_Murdoch\ICT397\Master\397-Game-Engine\VS_final_ver\ICT397_Assignment\ICT397_Assignment.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.36

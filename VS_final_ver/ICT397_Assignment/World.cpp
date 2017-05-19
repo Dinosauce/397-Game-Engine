@@ -89,7 +89,7 @@ void World::Initialize(){
 }
 
 void World::InitSpecialEffects(){
-	particleSystem.createParticles();
+	particleSystem.createParticles(0, 200, 0);
 }
 
 void World::Update(){
@@ -129,7 +129,7 @@ void World::Update(){
 
 void World::DrawSpecialEffects(){
 	particleSystem.updateParticles();
-	particleSystem.DrawParticles(particleSystem);
+	particleSystem.DrawParticles(&particleSystem);
 }
 
 void World::RunGame(int* argc, char* argv[]){
