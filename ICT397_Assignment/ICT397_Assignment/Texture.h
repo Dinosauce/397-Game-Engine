@@ -15,7 +15,9 @@ public:
 
 	//load a texture an make it the current texture
 	//if texID is already in use, it will be unloaded and replaced with this texture
-	bool Load(const char* filename,	const unsigned int texID,GLenum image_format,GLint internal_format,GLint level,GLint border);					
+
+	//TODO: Remove GL Dependancy or Make a part of Graphics system
+	bool Load(const char* filename,	const unsigned int texID,GLenum image_format,GLint internal_format,GLint level,GLint border, bool repeat = false);					
 
 	//free the memory for a texture
 	//bool UnloadTexture(const unsigned int texID);

@@ -63,6 +63,9 @@
     <ClCompile Include="md2Files\math\myMath.cpp">
       <Filter>MD2</Filter>
     </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -112,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="md2Files\timer.h">
       <Filter>MD2</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

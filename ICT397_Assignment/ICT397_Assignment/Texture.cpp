@@ -29,7 +29,7 @@ Texture::~Texture()
 	m_inst = 0;
 }*/
 
-bool Texture::Load(const char* filename, const unsigned int texID, GLenum image_format, GLint internal_format, GLint level, GLint border)
+bool Texture::Load(const char* filename, const unsigned int texID, GLenum image_format, GLint internal_format, GLint level, GLint border, bool repeat)
 {
 	int width, height, n;
 	//OpenGL's image ID to map to
@@ -48,8 +48,16 @@ bool Texture::Load(const char* filename, const unsigned int texID, GLenum image_
 		//store the texture data for OpenGL use
 		glTexImage2D(GL_TEXTURE_2D, level, internal_format, width, height, border, image_format, GL_UNSIGNED_BYTE, data);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		if (repeat)
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		}
+		else
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		}
 	}
 
 	
