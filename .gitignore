@@ -23,7 +23,7 @@
 *.a
 
 # Executables
-*.exe
+#*.exe
 *.out
 *.app
 
@@ -33,7 +33,7 @@
 *.suo
 *.opensdf
 
-ICT397_Assignment/Debug/
-ICT397_Assignment/Release/
-ICT397_Assignment/ICT397_Assignment/Debug/
-ICT397_Assignment/ICT397_Assignment/Release/
+397-Game-Engine/VS_final_ver/Debug/
+397-Game-Engine/VS_final_ver/Release/
+397-Game-Engine/VS_final_ver/ICT397_Assignment/Debug/
+397-Game-Engine/VS_final_ver/ICT397_Assignment/Release/
