@@ -1,6 +1,7 @@
 #ifndef GAMEASSET_H
 #define GAMEASSET_H
 #include "ObjectLoader.h"
+#include "Terrain.h"
 
 class GameAsset
 {
@@ -37,7 +38,8 @@ class TerrianAsset :public GameAsset
 	void LoadAsset(const char * path1);
 	void RenderAsset();
 private:
-	 ObjectLoader TerrianLoader;
+	 //ObjectLoader TerrianLoader;
+	terrain Terrain;
 };
 
 class ObjectAsset :public GameAsset

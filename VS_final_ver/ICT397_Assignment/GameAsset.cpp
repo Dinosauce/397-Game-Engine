@@ -4,12 +4,12 @@
 
 void TerrianAsset::LoadAsset(const char * path1)
 {
-	TerrianLoader.loadModel(path1);
+	Terrain.loadHeightfield(path1, 128);
 }
 
 void TerrianAsset::RenderAsset()
 {
-	TerrianLoader.Draw();
+	Terrain.render();
 }
 
 void NPCAsset::LoadAsset(const char * path2)

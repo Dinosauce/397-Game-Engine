@@ -105,7 +105,7 @@ void World::Update(){
 	DrawSpecialEffects();
 
 	//Draw NPCs Models
-	//DrawNPCs();
+	DrawNPCs();
 	
 	if (GetGameStatus() != GAME_PLAYING){
 		if (GetGameStatus() == GAME_DONE){
@@ -156,77 +156,11 @@ void World::InitialTerrain()
 {
 	Terrain.LoadGameObject(LD.TerrainFile.c_str(), "Terrain");
 	
-
-	for (int i = 0; i < 10; i++)
-	{
-		int randNum1 = (rand() % 10) + 0;
-		int randNum2 = (rand() % 10) + 0;
-
-		for (int j = 0; j < 10; j++)
-		{
-			std::vector<bool> colVector;
-
-			if( (j == randNum1) || (j == randNum2))
-			{
-				RandomGrids[i][j] = false;
-			}
-			else
-			{
-				RandomGrids[i][j] = true;
-			}
-		}
-	}
 }
 
 void World::DrawTerrain()
 {
-	for (int i = 0; i <10; i++)
-	{
-		for (int j = 0; j <10; j++)
-		{
-			if( (!RandomGrids[i][j]) && (i != 0) && (j!=0))
-			{
-				glPushMatrix();
-				glTranslatef(-40 * j, 40, 40*i);
-				Terrain.ShowGameObject();
-				glPopMatrix();
-
-				if (!RandomTrees[i][j])
-				{
-					glPushMatrix();
-					glTranslatef(-40 * j, 75, 40 * i);
-					DrawTrees();
-					glPopMatrix();
-				}
-
-			}
-			else
-			{
-				glPushMatrix();
-				glTranslatef(-40 * j, 0, 40*i);
-				Terrain.ShowGameObject();
-				glPopMatrix();
-
-				if (!RandomTrees[i][j])
-				{
-					glPushMatrix();
-					glTranslatef(-40 * j, 35, 40 * i);
-					DrawTrees();
-					glPopMatrix();
-				}
-
-				//Draw NPCs
-				if (!RandomNPCs[i][j])
-				{
-					glPushMatrix();
-					glTranslatef(-40 * j, 40, 40 * i);
-					glScalef(0.2, 0.2, 0.2);
-					DrawNPCs();
-					glPopMatrix();
-				}
-			}
-		}
-	}
+	Terrain.ShowGameObject();
 }
 
 void World::InitialNPCs()
