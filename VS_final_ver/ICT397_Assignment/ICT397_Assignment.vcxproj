@@ -45,11 +45,13 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;assimp.lib;SDL.lib;glew32.lib;lua5.1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freeglut.lib;assimp.lib;SDL.lib;glew32.lib;lua5.1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -83,6 +85,12 @@
     <ClCompile Include="ParticleEmmitter.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="textureHandler\bmpLoader.cpp" />
+    <ClCompile Include="textureHandler\imageFactory.cpp" />
+    <ClCompile Include="textureHandler\multitexture.cpp" />
+    <ClCompile Include="textureHandler\textureGenerator.cpp" />
+    <ClCompile Include="textureHandler\textureManager.cpp" />
+    <ClCompile Include="textureHandler\tgaLoader.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -97,8 +105,17 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="ObjectLoader.h" />
     <ClInclude Include="ParticleEmmitter.h" />
+    <ClInclude Include="singleton.h" />
+    <ClInclude Include="singletons.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="textureHandler\bmpLoader.h" />
+    <ClInclude Include="textureHandler\image.h" />
+    <ClInclude Include="textureHandler\imageFactory.h" />
+    <ClInclude Include="textureHandler\multitexture.h" />
+    <ClInclude Include="textureHandler\textureGenerator.h" />
+    <ClInclude Include="textureHandler\textureManager.h" />
+    <ClInclude Include="textureHandler\tgaLoader.h" />
     <ClInclude Include="TextureMap.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

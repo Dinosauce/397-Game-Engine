@@ -65,26 +65,27 @@ World::World(){
 }
 
 void World::Initialize(){
-	
-	texture2d.SetTextureCount(3);
-	texture2d.LoadRawTexture2D("pictures/GameMenu.raw", 512, 512, GAME_MAIN_MENU_TEXTURE);
-	texture2d.LoadRawTexture2D("pictures/HelpMenu.raw", 512, 512, GAME_HELP_MENU_TEXTURE);
-	texture2d.LoadRawTexture2D("pictures/Credit.raw", 512, 512, CREDIT_TEXTURE);
-	
-	// init the special effects
-	InitSpecialEffects();
-
 	//Load extra lua files
 	LoadLuaFiles();
 
 	//Initial Terrian Model
 	InitialTerrain();
 
-	//Initial NPCs Model
-	InitialNPCs();
+
+	texture2d.SetTextureCount(3);
+	texture2d.LoadRawTexture2D("pictures/GameMenu.raw", 512, 512, GAME_MAIN_MENU_TEXTURE);
+	texture2d.LoadRawTexture2D("pictures/HelpMenu.raw", 512, 512, GAME_HELP_MENU_TEXTURE);
+	texture2d.LoadRawTexture2D("pictures/Credit.raw", 512, 512, CREDIT_TEXTURE);
+
+	// init the special effects
+	InitSpecialEffects();
+
 
 	//Initial NPCs Model
-	InitialTrees();
+	//InitialNPCs();
+
+	//Initial NPCs Model
+	//InitialTrees();
 
 }
 
@@ -93,6 +94,7 @@ void World::InitSpecialEffects(){
 }
 
 void World::Update(){
+
 	elapsed_time_second = game_time.GetElapsedTimeSecond();
 	fps = game_time.GetFps();
 	cam.SetCameraSpdWithDT(elapsed_time_second);
@@ -105,7 +107,7 @@ void World::Update(){
 	DrawSpecialEffects();
 
 	//Draw NPCs Models
-	DrawNPCs();
+	//DrawNPCs();
 	
 	if (GetGameStatus() != GAME_PLAYING){
 		if (GetGameStatus() == GAME_DONE){
