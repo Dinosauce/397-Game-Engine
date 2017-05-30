@@ -17,9 +17,14 @@ bool initMultiTextures(void)
 
 	// Make sure that an appropriate version of OpenGL is installed.
 	// If the extension functions could not be found then the function pointers will be NULL
-	if(!glActiveTextureARB || !glMultiTexCoord2fARB)
-		return false;
-	else
-		return true;
+ if (!glActiveTextureARB || !glMultiTexCoord2fARB)
+ {
+	 return false;
+ }	
+ else
+ {
+	 return true;
+ }
+		
 }
  

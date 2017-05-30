@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include "../singletons.h"
+#include "textureHandler/multitexture.h"
 using namespace std;
 
 void terrain::loadHeightfield(const char *filename, const int size) {
@@ -27,14 +28,98 @@ void terrain::loadHeightfield(const char *filename, const int size) {
 	// read data as a block:
 	infile.seekg(0, ios::beg);
 	infile.read(reinterpret_cast<char *>(terrainData), length);
+
 	infile.close();
 	this->size = size;
 	Loaded = true;
 }
 
+bool terrain::generateHeightfield(const int size, float weight, int iterations)
+{
+	float* data = NULL;
+
+	if (size <= 0)
+		return false;
+
+	this->size = size;
+
+	data = new float[size*size];
+	terrainData = new unsigned char[size*size];
+
+	if (data == NULL || terrainData == NULL)
+		return false;
+
+	//Generate and filter random terrain
+	genFaultForm(data, iterations, weight);
+
+	//Smooth out and normalize generated terrain
+	normalise(data);
+
+	//Copy temp data
+	for (int z = 0; z<size; z++)
+	{
+		for (int x = 0; x<size; x++)
+		{
+			terrainData[(z*size) + x] = (unsigned char)data[z*size + x];
+		}
+	}
+
+	//free temp data
+	delete[] data;
+	return true;
+
+}
+
+void  terrain::genFaultForm(float* terrainData, int iterations, float weight)
+{
+	//Set to flat plane
+	for (int z = 0; z<size; z++)
+	{
+		for (int x = 0; x<size; x++)
+		{
+			terrainData[(z*size) + x] = 0;
+		}
+	}
+
+	//Displace
+	for (int iter = 0; iter < iterations; iter++)
+	{
+		float displacement = (255 * ((float)iter / (iterations)));
+
+		int x1, x2, z1, z2;
+
+		//Set random line
+		x1 = rand() % size;
+		z1 = rand() % size;
+
+		do {
+			x2 = rand() % size;
+			z2 = rand() % size;
+		} while (x1 == x2 && z1 == z2);
+
+		//Display terrain on one side of line
+		for (int z = 0; z<size; z++)
+		{
+			for (int x = 0; x<size; x++)
+			{
+				int y = (x2 - x1) * (z - z1) - (z2 - z1) * (x - x1);
+				if (y > 0)
+					terrainData[(z*size) + x] += (float)displacement;
+			}
+		}//For each terrainpoint
+
+		addFilter(terrainData, weight);
+	}//For each iteration
+}
+
 void terrain::setNumTerrainTexRepeat(int num)
 {
 	numTerrainTexRepeat = num;
+}
+
+void terrain::setNumDetailMapRepeat(int num)
+{
+	numDetailMapRepeat = num;
 }
 
 void terrain::setScalingFactor(float xScale, float yScale, float zScale) {
@@ -47,6 +132,20 @@ float terrain::getHeight(int xpos, int zpos) {
 	if (inbounds(xpos, zpos)) {
 		return ((float)(terrainData[(zpos*size) + xpos])*scaleY);
 	}
+}
+
+float terrain::getPointHeight(int x, int z)
+{
+	if (x < 0)
+		x = 0;
+	else if (x >= size)
+		x = size - 1;
+	if (z < 0)
+		z = 0;
+	else if (z >= size)
+		z = size - 1;
+
+	return (float)terrainData[z * size + x];
 }
 
 float terrain::getUnscaledHeight(int xpos, int zpos) {
@@ -67,6 +166,62 @@ bool terrain::inbounds(int xpos, int zpos)
 	return((xpos >= 0 && xpos <= 128) && (zpos >= 0 && zpos <= 128));
 }
 
+void terrain::normalise(float* terrainData)
+{
+	float fMin, fMax;
+	float fHeight;
+	int i;
+	fMin = terrainData[0];
+	fMax = terrainData[0];
+
+	for (i = 1; i < size*size; i++)
+	{
+		if (terrainData[i] > fMax)
+			fMax = terrainData[i];
+		else if (terrainData[i] < fMin)
+			fMin = terrainData[i];
+	}
+
+	if (fMax <= fMin)
+		return;
+
+	fHeight = fMax - fMin;
+
+	for (i = 0; i < size*size; i++)
+		terrainData[i] = ((terrainData[i] - fMin) / fHeight) * 255.0f;
+}
+
+void terrain::filterPass(float* dataP, int increment, float weight)
+{
+	float yprev = dataP[0]; // for yi-1
+	int j = increment; // +1, -1, +size, -size
+	float k = weight;
+	// loop through either
+	// one row from left to right (increment = +1), or
+	// one row from right to left (increment = -1), or
+	// one column from top to bottom (increment = +size), or
+	// one column from bottom to top (increment = -size)
+	for (int i = 1; i<size; i++) {
+		// yi= k yi-1+ (1-k) xi
+		*(dataP + j) = k*yprev + (1 - k)*(*(dataP + j)); //
+		yprev = *(dataP + j);
+		j += increment;
+	}
+}void terrain::addFilter(float* terrainData, float weight) {
+	int i;
+	//erode left to right, starting at the beginning of each row
+	for (i = 0; i<size; i++)
+		filterPass(&terrainData[size*i], 1, weight);
+	//erode right to left, starting at the end of each row
+	for (i = 0; i<size; i++)
+		filterPass(&terrainData[size*i + size - 1], -1, weight);
+	//erode top to bottom, starting at the beginning of each column
+	for (i = 0; i<size; i++)
+		filterPass(&terrainData[i], size, weight);
+	//erode from bottom to top, starting from the end of each column
+	for (i = 0; i<size; i++)
+		filterPass(&terrainData[size*(size - 1) + i], -size, weight);
+}
 
 bool terrain::createProceduralTexture()
 {
@@ -102,14 +257,23 @@ bool terrain::createProceduralTexture()
 	texID = texMan.createNewTexture(tex.getTex(), size, size);
 	cout << texID;
 	textureMapping = true;
-	//dont repeat this texture
-	numTerrainTexRepeat = 0;
 	return true;
 }
 
 bool terrain::addProceduralTexture(char* filename)
 {
 	tex.addTexture(filename);
+	return true;
+}
+
+bool terrain::loadDetailMap(char* filename)
+{
+	detailMapTexID = texMan.loadTexture(filename);
+	return true;
+}
+
+bool terrain::isDetailMapped()
+{
 	return true;
 }
 
@@ -122,47 +286,62 @@ void terrain::render() {
 	float tTop = 0.0f;
 	bool texturesEnabled = true;
 
-	if (texturesEnabled)
+	cout <<"ID:"<< detailMapTexID << "  " << texID<<endl;
+	
+	if (initMultiTextures())
 	{
-		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, texID);
-		//cout << "Textures Enabled" << endl;
+		cout << "ARB!!" << endl;
 	}
 
-	if (Loaded)
-	{
+	glDisable(GL_BLEND);
+	glActiveTextureARB(GL_TEXTURE0_ARB);
+	//bind texture 0
+	texMan.setActiveTexture(texID);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glActiveTextureARB(GL_TEXTURE1_ARB);
+	//bind texture 1
+	texMan.setActiveTexture(detailMapTexID);
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE_ARB);
+	glTexEnvi(GL_TEXTURE_ENV, GL_RGB_SCALE_ARB, 2);
 
-		//loop through the z axis
-		for (int z = 0; z<getSize() - 1; z++) {
-			//loop through the x axis
-			glBegin(GL_TRIANGLE_STRIP);
-			for (int x = 0; x<getSize(); x++) {
-				if (texturesEnabled)
-				{
-					tLeft = (float)x / (float)size;
-					tBottom = (float)z / (float)size;
-					tTop = (float)(z + 1) / (float)size;
-				}
-				else
-				{
-					hcolor = getHeightColor(x, z);
-					hcolor2 =getHeightColor(x, z + 1);
-				}
+	
+	for (int z = 0; z<size - 2; z++) {
+		//loop through the x axis
+		glBegin(GL_TRIANGLE_STRIP);
 
-				glColor3ub(hcolor, hcolor, hcolor);
-				glTexCoord2f(tLeft, tBottom);
-				glVertex3f((float)x*scaleX, getHeight(x, z)*0.1, (float)z*scaleZ);
-
-				//create the next point in the triangle strip
-				glColor3ub(hcolor2, hcolor2, hcolor2);
-				glTexCoord2f(tLeft, tTop);
-				glVertex3f((float)x*scaleX, getHeight(x, z + 1)*0.1, (float)(z + 1)*scaleZ);
+		for (int x = 0; x<size - 1; x++) {
+			if (textureMapping)
+			{
+				tLeft = (float)x / (float)size;
+				tBottom = (float)z / (float)size;
+				tTop = (float)(z + 1) / (float)size;
 			}
-			glEnd();
+			else
+			{
+				hcolor = getHeightColor(x, z);
+				hcolor2 = getHeightColor(x, z + 1);
+			}
+			glColor3ub(hcolor, hcolor, hcolor);
+			glMultiTexCoord2fARB(GL_TEXTURE0_ARB, tLeft*numTerrainTexRepeat, tBottom*numTerrainTexRepeat);
+			if (isDetailMapped())
+				glMultiTexCoord2fARB(GL_TEXTURE1_ARB, tLeft*numDetailMapRepeat, tBottom*numDetailMapRepeat);
+			glVertex3f((float)x*scaleX, getHeight(x, z), (float)z*scaleZ);
+
+			glColor3ub(hcolor2, hcolor2, hcolor2);
+			glMultiTexCoord2fARB(GL_TEXTURE0_ARB, tLeft*numTerrainTexRepeat, tTop*numTerrainTexRepeat);
+			if (isDetailMapped())
+				glMultiTexCoord2fARB(GL_TEXTURE1_ARB, tLeft*numDetailMapRepeat, tTop*numDetailMapRepeat);
+			glVertex3f((float)x*scaleX, getHeight(x, z + 1), (float)(z + 1)*scaleZ);
 		}
+		glEnd();
 	}
-	else
-	{
-		cout << "failed to load" << endl;
+
+
+	if (isDetailMapped()){
+		glActiveTextureARB(GL_TEXTURE1_ARB); glDisable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+	glActiveTextureARB(GL_TEXTURE0_ARB);
+	glDisable(GL_TEXTURE_2D); glBindTexture(GL_TEXTURE_2D, 0);
 }
