@@ -32,7 +32,8 @@ public:
 	bool addProceduralTexture(char* filename);
 
 	bool loadDetailMap(char* filename);
-	bool isDetailMapped();
+
+	bool DoDetailMapping(bool DM);
 
 	void render();
 
@@ -40,8 +41,17 @@ public:
 
 	float getPointHeight(int x, int z);
 
+	void LoadLightMap(const char *filename, const int size);
+
+	unsigned char getBrightnessAtPoint(int x, int z);
+
+	RGB<float> getLightMapColor();
+
+	bool DoLightMapping(bool LM);
+
 protected:
 	unsigned char *terrainData; //data of the heightfield
+	unsigned char *lightmapData;
 	float scaleX; //how much we want to scale by
 	float scaleY;
 	float scaleZ;
@@ -54,8 +64,11 @@ protected:
 
 private:
 	int size; //the size of the heightfield along x and z - power of 2
+	int LightMapSize;
 	bool textureMapping;
 	bool detailMap;
+	bool isLightMapped=true;
+	RGB<float> lightColor;
 
 	void filterPass(float* dataP, int increment, float weight);
 

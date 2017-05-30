@@ -5,6 +5,7 @@
 #include <fstream>
 #include "../singletons.h"
 #include "textureHandler/multitexture.h"
+#include "stb_image.h"
 using namespace std;
 
 void terrain::loadHeightfield(const char *filename, const int size) {
@@ -207,7 +208,9 @@ void terrain::filterPass(float* dataP, int increment, float weight)
 		yprev = *(dataP + j);
 		j += increment;
 	}
-}void terrain::addFilter(float* terrainData, float weight) {
+}
+
+void terrain::addFilter(float* terrainData, float weight) {
 	int i;
 	//erode left to right, starting at the beginning of each row
 	for (i = 0; i<size; i++)
@@ -272,9 +275,65 @@ bool terrain::loadDetailMap(char* filename)
 	return true;
 }
 
-bool terrain::isDetailMapped()
+bool terrain::DoDetailMapping(bool DM)
 {
-	return true;
+	detailMap = DM;
+	return detailMap;
+}
+
+void terrain::LoadLightMap(const char *filename, const int size)
+{
+	//lightmapData = stbi_load(filename, &LightMapWidth, &LightMapHeight, &LightMapBPP, 3);
+	
+	//open for binary read
+	ifstream infile(filename, ios::binary);
+	if (!infile) {
+		cout << "Cannot open file :" << filename << endl;
+		Loaded = false;
+	}
+	//allocate memory
+	if (lightmapData)
+		delete[] lightmapData;
+	if (size>0)
+		lightmapData = new unsigned char[size*size];
+	if (lightmapData == NULL)
+		Loaded = false;
+	//read in heightfield.
+	// get length of file:
+	infile.seekg(0, ios::end);
+	int length = infile.tellg();
+	// read data as a block:
+	infile.seekg(0, ios::beg);
+	infile.read(reinterpret_cast<char *>(lightmapData), length);
+
+	infile.close();
+	this->LightMapSize = size;
+}
+
+RGB<float> terrain::getLightMapColor()
+{
+	RGB<float> color = { 0, 0, 0 };
+
+	color.r =1;
+	color.g =1;
+	color.b = 1;
+
+	return color;
+}
+
+
+unsigned char terrain::getBrightnessAtPoint(int x, int z)
+{
+	if (isLightMapped)
+		return (lightmapData[(z*size) + x]);
+	else
+		return 0;
+}
+
+bool terrain::DoLightMapping(bool LM)
+{
+	isLightMapped = LM;
+	return LM;
 }
 
 void terrain::render() {
@@ -286,7 +345,11 @@ void terrain::render() {
 	float tTop = 0.0f;
 	bool texturesEnabled = true;
 
-	cout <<"ID:"<< detailMapTexID << "  " << texID<<endl;
+	RGB<float> lightmapColor;
+	unsigned char shadeLow;
+	unsigned char shadeHigh;
+
+	//cout <<"ID:"<< detailMapTexID << "  " << texID<<endl;
 	
 	if (initMultiTextures())
 	{
@@ -322,15 +385,32 @@ void terrain::render() {
 				hcolor = getHeightColor(x, z);
 				hcolor2 = getHeightColor(x, z + 1);
 			}
-			glColor3ub(hcolor, hcolor, hcolor);
+
+			if (isLightMapped)
+			{
+				lightmapColor = getLightMapColor();
+				shadeLow = getBrightnessAtPoint(x, z);
+				shadeHigh = getBrightnessAtPoint(x, z + 1);
+			}
+			else
+			{
+				lightmapColor = {1,1,1};
+				shadeLow = 255;
+				shadeHigh = 255;
+			}
+
+
+			glColor4ub(shadeLow*lightmapColor.r, shadeLow*lightmapColor.g,shadeLow*lightmapColor.b, 255);
+			//glColor3ub(hcolor, hcolor, hcolor);
 			glMultiTexCoord2fARB(GL_TEXTURE0_ARB, tLeft*numTerrainTexRepeat, tBottom*numTerrainTexRepeat);
-			if (isDetailMapped())
+			if (detailMap)
 				glMultiTexCoord2fARB(GL_TEXTURE1_ARB, tLeft*numDetailMapRepeat, tBottom*numDetailMapRepeat);
 			glVertex3f((float)x*scaleX, getHeight(x, z), (float)z*scaleZ);
 
-			glColor3ub(hcolor2, hcolor2, hcolor2);
+			glColor4ub(shadeHigh*lightmapColor.r, shadeHigh*lightmapColor.g,shadeHigh*lightmapColor.b, 255);
+			//glColor3ub(hcolor2, hcolor2, hcolor2);
 			glMultiTexCoord2fARB(GL_TEXTURE0_ARB, tLeft*numTerrainTexRepeat, tTop*numTerrainTexRepeat);
-			if (isDetailMapped())
+			if (detailMap)
 				glMultiTexCoord2fARB(GL_TEXTURE1_ARB, tLeft*numDetailMapRepeat, tTop*numDetailMapRepeat);
 			glVertex3f((float)x*scaleX, getHeight(x, z + 1), (float)(z + 1)*scaleZ);
 		}
@@ -338,7 +418,7 @@ void terrain::render() {
 	}
 
 
-	if (isDetailMapped()){
+	if (detailMap){
 		glActiveTextureARB(GL_TEXTURE1_ARB); glDisable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}

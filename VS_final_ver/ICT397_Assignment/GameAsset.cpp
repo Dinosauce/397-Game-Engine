@@ -15,7 +15,10 @@ void TerrianAsset::LoadAsset(const char * path1)
 	Terrain.setNumTerrainTexRepeat(1);
 	Terrain.DoTextureMapping(true);
 	Terrain.loadDetailMap("pictures/detailMap.tga");
-	Terrain.setNumDetailMapRepeat(5);
+	Terrain.setNumDetailMapRepeat(8);
+	Terrain.DoDetailMapping(true);
+	Terrain.LoadLightMap("pictures/lightmap.raw",128);
+	Terrain.DoLightMapping(true);
 }
 
 void TerrianAsset::RenderAsset()
