@@ -13,7 +13,9 @@
 #include "ParticleEmmitter.h"
 #include <cstdlib>
 #include <vector>
+#include <map>
 #include "lua/lua.hpp"
+#include "Terrain.h"
 /**
 * World class - Plentoon Games
 * Stores all the game components and helps object communication
@@ -167,9 +169,6 @@ class World{
 		/// texture object
 		static Texture2D texture2d;
 
-		//terrain objects
-		static GameObject Terrain;
-
 		//NPC objects
 		static GameObject NPCs;
 
@@ -183,6 +182,10 @@ class World{
 		static bool RandomTrees[10][10];
 
 		static LuaData LD;
+
+		//static terrain Terrain;
+
+		static map<string,terrain> Terrains;
 };
 
 #endif

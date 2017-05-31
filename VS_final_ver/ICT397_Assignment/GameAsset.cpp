@@ -5,7 +5,7 @@
 void TerrianAsset::LoadAsset(const char * path1)
 {
 	Terrain.loadHeightfield(path1, 128);
-	Terrain.setScalingFactor(5, 0.5, 5);
+	Terrain.setScalingFactor(7, 1, 7);
 	Terrain.generateHeightfield(128,0.3,150);
 	Terrain.addProceduralTexture("pictures/lowestTile.tga");
 	Terrain.addProceduralTexture("pictures/lowTile.tga");
@@ -15,7 +15,7 @@ void TerrianAsset::LoadAsset(const char * path1)
 	Terrain.setNumTerrainTexRepeat(1);
 	Terrain.DoTextureMapping(true);
 	Terrain.loadDetailMap("pictures/detailMap.tga");
-	Terrain.setNumDetailMapRepeat(8);
+	Terrain.setNumDetailMapRepeat(5);
 	Terrain.DoDetailMapping(true);
 	Terrain.LoadLightMap("pictures/lightmap.raw",128);
 	Terrain.DoLightMapping(true);

@@ -2,7 +2,7 @@
 #define CAMERA_H
 
 #include "GameMathHelp.h"
-
+#include "Terrain.h"
 /**
 * Camera class - Plentoon Games
 * Stores the camera position and look at vector
@@ -79,6 +79,8 @@ class Camera{
 
 		Vector3 GetCameraPos(){ return camera_pos; };
 		Vector3 GetCameraLookAt(){ return camera_look_at; };
+
+		void isTerrainCollision(int H);
 
 	private:
 		/**

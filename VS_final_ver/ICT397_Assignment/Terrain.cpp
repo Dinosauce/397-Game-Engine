@@ -8,6 +8,11 @@
 #include "stb_image.h"
 using namespace std;
 
+terrain::terrain()
+{
+
+}
+
 void terrain::loadHeightfield(const char *filename, const int size) {
 	//open for binary read
 	ifstream infile(filename, ios::binary);
@@ -147,6 +152,27 @@ float terrain::getPointHeight(int x, int z)
 		z = size - 1;
 
 	return (float)terrainData[z * size + x];
+}
+
+float terrain::getAverageHight(int x, int z)
+{
+	x /= scaleX;
+	z /= scaleZ;
+
+	int ix = (int)x;
+	int iz = (int)z;
+
+	float A, B, C, D, E, F, G;
+	A = getPointHeight(ix, iz);
+	B = getPointHeight(ix, iz + 1);
+	C = getPointHeight(ix + 1, iz);
+	D = getPointHeight(ix + 1, iz + 1);
+
+	E = A + ((z - iz) * (B - A));
+	F = C + ((z - iz) * (D - C));
+	G = E + ((x - ix) * (F - E));
+
+	return G * scaleY;
 }
 
 float terrain::getUnscaledHeight(int xpos, int zpos) {

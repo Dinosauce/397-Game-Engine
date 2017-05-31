@@ -128,3 +128,8 @@ void Camera::PreventFastDiagMove(){
 	move_vector = move_vector * camera_mov_spd_with_dt;
 	Move(move_vector);
 }
+
+void Camera::isTerrainCollision(int H)
+{
+	camera_pos.y = H;
+}

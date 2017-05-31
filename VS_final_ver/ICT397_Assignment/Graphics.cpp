@@ -1,4 +1,5 @@
 #include "Graphics.h"
+#include "singletons.h"
 #include <string>
 
 int Graphics::screen_width;

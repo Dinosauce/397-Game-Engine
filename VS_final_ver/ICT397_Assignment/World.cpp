@@ -10,12 +10,13 @@ Control World::control;
 GameTime World::game_time;
 ParticleEmmitter World::particleSystem;
 LuaData World::LD;
-
+//terrain World::Terrain;
+map<string,terrain> World::Terrains;
 double World::elapsed_time_second;
 int World::fps;
 
 //Draw Terrain Model
-GameObject World::Terrain;
+
 bool World::RandomGrids[10][10];
 
 //Draw NPCs Model
@@ -102,6 +103,7 @@ void World::Update(){
 	graphic_handler->SetCameraPos(cam.GetCameraPos());
 	graphic_handler->SetCameraLookAt(cam.GetCameraLookAt());
 
+
 	//Draw Terrain Model
 	DrawTerrain();
 	DrawSpecialEffects();
@@ -156,13 +158,60 @@ bool World::SetOpenGLGraphics(){
 
 void World::InitialTerrain()
 {
-	Terrain.LoadGameObject(LD.TerrainFile.c_str(), "Terrain");
-	
+	terrain *Terrain=new terrain();
+
+	Terrain->loadHeightfield(LD.TerrainFile.c_str(), 128);
+	Terrain->setScalingFactor(7, 1, 7);
+	Terrain->generateHeightfield(128, 0.3, 150);
+	Terrain->addProceduralTexture("pictures/lowestTile.tga");
+	Terrain->addProceduralTexture("pictures/lowTile.tga");
+	Terrain->addProceduralTexture("pictures/highTile.tga");
+	Terrain->addProceduralTexture("pictures/highestTile.tga");
+	Terrain->createProceduralTexture();
+	Terrain->setNumTerrainTexRepeat(1);
+	Terrain->DoTextureMapping(true);
+	Terrain->loadDetailMap("pictures/detailMap.tga");
+	Terrain->setNumDetailMapRepeat(8);
+	Terrain->DoDetailMapping(true);
+	Terrain->LoadLightMap("pictures/lightmap.raw", 128);
+	Terrain->DoLightMapping(true);
+
+	Terrains["T1"] = *Terrain;
+
+
+
+	terrain *Terrain2 = new terrain();
+
+	Terrain2->loadHeightfield(LD.TerrainFile.c_str(), 128);
+	Terrain2->setScalingFactor(3, 0.5, 3);
+	Terrain2->generateHeightfield(128, 0.3, 150);
+	Terrain2->addProceduralTexture("pictures/lowestTile.tga");
+	Terrain2->addProceduralTexture("pictures/lowTile.tga");
+	Terrain2->addProceduralTexture("pictures/highTile.tga");
+	Terrain2->addProceduralTexture("pictures/highestTile.tga");
+	Terrain2->createProceduralTexture();
+	Terrain2->setNumTerrainTexRepeat(1);
+	Terrain2->DoTextureMapping(true);
+	Terrain2->loadDetailMap("pictures/detailMap.tga");
+	Terrain2->setNumDetailMapRepeat(8);
+	Terrain2->DoDetailMapping(true);
+	Terrain2->LoadLightMap("pictures/lightmap.raw", 128);
+	Terrain2->DoLightMapping(true);
+
+	Terrains["T2"] = *Terrain2;
+
 }
 
 void World::DrawTerrain()
 {
-	Terrain.ShowGameObject();
+	Terrains["T1"].render();
+	Terrains["T2"].render();
+	//terrain t1 = Terrains["T1"];
+	int CamX = cam.GetCameraPos().x;
+
+	int CamZ = cam.GetCameraPos().z;
+	int CamY=Terrains["T1"].getAverageHight(CamX, CamZ);
+	cam.isTerrainCollision(CamY+10);
 }
 
 void World::InitialNPCs()

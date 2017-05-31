@@ -7,6 +7,7 @@ class terrain
 
 {
 public:
+	terrain();
 
 	void loadHeightfield(const char *filename, const int size);
 
@@ -48,6 +49,8 @@ public:
 	RGB<float> getLightMapColor();
 
 	bool DoLightMapping(bool LM);
+
+	float getAverageHight(int x, int z);
 
 protected:
 	unsigned char *terrainData; //data of the heightfield
