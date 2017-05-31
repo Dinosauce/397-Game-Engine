@@ -10,6 +10,7 @@ Control World::control;
 GameTime World::game_time;
 ParticleEmmitter World::particleSystem;
 LuaData World::LD;
+terrainData World::terrainInfo;
 //terrain World::Terrain;
 map<string,terrain> World::Terrains;
 double World::elapsed_time_second;
@@ -29,6 +30,31 @@ bool World::RandomTrees[10][10];
 
 void World::LoadLuaFiles()
 {
+	LuaScript script("terrain.lua");
+	terrainInfo.TerrainFile = script.get<std::string>("Terrain.TerrainFile");
+	terrainInfo.ImageSize = script.get<int>("Terrain.ImageSize");
+	terrainInfo.scalex = script.get<int>("Terrain.ScaleFactor.x");
+	terrainInfo.scaley = script.get<int>("Terrain.ScaleFactor.y");
+	terrainInfo.scalez = script.get<int>("Terrain.ScaleFactor.z");
+	terrainInfo.heightfieldX = script.get<int>("Terrain.HeightField.x");
+	terrainInfo.heightfieldY = script.get<float>("Terrain.HeightField.y");
+	terrainInfo.heightfieldZ = script.get<int>("Terrain.HeightField.z");
+	terrainInfo.ProceduralTexture1 = script.get<std::string>("Terrain.ProceduralTexture1");
+	terrainInfo.ProceduralTexture2 = script.get<std::string>("Terrain.ProceduralTexture2");
+	terrainInfo.ProceduralTexture3 = script.get<std::string>("Terrain.ProceduralTexture3");
+	terrainInfo.ProceduralTexture4 = script.get<std::string>("Terrain.ProceduralTexture4");
+	terrainInfo.repeat = script.get<int>("Terrain.repeatnum");
+	terrainInfo.textureMapping = script.get<bool>("Terrain.textureMapping");
+	terrainInfo.DetailMap = script.get<std::string>("Terrain.DetailMap");
+	terrainInfo.mapRepeat = script.get<int>("Terrain.mapRepeat");
+	terrainInfo.DetailMapping = script.get<bool>("Terrain.DetailMapping");
+	terrainInfo.LightMap = script.get<std::string>("Terrain.LightMap");
+	terrainInfo.LightMapSize = script.get<int>("Terrain.LightMapSize");
+	terrainInfo.LightMapping = script.get<bool>("Terrain.LightMapping");
+
+	//cout << "this is the terrain file name: " << terrainInfo.TerrainFile << endl;
+
+
 	lua_State *gameFile = lua_open();
 
 	luaL_openlibs(gameFile);
@@ -160,6 +186,22 @@ void World::InitialTerrain()
 {
 	terrain *Terrain=new terrain();
 
+	Terrain->loadHeightfield(terrainInfo.TerrainFile.c_str(), terrainInfo.ImageSize);
+	Terrain->setScalingFactor(terrainInfo.scalex, terrainInfo.scaley, terrainInfo.scalez);
+	Terrain->generateHeightfield(terrainInfo.heightfieldX, terrainInfo.heightfieldY, terrainInfo.heightfieldZ);
+	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture1.c_str());
+	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture2.c_str());
+	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture3.c_str());
+	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture4.c_str());
+	Terrain->createProceduralTexture();
+	Terrain->setNumTerrainTexRepeat(terrainInfo.repeat);
+	Terrain->DoTextureMapping(terrainInfo.textureMapping);
+	Terrain->loadDetailMap(terrainInfo.DetailMap.c_str());
+	Terrain->setNumDetailMapRepeat(terrainInfo.mapRepeat);
+	Terrain->DoDetailMapping(terrainInfo.DetailMapping);
+	Terrain->LoadLightMap(terrainInfo.LightMap.c_str(), terrainInfo.LightMapSize);
+	Terrain->DoLightMapping(terrainInfo.LightMapping);
+	/*
 	Terrain->loadHeightfield(LD.TerrainFile.c_str(), 128);
 	Terrain->setScalingFactor(7, 1, 7);
 	Terrain->generateHeightfield(128, 0.3, 150);
@@ -175,7 +217,7 @@ void World::InitialTerrain()
 	Terrain->DoDetailMapping(true);
 	Terrain->LoadLightMap("pictures/lightmap.raw", 128);
 	Terrain->DoLightMapping(true);
-
+	*/
 	Terrains["T1"] = *Terrain;
 
 

@@ -78,6 +78,9 @@
     <ClCompile Include="textureHandler\tgaLoader.cpp">
       <Filter>Resource Files\textureHandler</Filter>
     </ClCompile>
+    <ClCompile Include="LuaScript.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -152,9 +155,15 @@
     <ClInclude Include="textureHandler\tgaLoader.h">
       <Filter>Resource Files\textureHandler</Filter>
     </ClInclude>
+    <ClInclude Include="LuaScript.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameFiles.lua">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="terrain.lua">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

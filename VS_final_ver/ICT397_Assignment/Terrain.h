@@ -30,9 +30,9 @@ public:
 
 	bool createProceduralTexture();
 
-	bool addProceduralTexture(char* filename);
+	bool addProceduralTexture(const char* filename);
 
-	bool loadDetailMap(char* filename);
+	bool loadDetailMap(const char* filename);
 
 	bool DoDetailMapping(bool DM);
 

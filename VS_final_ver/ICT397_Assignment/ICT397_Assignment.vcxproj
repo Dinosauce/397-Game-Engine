@@ -79,6 +79,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="LuaScript.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="ObjectLoader.cpp" />
@@ -102,6 +103,7 @@
     <ClInclude Include="GameStatus.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="LuaScript.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="ObjectLoader.h" />
     <ClInclude Include="ParticleEmmitter.h" />
@@ -121,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="GameFiles.lua" />
+    <None Include="terrain.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

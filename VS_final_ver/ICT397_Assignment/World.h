@@ -16,6 +16,7 @@
 #include <map>
 #include "lua/lua.hpp"
 #include "Terrain.h"
+#include "LuaScript.h"
 /**
 * World class - Plentoon Games
 * Stores all the game components and helps object communication
@@ -25,6 +26,22 @@ struct  LuaData
 	string TerrainFile;
 	string ObjectsFile;
 	string NPCsFile;
+};
+struct terrainData
+{
+	string TerrainFile;
+	int ImageSize, scalex, scaley, scalez;
+	int heightfieldX, heightfieldZ;
+	float heightfieldY;
+	string ProceduralTexture1, ProceduralTexture2, ProceduralTexture3, ProceduralTexture4;
+	int repeat;
+	bool textureMapping;
+	string DetailMap;
+	int mapRepeat;
+	bool DetailMapping;
+	string LightMap;
+	int LightMapSize;
+	bool LightMapping;
 };
 
 class World{
@@ -182,6 +199,8 @@ class World{
 		static bool RandomTrees[10][10];
 
 		static LuaData LD;
+
+		static terrainData terrainInfo;
 
 		//static terrain Terrain;
 
