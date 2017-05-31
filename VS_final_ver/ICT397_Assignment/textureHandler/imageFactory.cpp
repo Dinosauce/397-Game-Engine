@@ -41,6 +41,10 @@ image* imageFactory::create(string filename)
 	  {
 		return new tgaLoader;
 	  }
+	  else if (ext == "PCX")
+	  {
+		  return new pcx;
+	  }
 	  else 
 	  {
 		return NULL;

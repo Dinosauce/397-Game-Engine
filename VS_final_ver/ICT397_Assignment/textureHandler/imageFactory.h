@@ -8,6 +8,7 @@ using namespace std;
 #include "image.h"
 #include "bmpLoader.h"
 #include "tgaLoader.h"
+#include "pcx.h"
 
 
 class imageFactory{

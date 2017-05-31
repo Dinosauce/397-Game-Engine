@@ -46,7 +46,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -81,6 +81,11 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="LuaScript.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MD2Loader\math\myMath.cpp" />
+    <ClCompile Include="MD2Loader\md2Header.cpp" />
+    <ClCompile Include="MD2Loader\md2Loader.cpp" />
+    <ClCompile Include="MD2Loader\vector\vector.cpp" />
+    <ClCompile Include="MD2Loader\vector\vector2D.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="AssimpLoader.cpp" />
     <ClCompile Include="ParticleEmmitter.cpp" />
@@ -89,6 +94,7 @@
     <ClCompile Include="textureHandler\bmpLoader.cpp" />
     <ClCompile Include="textureHandler\imageFactory.cpp" />
     <ClCompile Include="textureHandler\multitexture.cpp" />
+    <ClCompile Include="textureHandler\pcx.cpp" />
     <ClCompile Include="textureHandler\textureGenerator.cpp" />
     <ClCompile Include="textureHandler\textureManager.cpp" />
     <ClCompile Include="textureHandler\tgaLoader.cpp" />
@@ -104,6 +110,12 @@
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="LuaScript.h" />
+    <ClInclude Include="MD2Loader\math\myMath.h" />
+    <ClInclude Include="MD2Loader\md2Header.h" />
+    <ClInclude Include="MD2Loader\md2Loader.h" />
+    <ClInclude Include="MD2Loader\timer.h" />
+    <ClInclude Include="MD2Loader\vector\vector.h" />
+    <ClInclude Include="MD2Loader\vector\vector2D.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="AssimpLoader.h" />
     <ClInclude Include="ParticleEmmitter.h" />
@@ -115,6 +127,7 @@
     <ClInclude Include="textureHandler\image.h" />
     <ClInclude Include="textureHandler\imageFactory.h" />
     <ClInclude Include="textureHandler\multitexture.h" />
+    <ClInclude Include="textureHandler\pcx.h" />
     <ClInclude Include="textureHandler\textureGenerator.h" />
     <ClInclude Include="textureHandler\textureManager.h" />
     <ClInclude Include="textureHandler\tgaLoader.h" />

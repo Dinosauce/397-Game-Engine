@@ -2,7 +2,7 @@
 
 
 
-void OBJAsset::LoadAsset(const char * path[])
+void OBJAsset::LoadAsset(char * path[])
 {
 	ALoader.loadModel(path[0]);
 }
@@ -13,14 +13,18 @@ void OBJAsset::RenderAsset()
 	ALoader.Draw();
 }
 
-void MD2Asset::LoadAsset(const char * path[])
+void MD2Asset::LoadAsset(char * path[])
 {
-	ALoader.loadModel(path[0]);
+	char *md2File = path[0];
+	md2.loadModel("3Dmodels/tris.md2", "3Dmodels/twilight.PCX");
+	md2.setAnimationSpeed(10);
+	md2.printHeader();
 }
 
 void MD2Asset::RenderAsset()
 {
-	ALoader.Draw();
+	//md2.render();
+	md2.animate(40, 46);
 }
 
 

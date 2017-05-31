@@ -1,172 +1,147 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Resource Files\textureHandler">
-      <UniqueIdentifier>{9bc51e9e-7db8-4b08-8077-d2fe03be1760}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="World.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Control.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameTime.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameMathHelp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameAsset.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleEmmitter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Control.cpp" />
+    <ClCompile Include="GameAsset.cpp" />
+    <ClCompile Include="GameMathHelp.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameTime.cpp" />
+    <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="LuaScript.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ParticleEmmitter.cpp" />
+    <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="World.cpp" />
     <ClCompile Include="textureHandler\bmpLoader.cpp">
-      <Filter>Resource Files\textureHandler</Filter>
+      <Filter>textrueHandle</Filter>
     </ClCompile>
     <ClCompile Include="textureHandler\imageFactory.cpp">
-      <Filter>Resource Files\textureHandler</Filter>
+      <Filter>textrueHandle</Filter>
     </ClCompile>
     <ClCompile Include="textureHandler\multitexture.cpp">
-      <Filter>Resource Files\textureHandler</Filter>
+      <Filter>textrueHandle</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>textrueHandle</Filter>
     </ClCompile>
     <ClCompile Include="textureHandler\textureGenerator.cpp">
-      <Filter>Resource Files\textureHandler</Filter>
+      <Filter>textrueHandle</Filter>
     </ClCompile>
     <ClCompile Include="textureHandler\textureManager.cpp">
-      <Filter>Resource Files\textureHandler</Filter>
+      <Filter>textrueHandle</Filter>
     </ClCompile>
     <ClCompile Include="textureHandler\tgaLoader.cpp">
-      <Filter>Resource Files\textureHandler</Filter>
+      <Filter>textrueHandle</Filter>
     </ClCompile>
-<<<<<<< HEAD
+    <ClCompile Include="textureHandler\pcx.cpp">
+      <Filter>textrueHandle</Filter>
+    </ClCompile>
     <ClCompile Include="AssimpLoader.cpp">
-=======
-    <ClCompile Include="LuaScript.cpp">
->>>>>>> origin/master
-      <Filter>Source Files</Filter>
+      <Filter>AssimpLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>AssimpLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="MD2Loader\md2Header.cpp">
+      <Filter>MD2Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="MD2Loader\md2Loader.cpp">
+      <Filter>MD2Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="MD2Loader\vector\vector.cpp">
+      <Filter>MD2Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="MD2Loader\vector\vector2D.cpp">
+      <Filter>MD2Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="MD2Loader\math\myMath.cpp">
+      <Filter>MD2Loader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="World.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Control.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameTime.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameMathHelp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameStatus.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameAsset.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleEmmitter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="singleton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="singletons.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Control.h" />
+    <ClInclude Include="GameAsset.h" />
+    <ClInclude Include="GameMathHelp.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameStatus.h" />
+    <ClInclude Include="GameTime.h" />
+    <ClInclude Include="Graphics.h" />
+    <ClInclude Include="LuaScript.h" />
+    <ClInclude Include="ParticleEmmitter.h" />
+    <ClInclude Include="singleton.h" />
+    <ClInclude Include="singletons.h" />
+    <ClInclude Include="Terrain.h" />
+    <ClInclude Include="World.h" />
     <ClInclude Include="textureHandler\bmpLoader.h">
-      <Filter>Resource Files\textureHandler</Filter>
+      <Filter>textrueHandle</Filter>
     </ClInclude>
     <ClInclude Include="textureHandler\image.h">
-      <Filter>Resource Files\textureHandler</Filter>
+      <Filter>textrueHandle</Filter>
     </ClInclude>
     <ClInclude Include="textureHandler\imageFactory.h">
-      <Filter>Resource Files\textureHandler</Filter>
+      <Filter>textrueHandle</Filter>
     </ClInclude>
     <ClInclude Include="textureHandler\multitexture.h">
-      <Filter>Resource Files\textureHandler</Filter>
+      <Filter>textrueHandle</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>textrueHandle</Filter>
     </ClInclude>
     <ClInclude Include="textureHandler\textureGenerator.h">
-      <Filter>Resource Files\textureHandler</Filter>
+      <Filter>textrueHandle</Filter>
     </ClInclude>
     <ClInclude Include="textureHandler\textureManager.h">
-      <Filter>Resource Files\textureHandler</Filter>
+      <Filter>textrueHandle</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureMap.h">
+      <Filter>textrueHandle</Filter>
     </ClInclude>
     <ClInclude Include="textureHandler\tgaLoader.h">
-      <Filter>Resource Files\textureHandler</Filter>
+      <Filter>textrueHandle</Filter>
     </ClInclude>
-<<<<<<< HEAD
+    <ClInclude Include="textureHandler\pcx.h">
+      <Filter>textrueHandle</Filter>
+    </ClInclude>
     <ClInclude Include="AssimpLoader.h">
-=======
-    <ClInclude Include="LuaScript.h">
->>>>>>> origin/master
-      <Filter>Header Files</Filter>
+      <Filter>AssimpLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>AssimpLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="MD2Loader\md2Header.h">
+      <Filter>MD2Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="MD2Loader\md2Loader.h">
+      <Filter>MD2Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="MD2Loader\timer.h">
+      <Filter>MD2Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="MD2Loader\vector\vector.h">
+      <Filter>MD2Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="MD2Loader\vector\vector2D.h">
+      <Filter>MD2Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="MD2Loader\math\myMath.h">
+      <Filter>MD2Loader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="GameFiles.lua">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="terrain.lua">
-      <Filter>Resource Files</Filter>
-    </None>
+    <None Include="GameFiles.lua" />
+    <None Include="terrain.lua" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="textrueHandle">
+      <UniqueIdentifier>{e30527de-b2ff-4663-8f63-0155a2d85165}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AssimpLoader">
+      <UniqueIdentifier>{eefd9df0-9100-4ae2-985f-aea4eaf6cbf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MD2Loader">
+      <UniqueIdentifier>{f0db3911-cc28-4fdd-82f3-7f2c1af7ddd8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

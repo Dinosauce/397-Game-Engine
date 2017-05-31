@@ -201,6 +201,8 @@ class World{
 		static map<string,terrain> Terrains;
 
 		static map<string, GameObject> Trees;
+
+		static map<string, GameObject> NPCs;
 };
 
 #endif

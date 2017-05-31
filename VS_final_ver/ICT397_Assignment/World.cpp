@@ -12,8 +12,10 @@ ParticleEmmitter World::particleSystem;
 LuaData World::LD;
 terrainData World::terrainInfo;
 //terrain World::Terrain;
+
 map<string,terrain> World::Terrains;
 map<string, GameObject> World::Trees;
+map<string, GameObject> World::NPCs;
 
 double World::elapsed_time_second;
 int World::fps;
@@ -111,7 +113,7 @@ void World::Initialize(){
 	InitialTrees();
 
 	//Initial NPCs Model
-	//InitialTrees();
+	InitialNPCs();
 
 }
 
@@ -133,9 +135,9 @@ void World::Update(){
 	DrawTerrain();
 	DrawSpecialEffects();
 
-	DrawTrees();
+	//DrawTrees();
 	//Draw NPCs Models
-	//DrawNPCs();
+	DrawNPCs();
 	
 	if (GetGameStatus() != GAME_PLAYING){
 		if (GetGameStatus() == GAME_DONE){
@@ -188,7 +190,8 @@ void World::InitialTerrain()
 
 	Terrain->loadHeightfield(terrainInfo.TerrainFile.c_str(), terrainInfo.ImageSize);
 	Terrain->setScalingFactor(terrainInfo.scalex, terrainInfo.scaley, terrainInfo.scalez);
-	Terrain->generateHeightfield(terrainInfo.heightfieldX, terrainInfo.heightfieldY, terrainInfo.heightfieldZ);
+	//Terrain->generateHeightfield(terrainInfo.heightfieldX, terrainInfo.heightfieldY, terrainInfo.heightfieldZ);
+	Terrain->genFaultFormation(64, 128, 1, 128, 0.1, false);
 	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture1.c_str());
 	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture2.c_str());
 	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture3.c_str());
@@ -201,6 +204,7 @@ void World::InitialTerrain()
 	Terrain->DoDetailMapping(terrainInfo.DetailMapping);
 	Terrain->LoadLightMap(terrainInfo.LightMap.c_str(), terrainInfo.LightMapSize);
 	Terrain->DoLightMapping(terrainInfo.LightMapping);
+	
 	/*
 	Terrain->loadHeightfield(LD.TerrainFile.c_str(), 128);
 	Terrain->setScalingFactor(7, 1, 7);
@@ -234,12 +238,35 @@ void World::DrawTerrain()
 
 void World::InitialNPCs()
 {
+	static GameObject NPC;
+	Vector3 NPCPos;
+	Vector3 NPCSca;
 
+	char* TreeFiles[] = { const_cast<char *>(LD.NPCsFile.c_str()) };
+	NPC.LoadGameObject(TreeFiles, "MD2");
+
+	NPCPos.x = 50;
+	NPCPos.z = 50;
+	NPCPos.y = (double)Terrains["T1"].getAverageHight(NPCPos.x, NPCPos.z) + 8;
+
+	NPCSca.x = 0.3;
+	NPCSca.y = 0.3;
+	NPCSca.z = 0.3;
+
+	NPC.setPosition(NPCPos);
+	NPC.setScale(NPCSca);
+
+	NPCs["NPC"] = NPC;
 }
 
 void World::DrawNPCs()
 {
-
+	static Vector3 NewNPCPos;
+	NewNPCPos.x = cam.GetCameraLookAt().x+20;
+	NewNPCPos.z = cam.GetCameraLookAt().z+20;
+	NewNPCPos.y = (double)Terrains["T1"].getAverageHight(NewNPCPos.x, NewNPCPos.z)+8;
+	NPCs["NPC"].setPosition(NewNPCPos);
+	NPCs["NPC"].ShowGameObject();
 }
 
 void World::InitialTrees()
@@ -249,15 +276,15 @@ void World::InitialTrees()
 
 	for (int i = 0; i <10; i++)
 	{
-		const char* TreeFiles1[] = { LD.ObjectsFile.c_str() };
-		Tree.LoadGameObject(TreeFiles1, "OBJ");
+		char* TreeFiles[] = { const_cast<char *>(LD.ObjectsFile.c_str()) };
+		Tree.LoadGameObject(TreeFiles, "OBJ");
 		TreePos.x = 100+(i*30);
 		TreePos.z = 100+(i*30);
 		TreePos.y = (double)Terrains["T1"].getAverageHight(TreePos.x, TreePos.z)-5;
 		Tree.setPosition(TreePos);
 
 		string TreeName = "Tree" + to_string(i);
-		cout << TreePos.x << " " << TreePos.y << " " << TreePos.z << " " << TreeName << endl;
+		//cout << TreePos.x << " " << TreePos.y << " " << TreePos.z << " " << TreeName << endl;
 
 		Trees[TreeName] = Tree;
 	}

@@ -1,6 +1,7 @@
 #ifndef GAMEASSET_H
 #define GAMEASSET_H
 #include "AssimpLoader.h"
+#include "MD2Loader/md2Loader.h"
 
 class GameAsset
 {
@@ -20,7 +21,7 @@ public:
 	* Load asset 
 	* @param file pathname
 	*/
-	virtual void LoadAsset(const char * path[])=0;
+	virtual void LoadAsset(char * path[])=0;
 
 	/**
 	* Render asset
@@ -34,7 +35,7 @@ private:
 
 class OBJAsset :public GameAsset
 {
-	void LoadAsset(const char * path[]);
+	void LoadAsset(char * path[]);
 	void RenderAsset();
 private:
 	AssimpLoader ALoader;
@@ -42,10 +43,10 @@ private:
 
 class MD2Asset :public GameAsset
 {
-	void LoadAsset(const char * path[]);
+	void LoadAsset(char * path[]);
 	void RenderAsset();
 private:
-	AssimpLoader ALoader;
+	md2Loader md2;
 };
 
 
