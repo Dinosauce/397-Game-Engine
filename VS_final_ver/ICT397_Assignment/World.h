@@ -169,12 +169,6 @@ class World{
 		/// texture object
 		static Texture2D texture2d;
 
-		//NPC objects
-		static GameObject NPCs;
-
-		//Trees objects
-		static GameObject Trees;
-
 		static bool RandomGrids[10][10];
 
 		static bool RandomNPCs[10][10];
@@ -186,6 +180,8 @@ class World{
 		//static terrain Terrain;
 
 		static map<string,terrain> Terrains;
+
+		static map<string, GameObject> Trees;
 };
 
 #endif

@@ -81,7 +81,7 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="ObjectLoader.cpp" />
+    <ClCompile Include="AssimpLoader.cpp" />
     <ClCompile Include="ParticleEmmitter.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -103,7 +103,7 @@
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Mesh.h" />
-    <ClInclude Include="ObjectLoader.h" />
+    <ClInclude Include="AssimpLoader.h" />
     <ClInclude Include="ParticleEmmitter.h" />
     <ClInclude Include="singleton.h" />
     <ClInclude Include="singletons.h" />

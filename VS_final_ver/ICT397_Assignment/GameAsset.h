@@ -1,7 +1,6 @@
 #ifndef GAMEASSET_H
 #define GAMEASSET_H
-#include "ObjectLoader.h"
-#include "Terrain.h"
+#include "AssimpLoader.h"
 
 class GameAsset
 {
@@ -21,7 +20,7 @@ public:
 	* Load asset 
 	* @param file pathname
 	*/
-	virtual void LoadAsset(const char * path)=0;
+	virtual void LoadAsset(const char * path[])=0;
 
 	/**
 	* Render asset
@@ -33,30 +32,23 @@ private:
 
 };
 
-class TerrianAsset :public GameAsset
+class OBJAsset :public GameAsset
 {
-	void LoadAsset(const char * path1);
+	void LoadAsset(const char * path[]);
 	void RenderAsset();
 private:
-	 //ObjectLoader TerrianLoader;
-	terrain Terrain;
+	AssimpLoader ALoader;
 };
 
-class ObjectAsset :public GameAsset
+class MD2Asset :public GameAsset
 {
-	void LoadAsset(const char * path2);
+	void LoadAsset(const char * path[]);
 	void RenderAsset();
 private:
-	 ObjectLoader ObjectsLoader;
+	AssimpLoader ALoader;
 };
 
-class NPCAsset :public GameAsset
-{
-	void LoadAsset(const char * path3);
-	void RenderAsset();
-private:
-	 ObjectLoader NPCsLoader;
-};
+
 
 class GameAssetFactory{
 public:

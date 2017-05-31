@@ -38,8 +38,6 @@ public:
 
 	void render();
 
-	bool generateHeightfield(const int size, float weight, int iterations);
-
 	float getPointHeight(int x, int z);
 
 	void LoadLightMap(const char *filename, const int size);
@@ -51,6 +49,8 @@ public:
 	bool DoLightMapping(bool LM);
 
 	float getAverageHight(int x, int z);
+
+	bool genFaultFormation(int iterations, int hSize, int minHeight, int maxHeight, float weight, bool random);
 
 protected:
 	unsigned char *terrainData; //data of the heightfield
@@ -79,7 +79,7 @@ private:
 
 	void normalise(float* terrainData);
 
-	void  genFaultForm(float* terrainData, int iterations, float weight);
+	
 
 };
 

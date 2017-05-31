@@ -1,30 +1,30 @@
-#include "ObjectLoader.h"
+#include "AssimpLoader.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-ObjectLoader::ObjectLoader()
+AssimpLoader::AssimpLoader()
 {
 	
 }
 
 
-void ObjectLoader::Draw()
+void AssimpLoader::Draw()
 {
 	for (GLuint i = 0; i < this->meshes.size(); i++)
 		this->meshes[i].Draw();
 }
 
-void ObjectLoader::loadModel(string path)
+void AssimpLoader::loadModel(string path)
 {
 	this->Load(path);
 }
 
-void ObjectLoader::Load(string path)
+void AssimpLoader::Load(string path)
 {
 	cout << path;
 	// Read file via ASSIMP
 	Assimp::Importer importer;
-	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
 	// Check for errors
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
 	{
@@ -38,7 +38,7 @@ void ObjectLoader::Load(string path)
 	this->processNode(scene->mRootNode, scene);
 }
 
-void ObjectLoader::processNode(aiNode* node, const aiScene* scene)
+void AssimpLoader::processNode(aiNode* node, const aiScene* scene)
 {
 	// Process each mesh located at the current node
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
@@ -53,7 +53,7 @@ void ObjectLoader::processNode(aiNode* node, const aiScene* scene)
 
 }
 
-Mesh ObjectLoader::processMesh(aiMesh* mesh, const aiScene* scene)
+Mesh AssimpLoader::processMesh(aiMesh* mesh, const aiScene* scene)
 {
 	// Data to fill
 	vector<Vertex> vertices;
@@ -107,7 +107,7 @@ Mesh ObjectLoader::processMesh(aiMesh* mesh, const aiScene* scene)
 	return Mesh(vertices, indices, textures);
 }
 
-vector<Texture> ObjectLoader::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName)
+vector<Texture> AssimpLoader::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName)
 {
 	vector<Texture> textures;
 	for (GLuint i = 0; i < mat->GetTextureCount(type); i++)
@@ -139,7 +139,7 @@ vector<Texture> ObjectLoader::loadMaterialTextures(aiMaterial* mat, aiTextureTyp
 }
 
 
-GLint ObjectLoader::TextureFromFile(const char* path, string directory)
+GLint AssimpLoader::TextureFromFile(const char* path, string directory)
 { 
 	string filename = string(path);
 	filename = directory + '/' + filename;

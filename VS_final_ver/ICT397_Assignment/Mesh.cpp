@@ -16,14 +16,21 @@ void Mesh::Draw()
 	glEnable(GL_TEXTURE_2D);
 	for (GLuint i = 0; i < this->textures.size(); i++)
 	{
+		glActiveTexture(GL_TEXTURE0 + i);
 		glBindTexture(GL_TEXTURE_2D, this->textures[i].id);
 	}
+
 
 	// Draw mesh
 	glBindVertexArray(this->VAO);
 	glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
-	glDisable(GL_TEXTURE_2D);
+
+	for(GLuint i = 0; i < this->textures.size(); i++)
+	{
+		glActiveTexture(GL_TEXTURE0 + i);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
 }
 
 void Mesh::setupMesh()

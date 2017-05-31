@@ -40,82 +40,62 @@ void terrain::loadHeightfield(const char *filename, const int size) {
 	Loaded = true;
 }
 
-bool terrain::generateHeightfield(const int size, float weight, int iterations)
+
+bool  terrain::genFaultFormation(int iterations, int hSize, int minHeight, int maxHeight, float weight, bool random)
 {
-	float* data = NULL;
-
-	if (size <= 0)
+	int x1, x2, z1, z2;
+	float* heights = NULL;
+	int displacement;
+	if (hSize <= 0)
 		return false;
-
-	this->size = size;
-
-	data = new float[size*size];
+	if (random) //create truly random map
+		srand(time(NULL));
+	// allocate memory for heightfield array
+	size = hSize;
+	heights = new float[size*size]; //allocate memory
 	terrainData = new unsigned char[size*size];
-
-	if (data == NULL || terrainData == NULL)
+	if (heights == NULL || terrainData == NULL)
 		return false;
+	// initialise the heightfield array to all zeros
+	for (int i = 0; i<size*size; i++)
+		heights[i] = 0;
+	// generate heightfield
+	for (int j = 0; j<iterations; j++) {
+		//calculate reducing displacement value - how much to alter height
+		displacement = maxHeight - ((maxHeight - minHeight)*j) / iterations;
 
-	//Generate and filter random terrain
-	genFaultForm(data, iterations, weight);
-
-	//Smooth out and normalize generated terrain
-	normalise(data);
-
-	//Copy temp data
-	for (int z = 0; z<size; z++)
-	{
-		for (int x = 0; x<size; x++)
-		{
-			terrainData[(z*size) + x] = (unsigned char)data[z*size + x];
+		//pick the first point P1(x1, z1) at random from the height map
+		x1 = (rand() % size);
+		z1 = (rand() % size);
+		// pick up the second random point P2(x2, z2) and make sure it is
+		// different from the first point
+		do {
+			x2 = (rand() % size);
+			z2 = (rand() % size);
+		} while (x2 == x1 && z2 == z1);
+		//for each point P(x, z) in the field, calculate the new height values
+		for (int z = 0; z<size; z++) {
+			for (int x = 0; x<size; x++) {
+				// determine which side of the line P1P2 the point P lies in
+				if (((x - x1) * (z2 - z1) - (x2 - x1) * (z - z1)) > 0) {
+					heights[(z*size) + x] += (float)displacement;
+				}
+			}
+		}
+		addFilter(heights, weight);
+	}
+	// normalise the heightfield
+	normalise(heights);
+	// copy the float heightfield to terrainData (in unsign char)
+	for (int z = 0; z<size; z++) {
+		for (int x = 0; x<size; x++) {
+			terrainData[(z*size) + x] = (unsigned char)heights[z*size + x];
 		}
 	}
-
-	//free temp data
-	delete[] data;
+	// dispose of the temporary array heights
+	delete[] heights;
 	return true;
 
-}
-
-void  terrain::genFaultForm(float* terrainData, int iterations, float weight)
-{
-	//Set to flat plane
-	for (int z = 0; z<size; z++)
-	{
-		for (int x = 0; x<size; x++)
-		{
-			terrainData[(z*size) + x] = 0;
-		}
-	}
-
-	//Displace
-	for (int iter = 0; iter < iterations; iter++)
-	{
-		float displacement = (255 * ((float)iter / (iterations)));
-
-		int x1, x2, z1, z2;
-
-		//Set random line
-		x1 = rand() % size;
-		z1 = rand() % size;
-
-		do {
-			x2 = rand() % size;
-			z2 = rand() % size;
-		} while (x1 == x2 && z1 == z2);
-
-		//Display terrain on one side of line
-		for (int z = 0; z<size; z++)
-		{
-			for (int x = 0; x<size; x++)
-			{
-				int y = (x2 - x1) * (z - z1) - (z2 - z1) * (x - x1);
-				if (y > 0)
-					terrainData[(z*size) + x] += (float)displacement;
-			}
-		}//For each terrainpoint
-
-		addFilter(terrainData, weight);
-	}//For each iteration
 }
 
 void terrain::setNumTerrainTexRepeat(int num)
@@ -379,7 +359,7 @@ void terrain::render() {
 	
 	if (initMultiTextures())
 	{
-		cout << "ARB!!" << endl;
+		//cout << "ARB!!" << endl;
 	}
 
 	glDisable(GL_BLEND);

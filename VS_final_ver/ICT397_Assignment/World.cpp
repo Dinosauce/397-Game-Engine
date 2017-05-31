@@ -12,6 +12,8 @@ ParticleEmmitter World::particleSystem;
 LuaData World::LD;
 //terrain World::Terrain;
 map<string,terrain> World::Terrains;
+map<string, GameObject> World::Trees;
+
 double World::elapsed_time_second;
 int World::fps;
 
@@ -19,12 +21,9 @@ int World::fps;
 
 bool World::RandomGrids[10][10];
 
-//Draw NPCs Model
-GameObject World::NPCs;
 bool World::RandomNPCs[10][10];
 
-//Draw Trees Model
-GameObject World::Trees;
+
 bool World::RandomTrees[10][10];
 
 void World::LoadLuaFiles()
@@ -83,7 +82,7 @@ void World::Initialize(){
 
 
 	//Initial NPCs Model
-	//InitialNPCs();
+	InitialTrees();
 
 	//Initial NPCs Model
 	//InitialTrees();
@@ -108,6 +107,7 @@ void World::Update(){
 	DrawTerrain();
 	DrawSpecialEffects();
 
+	DrawTrees();
 	//Draw NPCs Models
 	//DrawNPCs();
 	
@@ -162,7 +162,7 @@ void World::InitialTerrain()
 
 	Terrain->loadHeightfield(LD.TerrainFile.c_str(), 128);
 	Terrain->setScalingFactor(7, 1, 7);
-	Terrain->generateHeightfield(128, 0.3, 150);
+	Terrain->genFaultFormation(64, 128, 1, 128, 0.2, false);
 	Terrain->addProceduralTexture("pictures/lowestTile.tga");
 	Terrain->addProceduralTexture("pictures/lowTile.tga");
 	Terrain->addProceduralTexture("pictures/highTile.tga");
@@ -178,75 +178,49 @@ void World::InitialTerrain()
 
 	Terrains["T1"] = *Terrain;
 
-
-
-	terrain *Terrain2 = new terrain();
-
-	Terrain2->loadHeightfield(LD.TerrainFile.c_str(), 128);
-	Terrain2->setScalingFactor(3, 0.5, 3);
-	Terrain2->generateHeightfield(128, 0.3, 150);
-	Terrain2->addProceduralTexture("pictures/lowestTile.tga");
-	Terrain2->addProceduralTexture("pictures/lowTile.tga");
-	Terrain2->addProceduralTexture("pictures/highTile.tga");
-	Terrain2->addProceduralTexture("pictures/highestTile.tga");
-	Terrain2->createProceduralTexture();
-	Terrain2->setNumTerrainTexRepeat(1);
-	Terrain2->DoTextureMapping(true);
-	Terrain2->loadDetailMap("pictures/detailMap.tga");
-	Terrain2->setNumDetailMapRepeat(8);
-	Terrain2->DoDetailMapping(true);
-	Terrain2->LoadLightMap("pictures/lightmap.raw", 128);
-	Terrain2->DoLightMapping(true);
-
-	Terrains["T2"] = *Terrain2;
-
 }
 
 void World::DrawTerrain()
 {
 	Terrains["T1"].render();
-	Terrains["T2"].render();
 	//terrain t1 = Terrains["T1"];
-	int CamX = cam.GetCameraPos().x;
-
-	int CamZ = cam.GetCameraPos().z;
-	int CamY=Terrains["T1"].getAverageHight(CamX, CamZ);
+	float CamX = (float)cam.GetCameraPos().x;
+	float CamZ = (float)cam.GetCameraPos().z;
+	float CamY=Terrains["T1"].getAverageHight(CamX, CamZ);
 	cam.isTerrainCollision(CamY+10);
 }
 
 void World::InitialNPCs()
 {
-	NPCs.LoadGameObject(LD.NPCsFile.c_str(), "NPC");
 
-	for (int i = 0; i < 10; i++)
-	{
-		int randNum1 = (rand() % 10) + 0;
-		int randNum2 = (rand() % 10) + 0;
-
-		for (int j = 0; j < 10; j++)
-		{
-			std::vector<bool> colVector;
-
-			if ((j == randNum1) || (j == randNum2))
-			{
-				RandomNPCs[i][j] = false;
-			}
-			else
-			{
-				RandomNPCs[i][j] = true;
-			}
-		}
-	}
 }
 
 void World::DrawNPCs()
 {
-	NPCs.ShowGameObject();
+
 }
 
 void World::InitialTrees()
 {
-	Trees.LoadGameObject(LD.ObjectsFile.c_str(), "Objects");
+	static GameObject Tree;
+	Vector3 TreePos;
+
+	for (int i = 0; i <10; i++)
+	{
+		const char* TreeFiles1[] = { LD.ObjectsFile.c_str() };
+		Tree.LoadGameObject(TreeFiles1, "OBJ");
+		TreePos.x = 100+(i*30);
+		TreePos.z = 100+(i*30);
+		TreePos.y = (double)Terrains["T1"].getAverageHight(TreePos.x, TreePos.z)-5;
+		Tree.setPosition(TreePos);
+
+		string TreeName = "Tree" + to_string(i);
+		cout << TreePos.x << " " << TreePos.y << " " << TreePos.z << " " << TreeName << endl;
+
+		Trees[TreeName] = Tree;
+	}
+
+
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -269,7 +243,14 @@ void World::InitialTrees()
 	}
 }
 
+
 void World::DrawTrees()
 {
-	Trees.ShowGameObject();
+	for (int i = 0; i < 10; i++)
+	{
+		string TreeName = "Tree" + to_string(i);
+		Trees[TreeName].ShowGameObject();
+
+	}
+
 }

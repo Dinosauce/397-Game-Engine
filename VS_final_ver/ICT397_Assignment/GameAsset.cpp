@@ -2,62 +2,36 @@
 
 
 
-void TerrianAsset::LoadAsset(const char * path1)
+void OBJAsset::LoadAsset(const char * path[])
 {
-	Terrain.loadHeightfield(path1, 128);
-	Terrain.setScalingFactor(7, 1, 7);
-	Terrain.generateHeightfield(128,0.3,150);
-	Terrain.addProceduralTexture("pictures/lowestTile.tga");
-	Terrain.addProceduralTexture("pictures/lowTile.tga");
-	Terrain.addProceduralTexture("pictures/highTile.tga");
-	Terrain.addProceduralTexture("pictures/highestTile.tga");
-	Terrain.createProceduralTexture();
-	Terrain.setNumTerrainTexRepeat(1);
-	Terrain.DoTextureMapping(true);
-	Terrain.loadDetailMap("pictures/detailMap.tga");
-	Terrain.setNumDetailMapRepeat(5);
-	Terrain.DoDetailMapping(true);
-	Terrain.LoadLightMap("pictures/lightmap.raw",128);
-	Terrain.DoLightMapping(true);
+	ALoader.loadModel(path[0]);
 }
 
-void TerrianAsset::RenderAsset()
+void OBJAsset::RenderAsset()
 {
 	//Terrain.normalise();
-	Terrain.render();
+	ALoader.Draw();
 }
 
-void NPCAsset::LoadAsset(const char * path2)
+void MD2Asset::LoadAsset(const char * path[])
 {
-	NPCsLoader.loadModel(path2);
+	ALoader.loadModel(path[0]);
 }
 
-void NPCAsset::RenderAsset()
+void MD2Asset::RenderAsset()
 {
-	NPCsLoader.Draw();
+	ALoader.Draw();
 }
 
-void ObjectAsset::LoadAsset(const char * path3)
-{
-	ObjectsLoader.loadModel(path3);
-}
-
-void ObjectAsset::RenderAsset()
-{
-	ObjectsLoader.Draw();
-}
 
 GameAsset* GameAssetFactory::Create(char* type)
 {
 	std::string type_str = type;
-	if (type_str == "Terrain"){
-		return new TerrianAsset;
+	if (type_str == "OBJ"){
+		return new OBJAsset;
 	}
-	else if (type_str == "Objects"){
-		return new ObjectAsset;
-	}
-	else if (type_str == "NPC"){
-		return new NPCAsset;
+	else if (type_str == "MD2"){
+		return new MD2Asset;
 	}
 	else{
 		return NULL;

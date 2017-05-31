@@ -18,11 +18,11 @@ using namespace std;
 #include <assimp/postprocess.h>
 #include "Mesh.h"
 
-class ObjectLoader
+class AssimpLoader
 {
 public:
 
-	ObjectLoader();
+	AssimpLoader();
 
 	void loadModel(string path);
 
