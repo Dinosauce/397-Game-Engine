@@ -91,7 +91,7 @@ void World::Initialize(){
 }
 
 void World::InitSpecialEffects(){
-	particleSystem.createParticles(0, 200, 0);
+	particleSystem.createParticles(0, 200, 0, explosion);
 }
 
 void World::Update(){
