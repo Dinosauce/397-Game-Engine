@@ -16,6 +16,7 @@ using namespace std;
 typedef float fVector[3];
 
 enum dimensions{X,Y,Z};
+enum ParticleTypeEnum { explosion, fountain };
 
 struct Particle
 {
@@ -33,7 +34,13 @@ class ParticleEmmitter
 public:
 	ParticleEmmitter();
 	~ParticleEmmitter();
-	
+
+		/**
+		* @brief  Draws the particles
+		*
+		* @param particleSystem, a pointer of type ParticleEmmitter *
+		* @return void
+		*/
 	void DrawParticles(ParticleEmmitter* particleSystem);
 
 		/**
@@ -47,7 +54,7 @@ public:
 		* @param p, a pointer of type particle *
 		* @return void
 		*/
-	void createParticle(Particle *p, float Xpos, float Ypos, float Zpos);
+	void createParticle(Particle *p, float Xpos, float Ypos, float Zpos, ParticleTypeEnum type);
 		
 		/**
 		* @brief  calls createParticle to initialise all particles in the system
@@ -57,7 +64,7 @@ public:
 		* @param Zpos, the initial Z position of the particles 
 		* @return void
 		*/
-	void createParticles(float Xpos, float Ypos, float Zpos);
+	void createParticles(float Xpos, float Ypos, float Zpos, ParticleTypeEnum type);
 
 		/**
 		* @brief  updates the particles positions based on their velocitys
@@ -154,6 +161,7 @@ public:
 	void modifySystemPull(float x, float y, float z); //used to modify x,y,z pull magnitudes
 
 private:
+	ParticleTypeEnum ParticleType;
 	fVector systemPull;
 	fVector initialPos;
 	int randomness;

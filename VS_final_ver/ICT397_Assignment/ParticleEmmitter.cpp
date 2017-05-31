@@ -74,48 +74,73 @@ void ParticleEmmitter::DrawParticles(ParticleEmmitter* particleSystem)
 	}
 }
 
-void ParticleEmmitter::createParticle(Particle *p, float Xpos, float Ypos, float Zpos)
+void ParticleEmmitter::createParticle(Particle *p, float Xpos, float Ypos, float Zpos, ParticleTypeEnum type)
 {
+	ParticleType = type;
 	//p->lifespan = 1000; //(((rand() % 10 + 1))) / 10.0f;
 	//srand(time(0));
-	p->lifespan = ((((randomness + rand()) % 10 + 1))) / 10.0f;
+
+	//If the particle system is creating an explosion:
+	if (ParticleType == explosion)
+	{
+		//the colour of the particles
+		p->color[X] = 1.0f;
+		p->color[Y] = 1.0f;
+		p->color[Z] = 1.0f;
+
+		p->lifespan = ((((randomness + rand()) % 40 + 1))) / 10.0f;
+
+		p->movement[X] = (rand() % 10 - rand() % 10)*0.1;
+		p->movement[Y] = (rand() % 10 - rand() % 10)*0.1;
+		p->movement[Z] = (rand() % 10 - rand() % 10)*0.1;
+	}
+
+	//If the particle system is creating a water fountain:
+	if (ParticleType == fountain)
+	{
+		//the colour of the particles
+		p->color[X] = 0.0f;
+		p->color[Y] = 0.0f;
+		p->color[Z] = 1.0f;
+
+		p->lifespan = ((((randomness + rand()) % 80 + 1))) / 10.0f;
+
+		//p->movement[X] = (((((((2) * rand() % 11) + 1)) * rand() % 11) + 1) * 0.0035) - (((((((2) * rand() % 11) + 1)) * rand() % 11) + 1) * 0.0035);
+		//p->movement[Y] = (((((((2) * rand() % 11) + 1)) * rand() % 11) + 1) * 0.0035) - (((((((2) * rand() % 11) + 1)) * rand() % 11) + 1) * 0.0035);
+		//p->movement[Y] = ((((((5) * rand() % 11) + 3)) * rand() % 11) + 7) * 0.115;
+		//p->movement[Z] = (((((((2) * rand() % 11) + 1)) * rand() % 11) + 1) * 0.0035) - (((((((2) * rand() % 11) + 1)) * rand() % 11) + 1) * 0.0015);
+		
+		//p->movement[X] = ((((((5) * rand() % 11) + 3)) * rand() % 11) + 7) * 0.015;
+		//p->movement[Z] = ((((((5) * rand() % 11) + 3)) * rand() % 11) + 7) * 0.015;
+		//p->movement[Y] = rand() % 10;
+
+		p->movement[X] = (((((((2) * rand() % 11) + 1)) * rand() % 11) + 1) * 0.005) - (((((((2) * rand() % 11) + 1)) * rand() % 11) + 1) * 0.005);
+		p->movement[Y] = ((((((5) * rand() % 11) + 5)) * rand() % 11) + 10) * 0.1;
+		p->movement[Z] = (((((((2) * rand() % 11) + 1)) * rand() % 11) + 1) * 0.005) - (((((((2) * rand() % 11) + 1)) * rand() % 11) + 1) * 0.005);
+	}
+	
+
+	//common attributes to all particles:
 	p->age = 0.0f;
 	p->scale = 0.25f;
 	p->direction = 0;
-
-	//srand(time(0));
 
 	//the starting position of particles
 	p->position[X] = Xpos;
 	p->position[Y] = Ypos;
 	p->position[Z] = Zpos;
 
-	//the movement of particles
-	//p->movement[X] = (((((((2) * rand() % 11) + 1)) * rand() % 11) + 1) * 0.0035) - (((((((2) * rand() % 11) + 1)) * rand() % 11) + 1) * 0.0035);
-	//p->movement[Y] = (((((((2) * rand() % 11) + 1)) * rand() % 11) + 1) * 0.0035) - (((((((2) * rand() % 11) + 1)) * rand() % 11) + 1) * 0.0035);
-	//p->movement[Y] = ((((((5) * rand() % 11) + 3)) * rand() % 11) + 7) * 0.015;
-	//p->movement[Z] = (((((((2) * rand() % 11) + 1)) * rand() % 11) + 1) * 0.0035) - (((((((2) * rand() % 11) + 1)) * rand() % 11) + 1) * 0.0015);
-
-	p->movement[X] = rand() % 10 - rand() % 10;
-	p->movement[Y] = rand() % 10 - rand() % 10;
-	p->movement[Z] = rand() % 10 - rand() % 10;
-
-	//the colour of the particles
-	p->color[X] = 1.0f;
-	p->color[Y] = 1.0f;
-	p->color[Z] = 1.0f;
-
-
+	//the pull of the particles
 	p->pull[X] = 0.0f;
 	p->pull[Y] = 0.0f;
 	p->pull[Z] = 0.0f;
 
 }
 
-void ParticleEmmitter::createParticles(float Xpos, float Ypos, float Zpos)
+void ParticleEmmitter::createParticles(float Xpos, float Ypos, float Zpos, ParticleTypeEnum type)
 {
 	systemPull[Y] = -0.0105;
-	systemPull[X] = systemPull[Z] = -0.001f;
+	systemPull[X] = systemPull[Z] = 0.000f;
 	srand(time(0));
 	randomness = rand();
 
@@ -126,7 +151,7 @@ void ParticleEmmitter::createParticles(float Xpos, float Ypos, float Zpos)
 	int i = 0;
 	for (i; i < MAX_PARTICLES; i++)
 	{
-		createParticle(&particles[i], Xpos, Ypos, Zpos);
+		createParticle(&particles[i], Xpos, Ypos, Zpos, type);
 	}
 }
 
@@ -154,29 +179,46 @@ void ParticleEmmitter::updateParticles()
 		particles[i].pull[Y] = particles[i].pull[Y] + systemPull[Y]; // acleration due to gravity
 		particles[i].pull[Z] = particles[i].pull[Z] + systemPull[Z];
 
-		if (particles[i].age > particles[i].lifespan /5)
-		{//gold
-			particles[i].color[X] = 1.0f;
-			particles[i].color[Y] = 1.0f;
-			particles[i].color[Z] = 0.0f;
+		//colour change if explosion:
+		if (ParticleType == explosion)
+		{
+			if (particles[i].age > particles[i].lifespan / 5)
+			{//Yellow
+				particles[i].color[X] = 1.0f;
+				particles[i].color[Y] = 1.0f;
+				particles[i].color[Z] = 0.0f;
+			}
+			if (particles[i].age > (particles[i].lifespan / 3))
+			{//Gold
+				particles[i].color[X] = 1.0f;
+				particles[i].color[Y] = 0.5f;
+				particles[i].color[Z] = 0.0f;
+			}
+			if (particles[i].age > particles[i].lifespan / 2)
+			{//Dark red
+				particles[i].color[X] = 0.5f;
+				particles[i].color[Y] = 0.0f;
+				particles[i].color[Z] = 0.0f;
+			}
+			if (particles[i].age > particles[i].lifespan / 1.5)
+			{//Black
+				particles[i].color[X] = 0.0f;
+				particles[i].color[Y] = 0.0f;
+				particles[i].color[Z] = 0.0f;
+			}
 		}
-		if (particles[i].age > (particles[i].lifespan / 3) )
-		{//gold
-			particles[i].color[X] = 1.0f;
-			particles[i].color[Y] = 0.5f;
-			particles[i].color[Z] = 0.0f;
-		}
-		if (particles[i].age > particles[i].lifespan/2)
-		{//gold
-			particles[i].color[X] = 0.5f;
-			particles[i].color[Y] = 0.0f;
-			particles[i].color[Z] = 0.0f;
-		}
-		if (particles[i].age > particles[i].lifespan / 1.5)
-		{//gold
-			particles[i].color[X] = 0.0f;
-			particles[i].color[Y] = 0.0f;
-			particles[i].color[Z] = 0.0f;
+
+		//Fountain features:
+		//colour change if fountain:
+		if (ParticleType == fountain)
+		{
+
+			if (particles[i].age > particles[i].lifespan)
+			{
+				createParticle(&particles[i], initialPos[0], initialPos[1], initialPos[2], fountain);
+
+			}
+			
 		}
 
 		//if (particles[i].position[Y] < initialPos[1])

@@ -18,7 +18,7 @@ private:
 public:
 	textureGenerator();
 	~textureGenerator();
-	bool addTexture(char* filename);
+	bool addTexture(const char* filename);
 	int getNumTextures();
 	bool isLoaded(int index);
 	RGB<unsigned char> getColor(int texNum,int x, int y);

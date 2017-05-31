@@ -269,13 +269,13 @@ bool terrain::createProceduralTexture()
 	return true;
 }
 
-bool terrain::addProceduralTexture(char* filename)
+bool terrain::addProceduralTexture(const char* filename)
 {
 	tex.addTexture(filename);
 	return true;
 }
 
-bool terrain::loadDetailMap(char* filename)
+bool terrain::loadDetailMap(const char* filename)
 {
 	detailMapTexID = texMan.loadTexture(filename);
 	return true;

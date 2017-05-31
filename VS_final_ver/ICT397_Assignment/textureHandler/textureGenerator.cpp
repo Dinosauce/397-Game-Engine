@@ -23,7 +23,7 @@ textureGenerator::~textureGenerator()
 }
 
 
-bool textureGenerator::addTexture(char* filename)
+bool textureGenerator::addTexture(const char* filename)
 {
       if(numTextures<4)
 	  { 
