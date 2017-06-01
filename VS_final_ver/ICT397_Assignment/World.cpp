@@ -103,11 +103,6 @@ void World::Initialize(){
 	//Load extra lua files
 	LoadLuaFiles();
 
-	
-
-	//Initial Terrian Model
-	InitialTerrain();
-
 
 	texture2d.SetTextureCount(3);
 	texture2d.LoadRawTexture2D("pictures/GameMenu.raw", 512, 512, GAME_MAIN_MENU_TEXTURE);
@@ -117,7 +112,8 @@ void World::Initialize(){
 	// init the special effects
 	InitSpecialEffects();
 
-
+	//Initial Terrian Model
+	InitialTerrain();
 	//Initial NPCs Model
 	InitialTrees();
 
@@ -134,7 +130,7 @@ void World::InitSpecialEffects(){
 
 void World::Update(){
 
-	DrawSkyBox();
+
 
 	elapsed_time_second = game_time.GetElapsedTimeSecond();
 	fps = game_time.GetFps();
@@ -143,13 +139,15 @@ void World::Update(){
 	graphic_handler->SetCameraPos(cam.GetCameraPos());
 	graphic_handler->SetCameraLookAt(cam.GetCameraLookAt());
 
-
+	DrawSkyBox();
 	//Draw Terrain Model
 	DrawTerrain();
 	DrawSpecialEffects();
 
 	DrawNPCs();
 	DrawTrees();
+
+
 	//Draw NPCs Models
 
 
@@ -207,7 +205,7 @@ void World::InitialTerrain()
 	Terrain->loadHeightfield(terrainInfo.TerrainFile.c_str(), terrainInfo.ImageSize);
 	Terrain->setScalingFactor(terrainInfo.scalex, terrainInfo.scaley, terrainInfo.scalez);
 	//Terrain->generateHeightfield(terrainInfo.heightfieldX, terrainInfo.heightfieldY, terrainInfo.heightfieldZ);
-	Terrain->genFaultFormation(64, 128, 1, 128, 0.1, false);
+	Terrain->genFaultFormation(64, 128, 1, 128, 0.08, true);
 	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture1.c_str());
 	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture2.c_str());
 	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture3.c_str());
@@ -250,7 +248,7 @@ void World::DrawTerrain()
 	float CamZ = (float)cam.GetCameraPos().z;
 	float CamY=Terrains["T1"].getAverageHight(CamX, CamZ);
 	//cout << CamY << endl;
-	cam.isTerrainCollision(CamY+10);
+	cam.isTerrainCollision(CamY+20);
 }
 
 void World::InitialNPCs()
@@ -363,9 +361,9 @@ void World::InitialSkyBox()
 	SkyPos.z = cam.GetCameraPos().z;
 	SkyPos.y = (double)Terrains["T1"].getAverageHight(SkyPos.x, SkyPos.z) ;
 
-	SkySca.x = 80;
-	SkySca.y = 80;
-	SkySca.z = 80;
+	SkySca.x = 230;
+	SkySca.y = 230;
+	SkySca.z = 230;
 
 	Sky.setPosition(SkyPos);
 	Sky.setScale(SkySca);
@@ -375,11 +373,12 @@ void World::InitialSkyBox()
 void World::DrawSkyBox()
 {
 	static Vector3 NewSkyPos;
-	NewSkyPos.x = cam.GetCameraLookAt().x ;
-	NewSkyPos.z = cam.GetCameraLookAt().z ;
-	NewSkyPos.y = (double)Terrains["T1"].getAverageHight(NewSkyPos.x, NewSkyPos.z) ;
-	Sky.setPosition(NewSkyPos);
 	Sky.ShowSkyBox();
+	NewSkyPos.x = cam.GetCameraPos().x;
+	NewSkyPos.z = cam.GetCameraPos().z;
+	NewSkyPos.y = (double)Terrains["T1"].getAverageHight(NewSkyPos.x, NewSkyPos.z) +5;
+	Sky.setPosition(NewSkyPos);
+
 
 
 }

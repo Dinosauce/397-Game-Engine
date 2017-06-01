@@ -80,9 +80,9 @@ class Camera{
 		Vector3 GetCameraPos(){ return camera_pos; };
 		Vector3 GetCameraLookAt(){ return camera_look_at; };
 
-		void SetCameraPosX(double x){ camera_pos.x = x; };
-		void SetCameraPosY(double y){ camera_pos.y = y; };
-		void SetCameraPosZ(double z){ camera_pos.z = z; };
+		void SetCameraPosX(double x){ camera_pos.x = x; UpdateLookAt(); };
+		void SetCameraPosY(double y){ camera_pos.y = y; UpdateLookAt(); };
+		void SetCameraPosZ(double z){ camera_pos.z = z; UpdateLookAt(); };
 
 		void isTerrainCollision(double H);
 

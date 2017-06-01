@@ -132,4 +132,5 @@ void Camera::PreventFastDiagMove(){
 void Camera::isTerrainCollision(double H)
 {
 	camera_pos.y = H;
+	UpdateLookAt();
 }
