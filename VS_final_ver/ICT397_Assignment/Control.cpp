@@ -7,6 +7,7 @@ int Control::screen_width = 0;
 int Control::screen_height = 0;
 int(*Control::GetGameStatus)();
 void(*Control::SetGameStatus)(const int &);
+char Control::key_pressed;
 
 void Control::OpenGLKeyboardDownFunc(unsigned char key, int x, int y){
 	if (GetGameStatus() == GAME_PLAYING){
