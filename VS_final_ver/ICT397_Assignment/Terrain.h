@@ -48,7 +48,7 @@ public:
 
 	bool DoLightMapping(bool LM);
 
-	float getAverageHight(int x, int z);
+	float getAverageHight(float x, float z);
 
 	bool genFaultFormation(int iterations, int hSize, int minHeight, int maxHeight, float weight, bool random);
 

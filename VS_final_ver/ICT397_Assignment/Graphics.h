@@ -3,7 +3,7 @@
 
 #include "GameObject.h"
 #include <GL/glut.h>
-#include "GameMathHelp.h"
+#include "math/GameMathHelp.h"
 
 /**
 * Graphic class - Plentoon Games

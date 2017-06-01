@@ -235,6 +235,8 @@ class Vector3{
 		* normalize the current vector object
 		*/
 		void Normalize(); 
+
+		void set(double var1, double var2, double var3);
 		
 		/// vector values
 		double x, y, z;

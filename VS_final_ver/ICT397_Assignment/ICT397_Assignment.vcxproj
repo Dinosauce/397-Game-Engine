@@ -72,20 +72,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AABB.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="GameAsset.cpp" />
-    <ClCompile Include="GameMathHelp.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="LuaScript.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MD2Loader\math\myMath.cpp" />
+    <ClCompile Include="math\GameMathHelp.cpp" />
+    <ClCompile Include="math\myMath.cpp" />
     <ClCompile Include="MD2Loader\md2Header.cpp" />
     <ClCompile Include="MD2Loader\md2Loader.cpp" />
-    <ClCompile Include="MD2Loader\vector\vector.cpp" />
-    <ClCompile Include="MD2Loader\vector\vector2D.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="AssimpLoader.cpp" />
     <ClCompile Include="ParticleEmmitter.cpp" />
@@ -98,24 +97,25 @@
     <ClCompile Include="textureHandler\textureGenerator.cpp" />
     <ClCompile Include="textureHandler\textureManager.cpp" />
     <ClCompile Include="textureHandler\tgaLoader.cpp" />
+    <ClCompile Include="vector\vector.cpp" />
+    <ClCompile Include="vector\vector2D.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Control.h" />
     <ClInclude Include="GameAsset.h" />
-    <ClInclude Include="GameMathHelp.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameStatus.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="LuaScript.h" />
-    <ClInclude Include="MD2Loader\math\myMath.h" />
+    <ClInclude Include="math\GameMathHelp.h" />
+    <ClInclude Include="math\myMath.h" />
+    <ClInclude Include="math\timer.h" />
     <ClInclude Include="MD2Loader\md2Header.h" />
     <ClInclude Include="MD2Loader\md2Loader.h" />
-    <ClInclude Include="MD2Loader\timer.h" />
-    <ClInclude Include="MD2Loader\vector\vector.h" />
-    <ClInclude Include="MD2Loader\vector\vector2D.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="AssimpLoader.h" />
     <ClInclude Include="ParticleEmmitter.h" />
@@ -132,6 +132,8 @@
     <ClInclude Include="textureHandler\textureManager.h" />
     <ClInclude Include="textureHandler\tgaLoader.h" />
     <ClInclude Include="TextureMap.h" />
+    <ClInclude Include="vector\vector.h" />
+    <ClInclude Include="vector\vector2D.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>

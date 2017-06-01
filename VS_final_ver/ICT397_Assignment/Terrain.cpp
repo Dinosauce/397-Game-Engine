@@ -134,7 +134,7 @@ float terrain::getPointHeight(int x, int z)
 	return (float)terrainData[z * size + x];
 }
 
-float terrain::getAverageHight(int x, int z)
+float terrain::getAverageHight(float x, float z)
 {
 	x /= scaleX;
 	z /= scaleZ;

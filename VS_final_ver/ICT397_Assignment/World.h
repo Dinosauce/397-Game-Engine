@@ -203,6 +203,10 @@ class World{
 		static map<string, GameObject> Trees;
 
 		static map<string, GameObject> NPCs;
+
+		static double CurrentX;
+
+		static double CurrentZ;
 };
 
 #endif

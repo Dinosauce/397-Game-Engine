@@ -1,7 +1,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "GameMathHelp.h"
+#include "math/GameMathHelp.h"
 #include "Terrain.h"
 /**
 * Camera class - Plentoon Games
@@ -80,7 +80,11 @@ class Camera{
 		Vector3 GetCameraPos(){ return camera_pos; };
 		Vector3 GetCameraLookAt(){ return camera_look_at; };
 
-		void isTerrainCollision(int H);
+		void SetCameraPosX(double x){ camera_pos.x = x; };
+		void SetCameraPosY(double y){ camera_pos.y = y; };
+		void SetCameraPosZ(double z){ camera_pos.z = z; };
+
+		void isTerrainCollision(double H);
 
 	private:
 		/**

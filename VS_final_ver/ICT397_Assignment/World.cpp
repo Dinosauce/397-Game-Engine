@@ -17,6 +17,10 @@ map<string,terrain> World::Terrains;
 map<string, GameObject> World::Trees;
 map<string, GameObject> World::NPCs;
 
+//Current Postion
+double World::CurrentX;
+double World::CurrentZ;
+
 double World::elapsed_time_second;
 int World::fps;
 
@@ -135,9 +139,10 @@ void World::Update(){
 	DrawTerrain();
 	DrawSpecialEffects();
 
-	//DrawTrees();
-	//Draw NPCs Models
 	DrawNPCs();
+	DrawTrees();
+	//Draw NPCs Models
+	
 	
 	if (GetGameStatus() != GAME_PLAYING){
 		if (GetGameStatus() == GAME_DONE){
@@ -233,6 +238,7 @@ void World::DrawTerrain()
 	float CamX = (float)cam.GetCameraPos().x;
 	float CamZ = (float)cam.GetCameraPos().z;
 	float CamY=Terrains["T1"].getAverageHight(CamX, CamZ);
+	//cout << CamY << endl;
 	cam.isTerrainCollision(CamY+10);
 }
 
@@ -247,7 +253,7 @@ void World::InitialNPCs()
 
 	NPCPos.x = 50;
 	NPCPos.z = 50;
-	NPCPos.y = (double)Terrains["T1"].getAverageHight(NPCPos.x, NPCPos.z) + 8;
+	NPCPos.y = (double)Terrains["T1"].getAverageHight(NPCPos.x, NPCPos.z) + 5;
 
 	NPCSca.x = 0.3;
 	NPCSca.y = 0.3;
@@ -264,9 +270,10 @@ void World::DrawNPCs()
 	static Vector3 NewNPCPos;
 	NewNPCPos.x = cam.GetCameraLookAt().x+20;
 	NewNPCPos.z = cam.GetCameraLookAt().z+20;
-	NewNPCPos.y = (double)Terrains["T1"].getAverageHight(NewNPCPos.x, NewNPCPos.z)+8;
+	NewNPCPos.y = (double)Terrains["T1"].getAverageHight(NewNPCPos.x, NewNPCPos.z)+5;
 	NPCs["NPC"].setPosition(NewNPCPos);
 	NPCs["NPC"].ShowGameObject();
+
 }
 
 void World::InitialTrees()
@@ -315,11 +322,20 @@ void World::InitialTrees()
 
 void World::DrawTrees()
 {
+	//cout << "Current11   " << cam.GetCameraPos().x<<endl;
 	for (int i = 0; i < 10; i++)
 	{
 		string TreeName = "Tree" + to_string(i);
 		Trees[TreeName].ShowGameObject();
-
+		if (Trees[TreeName].processCollision(NPCs["NPC"]))
+		{
+			cam.SetCameraPosX(CurrentX);
+			cam.SetCameraPosZ(CurrentZ);
+			cout << "Collsion!!" << endl;
+		}
+		
 	}
-
+	//cout << "Current22   " << cam.GetCameraPos().x << endl;
+	CurrentX = cam.GetCameraPos().x;
+	CurrentZ = cam.GetCameraPos().z;
 }

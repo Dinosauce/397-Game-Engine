@@ -1,10 +1,9 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 #include "GameAsset.h"
-#include "GameMathHelp.h"
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include "math/GameMathHelp.h"
+#include "AABB.h"
+
 
 class GameObject
 {
@@ -31,10 +30,16 @@ class GameObject
 		void setPosition(Vector3 pos){position.x = pos.x;position.y = pos.y;position.z = pos.z;}
 		void setScale(Vector3 sca){ scale.x = sca.x; scale.y = sca.y; scale.z = sca.z; }
 
+		bool processCollision(GameObject &obj);
+
+
 	private:
 		//static ObjectLoader OL;
 		bool res;
 		const char * pathName;
+		Vector3 model[8];
+
+		static AABB boundingBox;
 
 		Vector3 position;
 		Vector3 scale;

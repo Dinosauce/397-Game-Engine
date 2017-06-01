@@ -4,7 +4,6 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="GameAsset.cpp" />
-    <ClCompile Include="GameMathHelp.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Graphics.cpp" />
@@ -49,21 +48,24 @@
     <ClCompile Include="MD2Loader\md2Loader.cpp">
       <Filter>MD2Loader</Filter>
     </ClCompile>
-    <ClCompile Include="MD2Loader\vector\vector.cpp">
-      <Filter>MD2Loader</Filter>
+    <ClCompile Include="vector\vector.cpp">
+      <Filter>Vector</Filter>
     </ClCompile>
-    <ClCompile Include="MD2Loader\vector\vector2D.cpp">
-      <Filter>MD2Loader</Filter>
+    <ClCompile Include="vector\vector2D.cpp">
+      <Filter>Vector</Filter>
     </ClCompile>
-    <ClCompile Include="MD2Loader\math\myMath.cpp">
-      <Filter>MD2Loader</Filter>
+    <ClCompile Include="math\GameMathHelp.cpp">
+      <Filter>math</Filter>
     </ClCompile>
+    <ClCompile Include="math\myMath.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="AABB.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Control.h" />
     <ClInclude Include="GameAsset.h" />
-    <ClInclude Include="GameMathHelp.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameStatus.h" />
     <ClInclude Include="GameTime.h" />
@@ -116,18 +118,22 @@
     <ClInclude Include="MD2Loader\md2Loader.h">
       <Filter>MD2Loader</Filter>
     </ClInclude>
-    <ClInclude Include="MD2Loader\timer.h">
-      <Filter>MD2Loader</Filter>
+    <ClInclude Include="vector\vector.h">
+      <Filter>Vector</Filter>
     </ClInclude>
-    <ClInclude Include="MD2Loader\vector\vector.h">
-      <Filter>MD2Loader</Filter>
+    <ClInclude Include="vector\vector2D.h">
+      <Filter>Vector</Filter>
     </ClInclude>
-    <ClInclude Include="MD2Loader\vector\vector2D.h">
-      <Filter>MD2Loader</Filter>
+    <ClInclude Include="math\GameMathHelp.h">
+      <Filter>math</Filter>
     </ClInclude>
-    <ClInclude Include="MD2Loader\math\myMath.h">
-      <Filter>MD2Loader</Filter>
+    <ClInclude Include="math\myMath.h">
+      <Filter>math</Filter>
     </ClInclude>
+    <ClInclude Include="math\timer.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameFiles.lua" />
@@ -142,6 +148,12 @@
     </Filter>
     <Filter Include="MD2Loader">
       <UniqueIdentifier>{f0db3911-cc28-4fdd-82f3-7f2c1af7ddd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vector">
+      <UniqueIdentifier>{fb756959-111e-4de8-91ec-645f9e5b90e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="math">
+      <UniqueIdentifier>{040b23de-d6a3-43f4-b7af-1762770fcff6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

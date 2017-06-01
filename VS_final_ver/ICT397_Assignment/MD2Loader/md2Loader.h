@@ -18,9 +18,9 @@
 #include <fstream>
 using namespace std;
 #include "md2Header.h"
-#include "timer.h"
+#include "../math/timer.h"
 #include <GL/glu.h>
-#include "vector/vector.h"
+#include "../vector/vector.h"
 //a single vertex
 struct vertex
 {

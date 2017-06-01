@@ -64,6 +64,13 @@ Vector3::Vector3(double var1, double var2, double var3){
 	z = var3;
 }
 
+void Vector3::set(double var1, double var2, double var3)
+{
+	x = var1;
+	y = var2;
+	z = var3;
+}
+
 Vector3::Vector3(const Vector3 &new_vector3){
 	this->x = new_vector3.x;
 	this->y = new_vector3.y;
