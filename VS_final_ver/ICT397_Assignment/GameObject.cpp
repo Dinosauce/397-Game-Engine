@@ -47,7 +47,15 @@ void GameObject::ShowGameObject()
 	glPopMatrix();
 }
 
-
+void GameObject::ShowAnimation(int framStart, int framEnd)
+{
+	glPushMatrix();
+	glTranslatef(position.x, position.y, position.z);
+	glScalef(scale.x, scale.y, scale.z);
+	glRotatef(rotation_angle, 0.0, 1.0, 0.0);
+	gameAssetFactory_handler->RenderAnimation(framStart, framEnd);
+	glPopMatrix();
+}
 
 bool GameObject::processCollision(GameObject &obj)
 {

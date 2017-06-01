@@ -123,6 +123,8 @@
     <ClInclude Include="singleton.h" />
     <ClInclude Include="singletons.h" />
     <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="textureHandler\bmpLoader.h" />

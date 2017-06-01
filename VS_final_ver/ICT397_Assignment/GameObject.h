@@ -23,6 +23,7 @@ class GameObject
 		* Render object
 		*/
 		void ShowGameObject();
+		void ShowAnimation(int framStart, int framEnd);
 
 		Vector3 getPosition(){ return position; };
 		Vector3 getScale(){ return position; };

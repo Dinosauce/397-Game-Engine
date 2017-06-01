@@ -24,10 +24,14 @@ void MD2Asset::LoadAsset(char * path[])
 
 void MD2Asset::RenderAsset()
 {
-	//md2.render();
-	md2.animate(40, 46);
+	md2.render();
+	//md2.animate(40, 46);
 }
 
+void MD2Asset::RenderAnimation(int framStart,int framEnd)
+{
+	md2.animate(framStart, framEnd);
+}
 
 GameAsset* GameAssetFactory::Create(char* type)
 {

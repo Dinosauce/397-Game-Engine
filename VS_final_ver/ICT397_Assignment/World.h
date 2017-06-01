@@ -160,6 +160,11 @@ class World{
 		static void InitCamera(double x, double z);
 
 		static void SetTerrainBoundray();
+
+		static void Initplayer();
+
+		static void DrawPlayer();
+
 	private:
 		/// game status
 		static int game_status;
@@ -210,7 +215,7 @@ class World{
 
 		static map<string, GameObject> Trees;
 
-		static map<string, GameObject> NPCs;
+		static map<string, GameObject> Player;
 
 		static double CurrentX;
 

@@ -15,7 +15,7 @@ terrainData World::terrainInfo;
 
 map<string,terrain> World::Terrains;
 map<string, GameObject> World::Trees;
-map<string, GameObject> World::NPCs;
+map<string, GameObject> World::Player;
 
 //Current Postion
 double World::CurrentX;
@@ -121,8 +121,10 @@ void World::Initialize(){
 	//Initial NPCs Model
 	InitialTrees();
 
+
+	Initplayer();
 	//Initial NPCs Model
-	InitialNPCs();
+	//InitialNPCs();
 
 	InitialSkyBox();
 
@@ -146,7 +148,8 @@ void World::Update(){
 
 	SetTerrainBoundray();
 
-	DrawNPCs();
+	//DrawNPCs();
+	DrawPlayer();
 	DrawTrees();
 
 
@@ -291,39 +294,49 @@ void World::DrawTerrain()
 
 void World::InitialNPCs()
 {
-	static GameObject NPC;
-	Vector3 NPCPos;
-	Vector3 NPCSca;
 
-	char* NPCFiles[] = { "3Dmodels/tris.md2", "3Dmodels/twilight.PCX" };
-	NPC.LoadGameObject(NPCFiles, "MD2");
-
-	NPCPos.x = 50;
-	NPCPos.z = 50;
-	NPCPos.y = (double)Terrains["T1"].getAverageHight(NPCPos.x, NPCPos.z) + 5;
-
-	NPCSca.x = 0.3;
-	NPCSca.y = 0.3;
-	NPCSca.z = 0.3;
-
-	NPC.setPosition(NPCPos);
-	NPC.setScale(NPCSca);
-
-	NPCs["NPC"] = NPC;
 }
 
 void World::DrawNPCs()
 {
-	static Vector3 NewNPCPos;
-	static double NewNPCRot;
-	NewNPCPos.x = cam.GetCameraPos().x + (cam.GetLookAtOffset().x * 25);
-	NewNPCPos.z = cam.GetCameraPos().z + (cam.GetLookAtOffset().z * 25);
-	NewNPCPos.y = (double)Terrains["T1"].getAverageHight(NewNPCPos.x, NewNPCPos.z)+5;
-	NewNPCRot = MathHelp::ToDegrees(cam.GetRotationBuffer().x) - 90.0;
-	NPCs["NPC"].setPosition(NewNPCPos);
-	NPCs["NPC"].setRotation(NewNPCRot);
-	NPCs["NPC"].ShowGameObject();
 
+
+}
+
+void World::Initplayer()
+{
+	static GameObject player;
+	Vector3 playerPos;
+	Vector3 playerSca;
+
+	char* NPCFiles[] = { "3Dmodels/tris.md2", "3Dmodels/twilight.PCX" };
+	player.LoadGameObject(NPCFiles, "MD2");
+
+	playerPos.x = 50;
+	playerPos.z = 50;
+	playerPos.y = (double)Terrains["T1"].getAverageHight(playerPos.x, playerPos.z) + 5;
+
+	playerSca.x = 0.3;
+	playerSca.y = 0.3;
+	playerSca.z = 0.3;
+
+	player.setPosition(playerPos);
+	player.setScale(playerSca);
+
+	Player["NPC"] = player;
+}
+
+void World::DrawPlayer()
+{
+	static Vector3 NewPPos;
+	static double NewPRot;
+	NewPPos.x = cam.GetCameraPos().x + (cam.GetLookAtOffset().x * 25);
+	NewPPos.z = cam.GetCameraPos().z + (cam.GetLookAtOffset().z * 25);
+	NewPPos.y = (double)Terrains["T1"].getAverageHight(NewPPos.x, NewPPos.z) + 5;
+	NewPRot = MathHelp::ToDegrees(cam.GetRotationBuffer().x) - 90.0;
+	Player["NPC"].setPosition(NewPPos);
+	Player["NPC"].setRotation(NewPRot);
+	Player["NPC"].ShowAnimation(40, 46);
 }
 
 void World::InitialTrees()
@@ -378,7 +391,7 @@ void World::DrawTrees()
 	{
 		string TreeName = "Tree" + to_string(i);
 		Trees[TreeName].ShowGameObject();
-		if (Trees[TreeName].processCollision(NPCs["NPC"]))
+		if (Trees[TreeName].processCollision(Player["NPC"]))
 		{
 			cam.SetCameraPosX(CurrentX);
 			cam.SetCameraPosZ(CurrentZ);
