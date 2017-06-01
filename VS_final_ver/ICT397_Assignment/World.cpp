@@ -23,6 +23,7 @@ double World::CurrentZ;
 
 //SkyBox
 SkyBox World::Sky;
+water World::WaterObj;
 
 double World::elapsed_time_second;
 int World::fps;
@@ -127,6 +128,7 @@ void World::Initialize(){
 	//InitialNPCs();
 
 	InitialSkyBox();
+	InitialWater();
 
 }
 
@@ -142,6 +144,7 @@ void World::Update(){
 	graphic_handler->SetCameraLookAt(cam.GetCameraLookAt());
 
 	DrawSkyBox();
+	DrawWater();
 	//Draw Terrain Model
 	DrawTerrain();
 	DrawSpecialEffects();
@@ -211,8 +214,6 @@ void World::SetTerrainBoundray()
 void World::InitSpecialEffects(){
 	particleSystem.createParticles(0, 200, 0, explosion);
 }
-
-
 
 void World::DrawSpecialEffects(){
 	particleSystem.updateParticles();
@@ -430,9 +431,38 @@ void World::DrawSkyBox()
 	Sky.ShowSkyBox();
 	NewSkyPos.x = cam.GetCameraPos().x;
 	NewSkyPos.z = cam.GetCameraPos().z;
-	NewSkyPos.y = (double)Terrains["T1"].getAverageHight(NewSkyPos.x, NewSkyPos.z) +5;
+	NewSkyPos.y = (double)Terrains["T1"].getAverageHight(NewSkyPos.x, NewSkyPos.z) +50;
 	Sky.setPosition(NewSkyPos);
 
 
 
+}
+
+void World::InitialWater()
+{
+	Vector3 waters;
+	Vector3 waterss;
+
+	WaterObj.LoadWater();
+
+	waters.x = cam.GetCameraPos().x;
+	waters.z = cam.GetCameraPos().z;
+	waters.y = (double)Terrains["T1"].getAverageHight(waters.x, waters.z);
+
+	waterss.x = 230;
+	waterss.y = 230;
+	waterss.z = 230;
+
+	WaterObj.setPosition(waters);
+	WaterObj.setScale(waterss);
+}
+
+void World::DrawWater()
+{
+	static Vector3 NewWaterPos;
+	WaterObj.ShowWater();
+	NewWaterPos.x = 0;
+	NewWaterPos.z = 0;
+	NewWaterPos.y = 200;
+	WaterObj.setPosition(NewWaterPos);
 }

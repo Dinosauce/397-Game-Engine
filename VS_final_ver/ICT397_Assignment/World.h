@@ -18,6 +18,7 @@
 #include "Terrain.h"
 #include "LuaScript.h"
 #include "SkyBox.h"
+#include "water.h"
 /**
 * World class - Plentoon Games
 * Stores all the game components and helps object communication
@@ -157,6 +158,10 @@ class World{
 
 		static void DrawSkyBox();
 
+		static void InitialWater();
+
+		static void DrawWater();
+
 		static void InitCamera(double x, double z);
 
 		static void SetTerrainBoundray();
@@ -222,6 +227,8 @@ class World{
 		static double CurrentZ;
 
 		static SkyBox Sky;
+
+		static water WaterObj;
 };
 
 #endif
