@@ -173,6 +173,9 @@ void World::Update(){
 			texture2d.Display2DTexture(512, 512, 0, 0, CREDIT_TEXTURE);
 		}
 	}
+
+	CurrentX = cam.GetCameraPos().x;
+	CurrentZ = cam.GetCameraPos().z;
 }
 
 void World::InitCamera(double x, double z )
@@ -193,15 +196,13 @@ void World::SetTerrainBoundray()
 		(cam.GetCameraPos().z<IndenSize) ||
 		(cam.GetCameraPos().z>terrainInfo.scalex * terrainInfo.ImageSize - IndenSize) )
 	{
-		cout << "Current22   " << cam.GetCameraPos().x << endl;
+		//cout << "Current22   " << cam.GetCameraPos().x << endl;
 		cam.SetCameraPosX(CurrentX);
 		cam.SetCameraPosZ(CurrentZ);
-		cout << "Collsion!!" << endl;
+		//cout << "Collsion!!" << endl;
 	}
 
 	//cout << "Current22   " << cam.GetCameraPos().x << endl;
-	CurrentX = cam.GetCameraPos().x;
-	CurrentZ = cam.GetCameraPos().z;
 }
 
 void World::InitSpecialEffects(){
@@ -382,12 +383,11 @@ void World::DrawTrees()
 			cam.SetCameraPosX(CurrentX);
 			cam.SetCameraPosZ(CurrentZ);
 			cout << "Collsion!!" << endl;
+			cout << "Current11   " << CurrentX << " " << cam.GetCameraPos().x<< endl;
 		}
 		
 	}
-	//cout << "Current22   " << cam.GetCameraPos().x << endl;
-	CurrentX = cam.GetCameraPos().x;
-	CurrentZ = cam.GetCameraPos().z;
+
 }
 
 
