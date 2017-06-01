@@ -62,6 +62,7 @@
     </ClCompile>
     <ClCompile Include="AABB.cpp" />
     <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="water.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
@@ -138,6 +139,7 @@
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="water.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameFiles.lua" />

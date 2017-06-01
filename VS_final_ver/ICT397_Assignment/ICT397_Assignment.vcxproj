@@ -100,6 +100,7 @@
     <ClCompile Include="textureHandler\tgaLoader.cpp" />
     <ClCompile Include="vector\vector.cpp" />
     <ClCompile Include="vector\vector2D.cpp" />
+    <ClCompile Include="water.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +139,7 @@
     <ClInclude Include="TextureMap.h" />
     <ClInclude Include="vector\vector.h" />
     <ClInclude Include="vector\vector2D.h" />
+    <ClInclude Include="water.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>

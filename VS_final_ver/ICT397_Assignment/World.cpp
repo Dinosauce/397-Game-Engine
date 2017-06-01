@@ -178,6 +178,7 @@ void World::Update(){
 		if (GetGameStatus() == GAME_CREDIT_PAGE){
 			texture2d.Display2DTexture(512, 512, 0, 0, CREDIT_TEXTURE);
 		}
+
 	}
 
 	CurrentX = cam.GetCameraPos().x;
@@ -212,7 +213,8 @@ void World::SetTerrainBoundray()
 }
 
 void World::InitSpecialEffects(){
-	particleSystem.createParticles(0, 200, 0, explosion);
+
+	particleSystem.createParticles(50, 400, 50, fountain);
 }
 
 void World::DrawSpecialEffects(){
@@ -247,7 +249,7 @@ void World::InitialTerrain()
 	Terrain->loadHeightfield(terrainInfo.TerrainFile.c_str(), terrainInfo.ImageSize);
 	Terrain->setScalingFactor(terrainInfo.scalex, terrainInfo.scaley, terrainInfo.scalez);
 	//Terrain->generateHeightfield(terrainInfo.heightfieldX, terrainInfo.heightfieldY, terrainInfo.heightfieldZ);
-	Terrain->genFaultFormation(64, 128, 1, 128, 0.08, true);
+	Terrain->genFaultFormation(64, 128, 1, 128, 0.1, false);
 	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture1.c_str());
 	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture2.c_str());
 	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture3.c_str());
@@ -359,16 +361,21 @@ void World::InitialTrees()
 {
 	static GameObject Tree;
 	Vector3 TreePos;
+	Vector3 TreeSca;
 
-	for (int i = 0; i <10; i++)
+	for (int i = 0; i <20; i++)
 	{
+		int randNum1 = (rand() % 50) + 0;
+		int randNum2 = (rand() % 50) + 0;
 		char* TreeFiles[] = { const_cast<char *>(LD.ObjectsFile.c_str()) };
 		Tree.LoadGameObject(TreeFiles, "OBJ");
-		Tree.SetBoundingBox(15);
-		TreePos.x = 100+(i*30);
-		TreePos.z = 100+(i*30);
+		
+		TreePos.x = 500 + (i*randNum1);
+		TreePos.z = 500 + (i*randNum2);
 		TreePos.y = (double)Terrains["T1"].getAverageHight(TreePos.x, TreePos.z)-5;
 		Tree.setPosition(TreePos);
+
+		Tree.SetBoundingBox(15);
 
 		string TreeName = "Tree" + to_string(i);
 		//cout << TreePos.x << " " << TreePos.y << " " << TreePos.z << " " << TreeName << endl;
@@ -403,7 +410,7 @@ void World::InitialTrees()
 void World::DrawTrees()
 {
 	//cout << "Current11   " << cam.GetCameraPos().x<<endl;
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		string TreeName = "Tree" + to_string(i);
 		Trees[TreeName].ShowGameObject();
@@ -446,7 +453,7 @@ void World::DrawSkyBox()
 	Sky.ShowSkyBox();
 	NewSkyPos.x = cam.GetCameraPos().x;
 	NewSkyPos.z = cam.GetCameraPos().z;
-	NewSkyPos.y = (double)Terrains["T1"].getAverageHight(NewSkyPos.x, NewSkyPos.z) +50;
+	NewSkyPos.y = (double)Terrains["T1"].getAverageHight(NewSkyPos.x, NewSkyPos.z) +20;
 	Sky.setPosition(NewSkyPos);
 
 
@@ -478,6 +485,6 @@ void World::DrawWater()
 	WaterObj.ShowWater();
 	NewWaterPos.x = 0;
 	NewWaterPos.z = 0;
-	NewWaterPos.y = 200;
+	NewWaterPos.y = 100;
 	WaterObj.setPosition(NewWaterPos);
 }
