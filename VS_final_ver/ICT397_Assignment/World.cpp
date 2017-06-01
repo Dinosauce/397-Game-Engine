@@ -21,6 +21,9 @@ map<string, GameObject> World::NPCs;
 double World::CurrentX;
 double World::CurrentZ;
 
+//SkyBox
+SkyBox World::Sky;
+
 double World::elapsed_time_second;
 int World::fps;
 
@@ -100,6 +103,8 @@ void World::Initialize(){
 	//Load extra lua files
 	LoadLuaFiles();
 
+	
+
 	//Initial Terrian Model
 	InitialTerrain();
 
@@ -119,6 +124,8 @@ void World::Initialize(){
 	//Initial NPCs Model
 	InitialNPCs();
 
+	InitialSkyBox();
+
 }
 
 void World::InitSpecialEffects(){
@@ -126,6 +133,8 @@ void World::InitSpecialEffects(){
 }
 
 void World::Update(){
+
+	DrawSkyBox();
 
 	elapsed_time_second = game_time.GetElapsedTimeSecond();
 	fps = game_time.GetFps();
@@ -142,6 +151,8 @@ void World::Update(){
 	DrawNPCs();
 	DrawTrees();
 	//Draw NPCs Models
+
+
 	
 	
 	if (GetGameStatus() != GAME_PLAYING){
@@ -248,8 +259,8 @@ void World::InitialNPCs()
 	Vector3 NPCPos;
 	Vector3 NPCSca;
 
-	char* TreeFiles[] = { const_cast<char *>(LD.NPCsFile.c_str()) };
-	NPC.LoadGameObject(TreeFiles, "MD2");
+	char* NPCFiles[] = { "3Dmodels/tris.md2", "3Dmodels/twilight.PCX" };
+	NPC.LoadGameObject(NPCFiles, "MD2");
 
 	NPCPos.x = 50;
 	NPCPos.z = 50;
@@ -338,4 +349,37 @@ void World::DrawTrees()
 	//cout << "Current22   " << cam.GetCameraPos().x << endl;
 	CurrentX = cam.GetCameraPos().x;
 	CurrentZ = cam.GetCameraPos().z;
+}
+
+
+void World::InitialSkyBox()
+{
+	Vector3 SkyPos;
+	Vector3 SkySca;
+
+	Sky.loadSkyBox();
+
+	SkyPos.x = cam.GetCameraPos().x;
+	SkyPos.z = cam.GetCameraPos().z;
+	SkyPos.y = (double)Terrains["T1"].getAverageHight(SkyPos.x, SkyPos.z) ;
+
+	SkySca.x = 80;
+	SkySca.y = 80;
+	SkySca.z = 80;
+
+	Sky.setPosition(SkyPos);
+	Sky.setScale(SkySca);
+	
+}
+
+void World::DrawSkyBox()
+{
+	static Vector3 NewSkyPos;
+	NewSkyPos.x = cam.GetCameraLookAt().x ;
+	NewSkyPos.z = cam.GetCameraLookAt().z ;
+	NewSkyPos.y = (double)Terrains["T1"].getAverageHight(NewSkyPos.x, NewSkyPos.z) ;
+	Sky.setPosition(NewSkyPos);
+	Sky.ShowSkyBox();
+
+
 }

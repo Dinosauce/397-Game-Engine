@@ -16,7 +16,8 @@ void OBJAsset::RenderAsset()
 void MD2Asset::LoadAsset(char * path[])
 {
 	char *md2File = path[0];
-	md2.loadModel("3Dmodels/tris.md2", "3Dmodels/twilight.PCX");
+	char *PCXFile = path[1];
+	md2.loadModel(md2File, PCXFile);
 	md2.setAnimationSpeed(10);
 	md2.printHeader();
 }

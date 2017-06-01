@@ -17,6 +17,7 @@
 #include "lua/lua.hpp"
 #include "Terrain.h"
 #include "LuaScript.h"
+#include "SkyBox.h"
 /**
 * World class - Plentoon Games
 * Stores all the game components and helps object communication
@@ -152,6 +153,10 @@ class World{
 		*/
 		static void LoadLuaFiles();
 
+		static void InitialSkyBox();
+
+		static void DrawSkyBox();
+
 	private:
 		/// game status
 		static int game_status;
@@ -207,6 +212,8 @@ class World{
 		static double CurrentX;
 
 		static double CurrentZ;
+
+		static SkyBox Sky;
 };
 
 #endif
