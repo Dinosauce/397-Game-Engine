@@ -336,7 +336,22 @@ void World::DrawPlayer()
 	NewPRot = MathHelp::ToDegrees(cam.GetRotationBuffer().x) - 90.0;
 	Player["NPC"].setPosition(NewPPos);
 	Player["NPC"].setRotation(NewPRot);
-	Player["NPC"].ShowAnimation(40, 46);
+
+	if (cam.GetCameraPos().x!=CurrentX)
+	{
+		Player["NPC"].ShowAnimation(40, 46);
+	}
+
+	else if (control.GetKeyPressed() == 'f')
+	{
+		Player["NPC"].ShowAnimation(47, 60);
+	}
+
+	else
+	{
+		Player["NPC"].ShowGameObject();
+	}
+
 }
 
 void World::InitialTrees()

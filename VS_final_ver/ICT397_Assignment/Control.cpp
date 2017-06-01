@@ -58,6 +58,11 @@ void Control::OpenGLKeyboardDownFunc(unsigned char key, int x, int y){
 				key_pressed = 'x';
 				break;
 
+			case 'f':
+			case 'F':
+				key_pressed = 'f';
+				break;
+
 			default:
 				break;
 		}
@@ -122,6 +127,11 @@ void Control::OpenGLKeyboardUpFunc(unsigned char key, int x, int y){
 	case 'd':
 	case 'D':
 		cam->SetIsMovingLR(false);
+		key_pressed = 0;
+		break;
+
+	case 'f':
+	case 'F':
 		key_pressed = 0;
 		break;
 

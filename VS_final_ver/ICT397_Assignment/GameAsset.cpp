@@ -30,6 +30,7 @@ void MD2Asset::RenderAsset()
 
 void MD2Asset::RenderAnimation(int framStart,int framEnd)
 {
+
 	md2.animate(framStart, framEnd);
 }
 
