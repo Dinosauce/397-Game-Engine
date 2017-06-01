@@ -30,6 +30,8 @@ class GameObject
 		void setPosition(Vector3 pos){position.x = pos.x;position.y = pos.y;position.z = pos.z;}
 		void setScale(Vector3 sca){ scale.x = sca.x; scale.y = sca.y; scale.z = sca.z; }
 
+		void SetBoundingBox(double size);
+
 		bool processCollision(GameObject &obj);
 
 

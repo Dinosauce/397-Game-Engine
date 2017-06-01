@@ -157,6 +157,9 @@ class World{
 
 		static void DrawSkyBox();
 
+		static void InitCamera(double x, double z);
+
+		static void SetTerrainBoundray();
 	private:
 		/// game status
 		static int game_status;

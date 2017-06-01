@@ -114,6 +114,10 @@ void World::Initialize(){
 
 	//Initial Terrian Model
 	InitialTerrain();
+
+	InitCamera((terrainInfo.scalex * terrainInfo.ImageSize) / 2, (terrainInfo.scalez * terrainInfo.ImageSize) / 2);
+
+
 	//Initial NPCs Model
 	InitialTrees();
 
@@ -122,10 +126,6 @@ void World::Initialize(){
 
 	InitialSkyBox();
 
-}
-
-void World::InitSpecialEffects(){
-	particleSystem.createParticles(0, 200, 0, explosion);
 }
 
 void World::Update(){
@@ -144,6 +144,8 @@ void World::Update(){
 	DrawTerrain();
 	DrawSpecialEffects();
 
+	SetTerrainBoundray();
+
 	DrawNPCs();
 	DrawTrees();
 
@@ -151,8 +153,8 @@ void World::Update(){
 	//Draw NPCs Models
 
 
-	
-	
+
+
 	if (GetGameStatus() != GAME_PLAYING){
 		if (GetGameStatus() == GAME_DONE){
 			GameDestruction();
@@ -172,6 +174,41 @@ void World::Update(){
 		}
 	}
 }
+
+void World::InitCamera(double x, double z )
+{
+
+	float y = Terrains["T1"].getAverageHight(x, z);
+
+	cam.SetCameraPosX(x);
+	cam.SetCameraPosY(y);
+	cam.SetCameraPosZ(z);
+}
+
+void World::SetTerrainBoundray()
+{
+	int IndenSize = 50;
+	if ((cam.GetCameraPos().x<IndenSize) ||
+		(cam.GetCameraPos().x>terrainInfo.scalex * terrainInfo.ImageSize - IndenSize)||
+		(cam.GetCameraPos().z<IndenSize) ||
+		(cam.GetCameraPos().z>terrainInfo.scalex * terrainInfo.ImageSize - IndenSize) )
+	{
+		cout << "Current22   " << cam.GetCameraPos().x << endl;
+		cam.SetCameraPosX(CurrentX);
+		cam.SetCameraPosZ(CurrentZ);
+		cout << "Collsion!!" << endl;
+	}
+
+	//cout << "Current22   " << cam.GetCameraPos().x << endl;
+	CurrentX = cam.GetCameraPos().x;
+	CurrentZ = cam.GetCameraPos().z;
+}
+
+void World::InitSpecialEffects(){
+	particleSystem.createParticles(0, 200, 0, explosion);
+}
+
+
 
 void World::DrawSpecialEffects(){
 	particleSystem.updateParticles();
@@ -294,6 +331,7 @@ void World::InitialTrees()
 	{
 		char* TreeFiles[] = { const_cast<char *>(LD.ObjectsFile.c_str()) };
 		Tree.LoadGameObject(TreeFiles, "OBJ");
+		Tree.SetBoundingBox(15);
 		TreePos.x = 100+(i*30);
 		TreePos.z = 100+(i*30);
 		TreePos.y = (double)Terrains["T1"].getAverageHight(TreePos.x, TreePos.z)-5;
