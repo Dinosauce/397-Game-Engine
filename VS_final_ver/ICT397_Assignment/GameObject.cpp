@@ -11,6 +11,8 @@ GameObject::GameObject()
 	scale.x = 1;
 	scale.y = 1;
 	scale.z = 1;
+
+	rotation_angle = 0.0;
 }
 
 void GameObject::LoadGameObject(char* Files[], char* type)
