@@ -32,6 +32,8 @@ class GameObject
 		void setScale(Vector3 sca){ scale.x = sca.x; scale.y = sca.y; scale.z = sca.z; }
 		void setRotation(double rot){ rotation_angle = rot; }
 
+		void SetBoundingBox(double size);
+
 		bool processCollision(GameObject &obj);
 
 

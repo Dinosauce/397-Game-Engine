@@ -18,16 +18,20 @@ void GameObject::LoadGameObject(char* Files[], char* type)
 	gameAssetFactory_handler = gameAssetFactory_factory.Create(type);
 
 	gameAssetFactory_handler->LoadAsset(Files);
+}
 
+
+void GameObject::SetBoundingBox(double size)
+{
 	model[0].set(0, 0, 0);  //front face
-	model[1].set(15, 0, 0);
-	model[2].set(15, 15, 0);
-	model[3].set(0, 15, 0);
+	model[1].set(size, 0, 0);
+	model[2].set(size, size, 0);
+	model[3].set(0, size, 0);
 
-	model[4].set(0, 0, 15);  //rear face
-	model[5].set(15, 0, 15);
-	model[6].set(15, 15, 15);
-	model[7].set(0, 15, 15);
+	model[4].set(0, 0, size);  //rear face
+	model[5].set(size, 0, size);
+	model[6].set(size, size, size);
+	model[7].set(0, size, size);
 	boundingBox.createAABB(model, 8);
 }
 
