@@ -24,11 +24,13 @@ class GameObject
 		*/
 		void ShowGameObject();
 
-		Vector3 getPosition(){ return position; }
-		Vector3 getScale(){ return position; }
+		Vector3 getPosition(){ return position; };
+		Vector3 getScale(){ return position; };
+		double getRotation(){ return rotation_angle; };
 
 		void setPosition(Vector3 pos){position.x = pos.x;position.y = pos.y;position.z = pos.z;}
 		void setScale(Vector3 sca){ scale.x = sca.x; scale.y = sca.y; scale.z = sca.z; }
+		void setRotation(double rot){ rotation_angle = rot; }
 
 		bool processCollision(GameObject &obj);
 
@@ -42,6 +44,7 @@ class GameObject
 		static AABB boundingBox;
 
 		Vector3 position;
+		double rotation_angle;
 		Vector3 scale;
 		GameAssetFactory gameAssetFactory_factory;
 		GameAsset* gameAssetFactory_handler;

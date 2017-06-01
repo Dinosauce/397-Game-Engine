@@ -14,31 +14,37 @@ void Control::OpenGLKeyboardDownFunc(unsigned char key, int x, int y){
 			case 'w':
 			case 'W':
 				cam->MoveForward();
+				key_pressed = 'w';
 				break;
 
 			case 's':
 			case 'S':
 				cam->MoveBackward();
+				key_pressed = 's';
 				break;
 
 			case 'a':
 			case 'A':
 				cam->MoveLeft();
+				key_pressed = 'a';
 				break;
 
 			case 'd':
 			case 'D':
 				cam->MoveRight();
+				key_pressed = 'd';
 				break;
 
 			case 'k':
 			case 'K':
 				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+				key_pressed = 'k';
 				break;
 
 			case 'm':
 			case 'M':
 				SetGameStatus(GAME_HELP_MENU);
+				key_pressed = 'm';
 				break;
 
 			case 27:
@@ -48,6 +54,7 @@ void Control::OpenGLKeyboardDownFunc(unsigned char key, int x, int y){
 			case 'x':
 			case 'X':
 				SetGameStatus(GAME_CREDIT_PAGE);
+				key_pressed = 'x';
 				break;
 
 			default:
@@ -72,6 +79,7 @@ void Control::OpenGLKeyboardDownFunc(unsigned char key, int x, int y){
 			case 'm':
 			case 'M':
 				SetGameStatus(GAME_PLAYING);
+				key_pressed = 'm';
 				break;
 
 			default:
@@ -88,6 +96,7 @@ void Control::OpenGLKeyboardDownFunc(unsigned char key, int x, int y){
 			case 'x':
 			case 'X':
 				SetGameStatus(GAME_DONE);
+				key_pressed = 'x';
 				break;
 
 			default:
@@ -105,17 +114,20 @@ void Control::OpenGLKeyboardUpFunc(unsigned char key, int x, int y){
 	case 's':
 	case 'S':
 		cam->SetIsMovingFB(false);
+		key_pressed = 0;
 		break;
 	case 'a':
 	case 'A':
 	case 'd':
 	case 'D':
 		cam->SetIsMovingLR(false);
+		key_pressed = 0;
 		break;
 
 	case 'k':
 	case 'K':
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		key_pressed = 0;
 
 	default:
 		break;

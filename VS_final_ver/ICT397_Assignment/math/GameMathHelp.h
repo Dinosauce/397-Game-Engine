@@ -20,6 +20,13 @@ class MathHelp{
 		static double ToRadians(const double & degrees);
 
 		/**
+		* Converts radians to degrees
+		* @param input radians
+		* @return output degrees
+		*/
+		static double ToDegrees(const double & radians);
+
+		/**
 		* Restricts a value to be within a specified range
 		* @param input value
 		* @param min of the range

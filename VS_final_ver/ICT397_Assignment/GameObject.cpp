@@ -36,6 +36,7 @@ void GameObject::ShowGameObject()
 	glPushMatrix();
 	glTranslatef(position.x, position.y, position.z);
 	glScalef(scale.x, scale.y, scale.z);
+	glRotatef(rotation_angle, 0.0, 1.0, 0.0);
 	gameAssetFactory_handler->RenderAsset();
 	glPopMatrix();
 }

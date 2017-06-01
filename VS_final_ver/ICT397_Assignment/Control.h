@@ -43,6 +43,7 @@ class Control{
 		*/
 
 		static Camera* GetCameraPtr(){ return cam; };
+		static char GetKeyPressed(){ return key_pressed; };
 		
 
 		/// Keyboard Down function for openGL
@@ -72,6 +73,9 @@ class Control{
 
 		/// get game status function pointer from World class
 		static int(*GetGameStatus)();
+
+		/// key pressed at the moment
+		static char key_pressed;
 };
 
 #endif

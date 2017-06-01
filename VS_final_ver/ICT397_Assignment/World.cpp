@@ -277,10 +277,13 @@ void World::InitialNPCs()
 void World::DrawNPCs()
 {
 	static Vector3 NewNPCPos;
-	NewNPCPos.x = cam.GetCameraLookAt().x+20;
-	NewNPCPos.z = cam.GetCameraLookAt().z+20;
+	static double NewNPCRot;
+	NewNPCPos.x = cam.GetCameraPos().x + (cam.GetLookAtOffset().x * 25);
+	NewNPCPos.z = cam.GetCameraPos().z + (cam.GetLookAtOffset().z * 25);
 	NewNPCPos.y = (double)Terrains["T1"].getAverageHight(NewNPCPos.x, NewNPCPos.z)+5;
+	NewNPCRot = MathHelp::ToDegrees(cam.GetRotationBuffer().x) - 90.0;
 	NPCs["NPC"].setPosition(NewNPCPos);
+	NPCs["NPC"].setRotation(NewNPCRot);
 	NPCs["NPC"].ShowGameObject();
 
 }

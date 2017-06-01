@@ -101,7 +101,7 @@ void Camera::UpdateLookAt(){
 	Matrix rotation_matrix = Matrix::CreateRotationX(camera_rot.x) * Matrix::CreateRotationY(camera_rot.y);
 
 	// Build look at offset vector
-	Vector3 look_at_offset = Vector3::Transform(Vector3::UnitZ(), rotation_matrix);
+	look_at_offset = Vector3::Transform(Vector3::UnitZ(), rotation_matrix);
 
 	// Update the camera's look at vector
 	camera_look_at = camera_pos + look_at_offset;

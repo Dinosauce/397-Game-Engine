@@ -7,6 +7,10 @@ double MathHelp::ToRadians(const double & degrees){
 	return (degrees * _PI / 180);
 }
 
+double MathHelp::ToDegrees(const double & radians){
+	return (radians * 180.0 / _PI);
+}
+
 double MathHelp::Clamp(const double & value, const double & min, const double & max){
 	if (value < min){
 		return min;

@@ -79,6 +79,10 @@ class Camera{
 
 		Vector3 GetCameraPos(){ return camera_pos; };
 		Vector3 GetCameraLookAt(){ return camera_look_at; };
+		Vector3 GetCameraRot(){ return camera_rot; };
+		Vector3 GetLookAtOffset(){ return look_at_offset; };
+		Vector3 GetRotationBuffer(){ return rotation_buffer; };
+
 
 		void SetCameraPosX(double x){ camera_pos.x = x; UpdateLookAt(); };
 		void SetCameraPosY(double y){ camera_pos.y = y; UpdateLookAt(); };
@@ -153,6 +157,9 @@ class Camera{
 
 		/// true if is having camera rotation, false otherwise
 		bool is_rotating;
+
+		/// for rotation calculation
+		Vector3 look_at_offset;
 };
 
 #endif
