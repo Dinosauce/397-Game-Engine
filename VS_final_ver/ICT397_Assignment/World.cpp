@@ -89,7 +89,7 @@ void World::LoadLuaFiles()
 }
 
 World::World(){
-	game_status = GAME_PLAYING;
+	game_status = GAME_MAIN_MENU;
 	screen_width = 800;
 	screen_height = 600;
 	
@@ -172,7 +172,7 @@ void World::Update(){
 		}
 
 		if (GetGameStatus() == GAME_MAIN_MENU){
-			texture2d.Display2DTexture(512, 512, 0, 0, GAME_MAIN_MENU_TEXTURE);
+			ui.mainMenu(512, 512, 0, 0); //texture2d.Display2DTexture(512, 512, 0, 0, GAME_MAIN_MENU_TEXTURE);
 		}
 
 		if (GetGameStatus() == GAME_HELP_MENU){
@@ -502,4 +502,5 @@ void World::DrawWater()
 void World::DrawUI()
 {
 	ui.DisplayHealth();
+
 }
