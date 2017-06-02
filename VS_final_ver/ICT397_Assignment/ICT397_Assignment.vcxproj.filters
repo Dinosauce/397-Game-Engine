@@ -85,6 +85,7 @@
     <ClCompile Include="NPCStates.cpp">
       <Filter>FSM</Filter>
     </ClCompile>
+    <ClCompile Include="movement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
@@ -157,9 +158,6 @@
     <ClInclude Include="State.h">
       <Filter>FSM</Filter>
     </ClInclude>
-    <ClInclude Include="StateMachine.h">
-      <Filter>FSM</Filter>
-    </ClInclude>
     <ClInclude Include="UserInterface.h" />
     <ClInclude Include="Terrain.h">
       <Filter>GameAssets</Filter>
@@ -188,6 +186,7 @@
     <ClInclude Include="NPCStates.h">
       <Filter>FSM</Filter>
     </ClInclude>
+    <ClInclude Include="movement.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameFiles.lua" />

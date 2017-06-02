@@ -30,7 +30,7 @@ class GameObject
 		* Render object
 		*/
 		virtual void ShowGameObject();
-		virtual void ShowAnimation(int framStart, int framEnd);
+		virtual void ShowAnimation(int framStart, int framEnd, double speed);
 
 		virtual Vector3 getPosition(){ return position; };
 		virtual Vector3 getScale(){ return position; };
@@ -39,6 +39,10 @@ class GameObject
 		virtual void setPosition(Vector3 pos){ position.x = pos.x; position.y = pos.y; position.z = pos.z; }
 		virtual void setScale(Vector3 sca){ scale.x = sca.x; scale.y = sca.y; scale.z = sca.z; }
 		virtual void setRotation(double rot){ rotation_angle = rot; }
+
+		virtual void setX(double x){ position.x = x; };
+		virtual void setY(double y){ position.y = y; };
+		virtual void setZ(double z){ position.z = z; };
 
 		virtual void SetBoundingBox(double size);
 
@@ -60,7 +64,6 @@ class GameObject
 		Vector3 scale;
 		GameAssetFactory gameAssetFactory_factory;
 		GameAsset* gameAssetFactory_handler;
-
 
 };
 

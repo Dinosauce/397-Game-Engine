@@ -6,7 +6,6 @@
 #endif
 #include "singleton.h"
 #include "textureHandler/textureManager.h"
-
 typedef singleton<textureManager> textureMan;
 
 #define texMan textureMan::Instance()

@@ -48,13 +48,13 @@ void GameObject::ShowGameObject()
 	glPopMatrix();
 }
 
-void GameObject::ShowAnimation(int framStart, int framEnd)
+void GameObject::ShowAnimation(int framStart, int framEnd, double speed)
 {
 	glPushMatrix();
 	glTranslatef(position.x, position.y, position.z);
 	glScalef(scale.x, scale.y, scale.z);
 	glRotatef(rotation_angle, 0.0, 1.0, 0.0);
-	gameAssetFactory_handler->RenderAnimation(framStart, framEnd);
+	gameAssetFactory_handler->RenderAnimation(framStart, framEnd, speed);
 	glPopMatrix();
 }
 

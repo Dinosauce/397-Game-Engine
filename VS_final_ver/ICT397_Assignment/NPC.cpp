@@ -1,12 +1,15 @@
 #include "NPC.h"
 #include "NPCStates.h"
+
 void NPC::SetHealth(int HP)
 {
 	Health = HP;
-	// state machine
-	obj_fsm = new StateMachine<GameObject>(this);
-	obj_fsm->SetCurrentState(&walk_state::Instance());
-	obj_fsm->SetGlobalState(&global_state::Instance());
+	
+}
+
+void NPC::InitialState()
+{
+	currentState = &Default_state::Instance();
 }
 
 int NPC::GetHealth()
@@ -14,7 +17,22 @@ int NPC::GetHealth()
 	return Health;
 }
 
+void NPC::changeState(State<NPC> *newState)
+{
+	//call the exit method of the existing state
+	currentState->Exit(this);
+	//change state to the new state
+	currentState = newState;
+	//call the entry method of the new state
+	currentState->Enter(this);
+}
+
 // state machine
-void NPC::UpdateState(){
-	obj_fsm->Update();
+void NPC::UpdateState(Player p){
+
+	this->PL = p;
+	if (currentState)
+	{
+		currentState->Execute(this);
+	}
 }

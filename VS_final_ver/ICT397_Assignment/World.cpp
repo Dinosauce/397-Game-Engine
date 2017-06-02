@@ -303,30 +303,54 @@ void World::DrawTerrain()
 
 void World::InitialNPCs()
 {
+
 	static NPC npc;
 	Vector3 Pos;
 	Vector3 Sca;
 
-	char* NPCFiles[] = { "3Dmodels/tris.md2", "3Dmodels/twilight.PCX" };
-	npc.LoadGameObject(NPCFiles, "MD2");
+	for (int i = 0; i < 20; i++)
+	{
+		int randNum1 = (rand() % 200) - 200;
+		int randNum2 = (rand() % 200) - 200;
 
-	Pos.x = (terrainInfo.scalex * terrainInfo.ImageSize) / 2;
-	Pos.z = (terrainInfo.scalex * terrainInfo.ImageSize) / 2;
-	Pos.y = (double)Terrains["T1"].getAverageHight(Pos.x, Pos.z) + 5;
+		char* NPCFiles[] = { "3Dmodels/tris.md2", "3Dmodels/twilight.PCX" };
+		npc.LoadGameObject(NPCFiles, "MD2");
 
-	Sca.x = 0.3;
-	Sca.y = 0.3;
-	Sca.z = 0.3;
+		Pos.x = (terrainInfo.scalex * terrainInfo.ImageSize) / 2 + randNum1;
+		Pos.z = (terrainInfo.scalex * terrainInfo.ImageSize) / 2 + randNum2;
+		Pos.y = (double)Terrains["T1"].getAverageHight(Pos.x, Pos.z) + 5;
 
-	npc.setPosition(Pos);
-	npc.setScale(Sca);
+		Sca.x = 0.3;
+		Sca.y = 0.3;
+		Sca.z = 0.3;
 
-	NPCs["NPC1"] = npc;
+		npc.setPosition(Pos);
+		npc.setScale(Sca);
+		npc.InitialState();
+
+		string NPCName = "NPC" + to_string(i);
+
+		NPCs[NPCName] = npc;
+	}
+
 }
 
 void World::DrawNPCs()
 {
-	NPCs["NPC1"].ShowGameObject();
+	Vector3 Pos;
+	Vector3 Sca;
+
+	for (int i = 0; i < 20; i++)
+	{
+		string NPCName = "NPC" + to_string(i);
+		//NPCs["NPC1"].ShowGameObject();
+		NPCs[NPCName].UpdateState(Players["Player1"]);
+		Pos.x = NPCs[NPCName].getPosition().x;
+		Pos.z = NPCs[NPCName].getPosition().z;
+		Pos.y = (double)Terrains["T1"].getAverageHight(Pos.x, Pos.z) + 5;
+		NPCs[NPCName].setPosition(Pos);
+	}
+
 }
 
 void World::Initplayer()
@@ -365,12 +389,12 @@ void World::DrawPlayer()
 
 	if (cam.GetCameraPos().x!=CurrentX)
 	{
-		Players["Player1"].ShowAnimation(40, 46);
+		Players["Player1"].ShowAnimation(40, 46,10);
 	}
 
 	else if (control.GetKeyPressed() == 'f')
 	{
-		Players["Player1"].ShowAnimation(47, 60);
+		Players["Player1"].ShowAnimation(47, 60,10);
 	}
 
 	else
@@ -381,7 +405,7 @@ void World::DrawPlayer()
 	// state machine
 	//Players["NPC"].UpdateState();
 
-	cout << Players["Player1"].getPosition().z;
+	//cout << Players["Player1"].getPosition().z;
 
 	if (Players["Player1"].getPosition().y <= WaterHight)
 	{

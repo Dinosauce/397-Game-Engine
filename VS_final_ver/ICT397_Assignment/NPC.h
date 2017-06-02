@@ -3,21 +3,25 @@
 
 #include "GameObject.h"
 #include "State.h"
-#include "StateMachine.h"
+#include "Player.h"
+
 class NPC:public GameObject
 {
 public:
-	NPC() :GameObject(){}
+	NPC() :GameObject(){ }
+	void InitialState();
 	void SetHealth(int HP);
 	int GetHealth();
 
-	StateMachine<GameObject>* GetFSM() const { return obj_fsm; };
-
+	Player GetTarget(){ return PL; };
+	void changeState(State<NPC>* newState);
 	// state machine
-	void UpdateState();
+	void UpdateState(Player P);
 private:
 	int Health;
+	//Vector3 TargetPos;
+	Player PL;
 	// state machine
-	StateMachine<GameObject>* obj_fsm;
+	State<NPC> *currentState;
 };
 #endif

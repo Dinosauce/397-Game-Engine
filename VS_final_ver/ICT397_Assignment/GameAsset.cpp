@@ -18,7 +18,7 @@ void MD2Asset::LoadAsset(char * path[])
 	char *md2File = path[0];
 	char *PCXFile = path[1];
 	md2.loadModel(md2File, PCXFile);
-	md2.setAnimationSpeed(10);
+
 	md2.printHeader();
 }
 
@@ -28,10 +28,12 @@ void MD2Asset::RenderAsset()
 	//md2.animate(40, 46);
 }
 
-void MD2Asset::RenderAnimation(int framStart,int framEnd)
+void MD2Asset::RenderAnimation(int framStart,int framEnd,double speed)
 {
 
 	md2.animate(framStart, framEnd);
+	md2.setAnimationSpeed(speed);
+
 }
 
 GameAsset* GameAssetFactory::Create(char* type)

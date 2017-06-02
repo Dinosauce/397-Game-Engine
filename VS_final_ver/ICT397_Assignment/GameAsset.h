@@ -28,7 +28,7 @@ public:
 	*/
 	virtual void RenderAsset() = 0;
 
-	virtual void RenderAnimation(int framStart, int framEnd)=0;
+	virtual void RenderAnimation(int framStart, int framEnd, double speed) = 0;
 
 private:
 
@@ -39,7 +39,7 @@ class OBJAsset :public GameAsset
 {
 	void LoadAsset(char * path[]);
 	void RenderAsset();
-	void RenderAnimation(int framStart, int framEnd){};
+	void RenderAnimation(int framStart, int framEnd, double speed){};
 private:
 	AssimpLoader ALoader;
 };
@@ -48,7 +48,7 @@ class MD2Asset :public GameAsset
 {
 	void LoadAsset(char * path[]);
 	void RenderAsset();
-	void RenderAnimation(int framStart, int framEnd);
+	void RenderAnimation(int framStart, int framEnd, double speed);
 private:
 	md2Loader md2;
 };

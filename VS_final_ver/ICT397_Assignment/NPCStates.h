@@ -3,25 +3,31 @@
 
 #include "singleton.h"
 #include "State.h"
-#include "GameObject.h"
+#include "vector/vector2D.h"
+#include "movement.h"
+#include <math.h>
+#include <stdio.h> 
+#define PI 3.14159265
+class NPC;
 
-class GameObject;
 
-class Global : public State <GameObject> {
+class Flee : public State <NPC> {
 public:
-	void Enter(GameObject *thing);
-	void Execute(GameObject *thing);
-	void Exit(GameObject *thing);
+	void Enter(NPC *npc);
+	void Execute(NPC *npc);
+	void Exit(NPC *npc);
+	Movement *NPCs = new Movement();
 };
 
-class Walk : public State < GameObject > {
+class Default : public State < NPC > {
 public:
-	void Enter(GameObject *thing);
-	void Execute(GameObject *thing);
-	void Exit(GameObject *thing);
+	void Enter(NPC *npc);
+	void Execute(NPC *npc);
+	void Exit(NPC *npc);
+	Movement *NPCs = new Movement();
 };
 
-typedef singleton<Global> global_state;
-typedef singleton<Walk> walk_state;
+typedef singleton<Flee> flee_state;
+typedef singleton<Default> Default_state;
 
 #endif
