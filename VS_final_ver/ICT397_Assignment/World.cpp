@@ -24,6 +24,7 @@ double World::CurrentZ;
 //SkyBox
 SkyBox World::Sky;
 water World::WaterObj;
+UserInterface World::ui;
 
 double World::elapsed_time_second;
 int World::fps;
@@ -45,12 +46,12 @@ void World::LoadLuaFiles()
 	terrainInfo.scalex = script.get<int>("Terrain.ScaleFactor.x");
 	terrainInfo.scaley = script.get<int>("Terrain.ScaleFactor.y");
 	terrainInfo.scalez = script.get<int>("Terrain.ScaleFactor.z");
-	terrainInfo.iterations = script.get<int>("Terrain.iterations");
-	terrainInfo.hSize = script.get<int>("Terrain.hSize");
-	terrainInfo.minHeight = script.get<int>("Terrain.minHeight");
-	terrainInfo.maxHeight = script.get<int>("Terrain.maxHeight");
-	terrainInfo.weight = script.get<float>("Terrain.weight");
-	terrainInfo.random = script.get<bool>("Terrain.random");
+	terrainInfo.iterations = script.get<int>("Terrain.HeightField.iterations");
+	terrainInfo.hSize = script.get<int>("Terrain.HeightField.hSize");
+	terrainInfo.minHeight = script.get<int>("Terrain.HeightField.minHeight");
+	terrainInfo.maxHeight = script.get<int>("Terrain.HeightField.maxHeight");
+	terrainInfo.weight = script.get<float>("Terrain.HeightField.weight");
+	terrainInfo.random = script.get<bool>("Terrain.HeightField.random");
 	terrainInfo.ProceduralTexture1 = script.get<std::string>("Terrain.ProceduralTexture1");
 	terrainInfo.ProceduralTexture2 = script.get<std::string>("Terrain.ProceduralTexture2");
 	terrainInfo.ProceduralTexture3 = script.get<std::string>("Terrain.ProceduralTexture3");
@@ -91,7 +92,7 @@ World::World(){
 	game_status = GAME_PLAYING;
 	screen_width = 800;
 	screen_height = 600;
-
+	
 	if (! SetOpenGLGraphics())	
 		std::cout << "error set openGL graphics. " << std::endl;
 	
@@ -138,7 +139,6 @@ void World::Initialize(){
 void World::Update(){
 
 
-
 	elapsed_time_second = game_time.GetElapsedTimeSecond();
 	fps = game_time.GetFps();
 	cam.SetCameraSpdWithDT(elapsed_time_second);
@@ -146,6 +146,7 @@ void World::Update(){
 	graphic_handler->SetCameraPos(cam.GetCameraPos());
 	graphic_handler->SetCameraLookAt(cam.GetCameraLookAt());
 
+	
 	DrawSkyBox();
 	DrawWater();
 	//Draw Terrain Model
@@ -186,6 +187,7 @@ void World::Update(){
 
 	CurrentX = cam.GetCameraPos().x;
 	CurrentZ = cam.GetCameraPos().z;
+	DrawUI();//ui.DisplayHealth(0, 0);
 }
 
 void World::InitCamera(double x, double z )
@@ -493,4 +495,9 @@ void World::DrawWater()
 	NewWaterPos.z = 0;
 	NewWaterPos.y = 100;
 	WaterObj.setPosition(NewWaterPos);
+}
+
+void World::DrawUI()
+{
+	ui.DisplayHealth();
 }
