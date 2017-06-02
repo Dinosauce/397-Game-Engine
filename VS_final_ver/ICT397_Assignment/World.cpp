@@ -24,6 +24,7 @@ double World::CurrentZ;
 //SkyBox
 SkyBox World::Sky;
 water World::WaterObj;
+UserInterface World::ui;
 
 double World::elapsed_time_second;
 int World::fps;
@@ -91,7 +92,7 @@ World::World(){
 	game_status = GAME_PLAYING;
 	screen_width = 800;
 	screen_height = 600;
-
+	
 	if (! SetOpenGLGraphics())	
 		std::cout << "error set openGL graphics. " << std::endl;
 	
@@ -138,7 +139,6 @@ void World::Initialize(){
 void World::Update(){
 
 
-
 	elapsed_time_second = game_time.GetElapsedTimeSecond();
 	fps = game_time.GetFps();
 	cam.SetCameraSpdWithDT(elapsed_time_second);
@@ -146,6 +146,7 @@ void World::Update(){
 	graphic_handler->SetCameraPos(cam.GetCameraPos());
 	graphic_handler->SetCameraLookAt(cam.GetCameraLookAt());
 
+	
 	DrawSkyBox();
 	DrawWater();
 	//Draw Terrain Model
@@ -186,6 +187,7 @@ void World::Update(){
 
 	CurrentX = cam.GetCameraPos().x;
 	CurrentZ = cam.GetCameraPos().z;
+	DrawUI();//ui.DisplayHealth(0, 0);
 }
 
 void World::InitCamera(double x, double z )
@@ -495,4 +497,16 @@ void World::InitialWater()
 void World::DrawWater()
 {
 	WaterObj.ShowWater();
+<<<<<<< HEAD
+=======
+	NewWaterPos.x = 0;
+	NewWaterPos.z = 0;
+	NewWaterPos.y = 100;
+	WaterObj.setPosition(NewWaterPos);
+}
+
+void World::DrawUI()
+{
+	ui.DisplayHealth();
+>>>>>>> e67a618f8bb920aec43d0ef521d6bb7a14521c1b
 }

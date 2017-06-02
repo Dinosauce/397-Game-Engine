@@ -105,6 +105,7 @@ void OpenGL::Reshape(int width, int height){
 }
 
 void OpenGL::CallLookAt(){
+	Reshape(screen_width, screen_height);
 	glLoadIdentity();
 	gluLookAt(camera_pos.x, camera_pos.y, camera_pos.z,
 		camera_look_at.x, camera_look_at.y, camera_look_at.z,

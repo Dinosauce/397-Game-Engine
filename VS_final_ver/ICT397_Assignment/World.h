@@ -19,6 +19,8 @@
 #include "LuaScript.h"
 #include "SkyBox.h"
 #include "water.h"
+#include "UserInterface.h"
+
 /**
 * World class - Plentoon Games
 * Stores all the game components and helps object communication
@@ -163,6 +165,8 @@ class World{
 
 		static void DrawWater();
 
+		static void DrawUI();
+
 		static void InitCamera(double x, double z);
 
 		static void SetTerrainBoundray();
@@ -230,6 +234,8 @@ class World{
 		static SkyBox Sky;
 
 		static water WaterObj;
+
+		static UserInterface ui;
 };
 
 #endif
