@@ -99,6 +99,7 @@
     <ClCompile Include="textureHandler\textureGenerator.cpp" />
     <ClCompile Include="textureHandler\textureManager.cpp" />
     <ClCompile Include="textureHandler\tgaLoader.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
     <ClCompile Include="vector\vector.cpp" />
     <ClCompile Include="vector\vector2D.cpp" />
     <ClCompile Include="water.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="textureHandler\textureManager.h" />
     <ClInclude Include="textureHandler\tgaLoader.h" />
     <ClInclude Include="TextureMap.h" />
+    <ClInclude Include="UserInterface.h" />
     <ClInclude Include="vector\vector.h" />
     <ClInclude Include="vector\vector2D.h" />
     <ClInclude Include="water.h" />

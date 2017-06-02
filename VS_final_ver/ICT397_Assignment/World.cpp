@@ -497,16 +497,9 @@ void World::InitialWater()
 void World::DrawWater()
 {
 	WaterObj.ShowWater();
-<<<<<<< HEAD
-=======
-	NewWaterPos.x = 0;
-	NewWaterPos.z = 0;
-	NewWaterPos.y = 100;
-	WaterObj.setPosition(NewWaterPos);
 }
 
 void World::DrawUI()
 {
 	ui.DisplayHealth();
->>>>>>> e67a618f8bb920aec43d0ef521d6bb7a14521c1b
 }
