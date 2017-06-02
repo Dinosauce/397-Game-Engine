@@ -220,7 +220,7 @@ void World::SetTerrainBoundray()
 
 void World::InitSpecialEffects(){
 
-	particleSystem.createParticles(50, 400, 50, fountain);
+	particleSystem.createParticles(1472, 1472, 1472, explosion, 0.01);
 }
 
 void World::DrawSpecialEffects(){
@@ -480,6 +480,8 @@ void World::DrawTrees()
 		}
 		
 	}
+
+	//cout << "Currentpositionx   " << cam.GetCameraPos().x << " ypos: " << cam.GetCameraPos().x <<" z pos: "<< cam.GetCameraPos().z<< endl;
 
 }
 
