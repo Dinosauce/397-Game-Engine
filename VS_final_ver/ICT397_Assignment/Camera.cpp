@@ -24,8 +24,8 @@ void Camera::CheckCamera(){
 
 void Camera::SetCameraRotation(const double & delta_x, const double & delta_y){
 	// Cache mouse location
-	rotation_buffer.x -= 0.01f * delta_x * camera_rot_spd_with_dt;
-	rotation_buffer.y -= 0.01f * delta_y * camera_rot_spd_with_dt;
+	rotation_buffer.x -= 0.01f * delta_x * camera_rot_spd_with_dt*0.5;
+	rotation_buffer.y -= 0.01f * delta_y * camera_rot_spd_with_dt*0.5;
 
 	// No move over the ground and back to the top
 	if (rotation_buffer.y < MathHelp::ToRadians(-75.0))

@@ -29,15 +29,19 @@ UserInterface World::ui;
 
 double World::elapsed_time_second;
 int World::fps;
-
+double World::t=0.0;
 double WaterHight = 200;
 //Draw Terrain Model
+
+double BoundarySize = 100;
 
 bool World::RandomGrids[10][10];
 
 bool World::RandomNPCs[10][10];
 
 bool World::RandomTrees[10][10];
+
+bool World::IsDead = false;
 
 void World::LoadLuaFiles()
 {
@@ -152,7 +156,8 @@ void World::Update(){
 	DrawWater();
 	//Draw Terrain Model
 	DrawTerrain();
-	DrawSpecialEffects();
+	//DrawSpecialEffects();
+	glColor4f(1.0, 1.0, 1.0, 0.0);
 
 	SetTerrainBoundray();
 
@@ -203,7 +208,7 @@ void World::InitCamera(double x, double z )
 
 void World::SetTerrainBoundray()
 {
-	int IndenSize = 50;
+	int IndenSize = BoundarySize;
 	if ((cam.GetCameraPos().x<IndenSize) ||
 		(cam.GetCameraPos().x>terrainInfo.scalex * terrainInfo.ImageSize - IndenSize)||
 		(cam.GetCameraPos().z<IndenSize) ||
@@ -310,8 +315,8 @@ void World::InitialNPCs()
 
 	for (int i = 0; i < 20; i++)
 	{
-		int randNum1 = (rand() % 200) - 200;
-		int randNum2 = (rand() % 200) - 200;
+		int randNum1 = (rand() % 500) - 500;
+		int randNum2 = (rand() % 500) - 500;
 
 		char* NPCFiles[] = { "3Dmodels/tris.md2", "3Dmodels/twilight.PCX" };
 		npc.LoadGameObject(NPCFiles, "MD2");
@@ -407,10 +412,31 @@ void World::DrawPlayer()
 
 	//cout << Players["Player1"].getPosition().z;
 
-	if (Players["Player1"].getPosition().y <= WaterHight)
+	//Set Water prevant
+	if (Players["Player1"].getPosition().y <= WaterHight-10)
 	{
 		cam.SetCameraPosX(CurrentX);
 		cam.SetCameraPosZ(CurrentZ);
+	}
+
+	//get killed 
+	if (Players["Player1"].getPosition().y <= WaterHight+5)
+	{
+
+		t += elapsed_time_second;
+		if (t > 1.0&&ui.getHealth()>=40)
+		{
+			cout << ui.getHealth();
+			int newHP = ui.getHealth() - 30;
+			ui.setHealth(newHP);
+			t = 0.0;
+		}
+	}
+
+	if (ui.getHealth() < 40 && !IsDead)
+	{
+		IsDead = true;
+		SetGameStatus(GAME_CREDIT_PAGE);
 	}
 }
 
@@ -420,15 +446,15 @@ void World::InitialTrees()
 	Vector3 TreePos;
 	Vector3 TreeSca;
 
-	for (int i = 0; i <20; i++)
+	for (int i = 0; i <30; i++)
 	{
-		int randNum1 = (rand() % 50) + 0;
-		int randNum2 = (rand() % 50) + 0;
+		int randNum1 = (rand() % 500) -500;
+		int randNum2 = (rand() % 500) -500;
 		char* TreeFiles[] = { const_cast<char *>(LD.ObjectsFile.c_str()) };
 		Tree.LoadGameObject(TreeFiles, "Assimp");
 		
-		TreePos.x = 500 + (i*randNum1);
-		TreePos.z = 500 + (i*randNum2);
+		TreePos.x = (terrainInfo.scalex * terrainInfo.ImageSize) / 2 + randNum1;
+		TreePos.z = (terrainInfo.scalez * terrainInfo.ImageSize) / 2 + randNum2;
 		TreePos.y = (double)Terrains["T1"].getAverageHight(TreePos.x, TreePos.z)-5;
 		Tree.setPosition(TreePos);
 
@@ -440,27 +466,6 @@ void World::InitialTrees()
 		Trees[TreeName] = Tree;
 	}
 
-
-
-	for (int i = 0; i < 10; i++)
-	{
-		int randNum1 = (rand() % 10) + 0;
-		int randNum2 = (rand() % 10) + 0;
-
-		for (int j = 0; j < 10; j++)
-		{
-			std::vector<bool> colVector;
-
-			if ((j == randNum1) || (j == randNum2))
-			{
-				RandomTrees[i][j] = false;
-			}
-			else
-			{
-				RandomTrees[i][j] = true;
-			}
-		}
-	}
 }
 
 

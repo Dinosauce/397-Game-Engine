@@ -128,7 +128,7 @@ void UserInterface::setScore(int sc)
 
 UserInterface::UserInterface()
 {
-	health = 300;
+	health = 310;
 }
 
 

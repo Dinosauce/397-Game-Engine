@@ -10,6 +10,7 @@ void Flee::Enter(NPC *npc){
 }
 
 void Flee::Execute(NPC *npc){
+	distance = 0.0f;
 	vector2D patroller(npc->getPosition().x, npc->getPosition().z);
 	vector2D target(npc->GetTarget().getPosition().x, npc->GetTarget().getPosition().z);
 	vector2D patrollerVel(0, 80);
@@ -27,9 +28,23 @@ void Flee::Execute(NPC *npc){
 	npc->setZ(patroller.getY());
 	npc->setRotation(angle-90);
 
-	if (!NPCs->seeTarget(patroller, target, patrollerVel, 50, 360))
+	// lua
+	lua_State *L;
+	L = lua_open();
+	luaL_openlibs(L);
+
+	luaL_dofile(L, "AI_Lua.lua");
+	lua_getglobal(L, "FleeExecuteUpdate");
+	lua_call(L, 0, 2);
+	distance = (float)lua_tonumber(L, 1);
+	new_state_str = lua_tostring(L, 2);
+	lua_pop(L, 2);
+	lua_close(L);
+
+	if (!NPCs->seeTarget(patroller, target, patrollerVel, distance, 360))
 	{
-		npc->changeState(&Default_state::Instance());
+		if (new_state_str == "Default_state")
+			npc->changeState(&Default_state::Instance());
 	}
 
 
@@ -45,15 +60,31 @@ void Default::Enter(NPC *npc){
 }
 
 void Default::Execute(NPC *npc){
+	distance = 0.0f;
+
 	 vector2D patroller(npc->getPosition().x, npc->getPosition().z);
 	 vector2D target(npc->GetTarget().getPosition().x, npc->GetTarget().getPosition().z);
 	vector2D patrollerVel(0, 80);
 
 	npc->ShowAnimation(0, 30, 5);
 
-	if (NPCs->seeTarget(patroller, target, patrollerVel,50,360))
+	// lua
+	lua_State *L;
+	L = lua_open();
+	luaL_openlibs(L);
+
+	luaL_dofile(L, "AI_Lua.lua");
+	lua_getglobal(L, "DefaultExecuteUpdate");
+	lua_call(L, 0, 2);
+	distance = (float)lua_tonumber(L, 1);
+	new_state_str = lua_tostring(L, 2);
+	lua_pop(L, 2);
+	lua_close(L);
+
+	if (NPCs->seeTarget(patroller, target, patrollerVel,distance,360))
 	{
-		npc->changeState(&flee_state::Instance());
+		if (new_state_str == "flee_state")
+			npc->changeState(&flee_state::Instance());
 	}
 
 	//cout << "Execute walk state" << endl;

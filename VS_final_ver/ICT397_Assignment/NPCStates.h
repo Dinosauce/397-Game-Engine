@@ -7,6 +7,7 @@
 #include "movement.h"
 #include <math.h>
 #include <stdio.h> 
+#include "Lua\lua.hpp"
 #define PI 3.14159265
 class NPC;
 
@@ -17,6 +18,8 @@ public:
 	void Execute(NPC *npc);
 	void Exit(NPC *npc);
 	Movement *NPCs = new Movement();
+	float distance;
+	std::string new_state_str;
 };
 
 class Default : public State < NPC > {
@@ -25,6 +28,8 @@ public:
 	void Execute(NPC *npc);
 	void Exit(NPC *npc);
 	Movement *NPCs = new Movement();
+	float distance;
+	std::string new_state_str;
 };
 
 typedef singleton<Flee> flee_state;

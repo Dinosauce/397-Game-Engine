@@ -241,6 +241,10 @@ class World{
 
 		static UserInterface ui;
 
+		static double t;
+
+		static bool IsDead;
+
 };
 
 #endif
