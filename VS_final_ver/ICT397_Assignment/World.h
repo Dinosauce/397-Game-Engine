@@ -20,6 +20,8 @@
 #include "SkyBox.h"
 #include "water.h"
 #include "UserInterface.h"
+#include "Player.h"
+#include "NPC.h"
 
 /**
 * World class - Plentoon Games
@@ -225,7 +227,9 @@ class World{
 
 		static map<string, GameObject> Trees;
 
-		static map<string, GameObject> Player;
+		static map<string, Player> Players;
+
+		static map<string, NPC> NPCs;
 
 		static double CurrentX;
 
@@ -236,6 +240,7 @@ class World{
 		static water WaterObj;
 
 		static UserInterface ui;
+
 };
 
 #endif

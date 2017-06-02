@@ -3,14 +3,10 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Control.cpp" />
-    <ClCompile Include="GameAsset.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="LuaScript.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ParticleEmmitter.cpp" />
-    <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="textureHandler\bmpLoader.cpp">
       <Filter>textrueHandle</Filter>
@@ -43,10 +39,10 @@
       <Filter>AssimpLoader</Filter>
     </ClCompile>
     <ClCompile Include="MD2Loader\md2Header.cpp">
-      <Filter>MD2Loader</Filter>
+      <Filter>Aimation+MD2Loader</Filter>
     </ClCompile>
     <ClCompile Include="MD2Loader\md2Loader.cpp">
-      <Filter>MD2Loader</Filter>
+      <Filter>Aimation+MD2Loader</Filter>
     </ClCompile>
     <ClCompile Include="vector\vector.cpp">
       <Filter>Vector</Filter>
@@ -61,26 +57,44 @@
       <Filter>math</Filter>
     </ClCompile>
     <ClCompile Include="AABB.cpp" />
-    <ClCompile Include="SkyBox.cpp" />
-    <ClCompile Include="water.cpp" />
-    <ClCompile Include="MushroomStates.cpp">
+    <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="Terrain.cpp">
+      <Filter>GameAssets</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>GameAssets</Filter>
+    </ClCompile>
+    <ClCompile Include="water.cpp">
+      <Filter>GameAssets</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameAssets</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>GameAssets</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleEmmitter.cpp">
+      <Filter>GameAssets</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameAssets</Filter>
+    </ClCompile>
+    <ClCompile Include="GameAsset.cpp">
+      <Filter>GameAssets</Filter>
+    </ClCompile>
+    <ClCompile Include="NPCStates.cpp">
       <Filter>FSM</Filter>
     </ClCompile>
-    <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Control.h" />
-    <ClInclude Include="GameAsset.h" />
-    <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameStatus.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="LuaScript.h" />
-    <ClInclude Include="ParticleEmmitter.h" />
     <ClInclude Include="singleton.h" />
     <ClInclude Include="singletons.h" />
-    <ClInclude Include="Terrain.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="textureHandler\bmpLoader.h">
       <Filter>textrueHandle</Filter>
@@ -119,10 +133,10 @@
       <Filter>AssimpLoader</Filter>
     </ClInclude>
     <ClInclude Include="MD2Loader\md2Header.h">
-      <Filter>MD2Loader</Filter>
+      <Filter>Aimation+MD2Loader</Filter>
     </ClInclude>
     <ClInclude Include="MD2Loader\md2Loader.h">
-      <Filter>MD2Loader</Filter>
+      <Filter>Aimation+MD2Loader</Filter>
     </ClInclude>
     <ClInclude Include="vector\vector.h">
       <Filter>Vector</Filter>
@@ -140,11 +154,6 @@
       <Filter>math</Filter>
     </ClInclude>
     <ClInclude Include="AABB.h" />
-    <ClInclude Include="SkyBox.h" />
-    <ClInclude Include="water.h" />
-    <ClInclude Include="MushroomStates.h">
-      <Filter>FSM</Filter>
-    </ClInclude>
     <ClInclude Include="State.h">
       <Filter>FSM</Filter>
     </ClInclude>
@@ -152,6 +161,33 @@
       <Filter>FSM</Filter>
     </ClInclude>
     <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="Terrain.h">
+      <Filter>GameAssets</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>GameAssets</Filter>
+    </ClInclude>
+    <ClInclude Include="water.h">
+      <Filter>GameAssets</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GameAssets</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC.h">
+      <Filter>GameAssets</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEmmitter.h">
+      <Filter>GameAssets</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameAssets</Filter>
+    </ClInclude>
+    <ClInclude Include="GameAsset.h">
+      <Filter>GameAssets</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCStates.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameFiles.lua" />
@@ -164,9 +200,6 @@
     <Filter Include="AssimpLoader">
       <UniqueIdentifier>{eefd9df0-9100-4ae2-985f-aea4eaf6cbf6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MD2Loader">
-      <UniqueIdentifier>{f0db3911-cc28-4fdd-82f3-7f2c1af7ddd8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Vector">
       <UniqueIdentifier>{fb756959-111e-4de8-91ec-645f9e5b90e5}</UniqueIdentifier>
     </Filter>
@@ -175,6 +208,12 @@
     </Filter>
     <Filter Include="FSM">
       <UniqueIdentifier>{ae3b209b-6887-4024-8227-ea4aa94abb9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Aimation+MD2Loader">
+      <UniqueIdentifier>{f0db3911-cc28-4fdd-82f3-7f2c1af7ddd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameAssets">
+      <UniqueIdentifier>{9c44dd9b-ae5d-4615-bfe5-5ad8f78f9e36}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

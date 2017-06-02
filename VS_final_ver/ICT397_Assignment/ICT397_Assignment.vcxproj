@@ -87,8 +87,10 @@
     <ClCompile Include="MD2Loader\md2Loader.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="AssimpLoader.cpp" />
-    <ClCompile Include="MushroomStates.cpp" />
+    <ClCompile Include="NPCStates.cpp" />
+    <ClCompile Include="NPC.cpp" />
     <ClCompile Include="ParticleEmmitter.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -122,8 +124,10 @@
     <ClInclude Include="MD2Loader\md2Loader.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="AssimpLoader.h" />
-    <ClInclude Include="MushroomStates.h" />
+    <ClInclude Include="NPCStates.h" />
+    <ClInclude Include="NPC.h" />
     <ClInclude Include="ParticleEmmitter.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="singleton.h" />
     <ClInclude Include="singletons.h" />
     <ClInclude Include="SkyBox.h" />

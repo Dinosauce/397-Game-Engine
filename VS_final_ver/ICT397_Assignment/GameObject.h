@@ -3,8 +3,6 @@
 #include "GameAsset.h"
 #include "math/GameMathHelp.h"
 #include "AABB.h"
-#include "State.h"
-#include "StateMachine.h"
 
 
 class GameObject
@@ -20,35 +18,34 @@ class GameObject
 		* Destructure - delete fsm
 		*/
 		~GameObject(){
-			if(!obj_fsm) delete obj_fsm;
+			//if(!obj_fsm) delete obj_fsm;
 		};
 
 		/**
 		* Draw Terrain Model
 		* @param file name and GameAssetFactory type
 		*/
-		void LoadGameObject(char* Files[], char* type);
+		virtual void LoadGameObject(char* Files[], char* type);
 		/**
 		* Render object
 		*/
-		void ShowGameObject();
-		void ShowAnimation(int framStart, int framEnd);
+		virtual void ShowGameObject();
+		virtual void ShowAnimation(int framStart, int framEnd);
 
-		Vector3 getPosition(){ return position; };
-		Vector3 getScale(){ return position; };
-		double getRotation(){ return rotation_angle; };
+		virtual Vector3 getPosition(){ return position; };
+		virtual Vector3 getScale(){ return position; };
+		virtual double getRotation(){ return rotation_angle; };
 
-		void setPosition(Vector3 pos){position.x = pos.x;position.y = pos.y;position.z = pos.z;}
-		void setScale(Vector3 sca){ scale.x = sca.x; scale.y = sca.y; scale.z = sca.z; }
-		void setRotation(double rot){ rotation_angle = rot; }
+		virtual void setPosition(Vector3 pos){ position.x = pos.x; position.y = pos.y; position.z = pos.z; }
+		virtual void setScale(Vector3 sca){ scale.x = sca.x; scale.y = sca.y; scale.z = sca.z; }
+		virtual void setRotation(double rot){ rotation_angle = rot; }
 
-		void SetBoundingBox(double size);
+		virtual void SetBoundingBox(double size);
 
-		bool processCollision(GameObject &obj);
+		virtual bool processCollision(GameObject &obj);
 
-		// state machine
-		void UpdateState();
-		StateMachine<GameObject>* GetFSM() const { return obj_fsm; };
+
+
 
 	private:
 		//static ObjectLoader OL;
@@ -64,8 +61,7 @@ class GameObject
 		GameAssetFactory gameAssetFactory_factory;
 		GameAsset* gameAssetFactory_handler;
 
-		// state machine
-		StateMachine<GameObject>* obj_fsm;
+
 };
 
 #endif
