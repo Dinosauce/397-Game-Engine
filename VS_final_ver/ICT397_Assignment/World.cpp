@@ -355,6 +355,8 @@ void World::DrawPlayer()
 		Player["NPC"].ShowGameObject();
 	}
 
+	// state machine
+	Player["NPC"].UpdateState();
 }
 
 void World::InitialTrees()

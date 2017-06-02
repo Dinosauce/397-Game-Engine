@@ -14,4 +14,14 @@ public:
 	void Exit(GameObject *thing);
 };
 
+class Walk : public State < GameObject > {
+public:
+	void Enter(GameObject *thing);
+	void Execute(GameObject *thing);
+	void Exit(GameObject *thing);
+};
+
+typedef singleton<Global> global_state;
+typedef singleton<Walk> walk_state;
+
 #endif

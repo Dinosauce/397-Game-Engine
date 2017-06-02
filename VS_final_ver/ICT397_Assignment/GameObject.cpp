@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include "MushroomStates.h"
 
 AABB GameObject::boundingBox;
 
@@ -13,6 +14,11 @@ GameObject::GameObject()
 	scale.z = 1;
 
 	rotation_angle = 0.0;
+
+	// state machine
+	obj_fsm = new StateMachine<GameObject>(this);
+	obj_fsm->SetCurrentState(&walk_state::Instance());
+	obj_fsm->SetGlobalState(&global_state::Instance());
 }
 
 void GameObject::LoadGameObject(char* Files[], char* type)
@@ -48,6 +54,12 @@ void GameObject::ShowGameObject()
 }
 
 void GameObject::ShowAnimation(int framStart, int framEnd)
+
+
+
+
+
+
 {
 	glPushMatrix();
 	glTranslatef(position.x, position.y, position.z);
@@ -64,4 +76,9 @@ bool GameObject::processCollision(GameObject &obj)
 		return true;
 	}
 	return false;
+}
+
+// state machine
+void GameObject::UpdateState(){
+	obj_fsm->Update();
 }

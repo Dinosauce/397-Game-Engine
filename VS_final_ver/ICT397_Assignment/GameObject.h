@@ -3,6 +3,8 @@
 #include "GameAsset.h"
 #include "math/GameMathHelp.h"
 #include "AABB.h"
+#include "State.h"
+#include "StateMachine.h"
 
 
 class GameObject
@@ -13,6 +15,13 @@ class GameObject
 		* Default constructor
 		*/
 		GameObject();
+
+		/**
+		* Destructure - delete fsm
+		*/
+		~GameObject(){
+			if(!obj_fsm) delete obj_fsm;
+		};
 
 		/**
 		* Draw Terrain Model
@@ -37,6 +46,9 @@ class GameObject
 
 		bool processCollision(GameObject &obj);
 
+		// state machine
+		void UpdateState();
+		StateMachine<GameObject>* GetFSM() const { return obj_fsm; };
 
 	private:
 		//static ObjectLoader OL;
@@ -51,6 +63,9 @@ class GameObject
 		Vector3 scale;
 		GameAssetFactory gameAssetFactory_factory;
 		GameAsset* gameAssetFactory_handler;
+
+		// state machine
+		StateMachine<GameObject>* obj_fsm;
 };
 
 #endif
