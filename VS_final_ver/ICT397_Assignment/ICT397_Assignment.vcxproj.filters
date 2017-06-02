@@ -63,6 +63,9 @@
     <ClCompile Include="AABB.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="water.cpp" />
+    <ClCompile Include="MushroomStates.cpp">
+      <Filter>FSM</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
@@ -137,9 +140,16 @@
     </ClInclude>
     <ClInclude Include="AABB.h" />
     <ClInclude Include="SkyBox.h" />
-    <ClInclude Include="State.h" />
-    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="water.h" />
+    <ClInclude Include="MushroomStates.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameFiles.lua" />
@@ -160,6 +170,9 @@
     </Filter>
     <Filter Include="math">
       <UniqueIdentifier>{040b23de-d6a3-43f4-b7af-1762770fcff6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FSM">
+      <UniqueIdentifier>{ae3b209b-6887-4024-8227-ea4aa94abb9e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

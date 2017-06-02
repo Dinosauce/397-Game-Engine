@@ -37,7 +37,7 @@ void MD2Asset::RenderAnimation(int framStart,int framEnd)
 GameAsset* GameAssetFactory::Create(char* type)
 {
 	std::string type_str = type;
-	if (type_str == "OBJ"){
+	if (type_str == "Assimp"){
 		return new OBJAsset;
 	}
 	else if (type_str == "MD2"){

@@ -84,7 +84,7 @@ bool  terrain::genFaultFormation(int iterations, int hSize, int minHeight, int m
 		}
 		addFilter(heights, weight);
 	}
-	// normalise the heightfield
+	//normalise the heightfield
 	normalise(heights);
 	// copy the float heightfield to terrainData (in unsign char)
 	for (int z = 0; z<size; z++) {

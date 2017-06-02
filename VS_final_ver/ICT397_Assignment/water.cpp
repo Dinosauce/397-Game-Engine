@@ -20,12 +20,12 @@ void water::LoadWater()
 
 void water::ShowWater()
 {
-	for (int i = 0; i < 8;i++)
+	for (int i = 0; i < 12;i++)
 	{
-		for (int j = 0; j < 8; j++)
+		for (int j = 0; j < 12; j++)
 		{
 			glPushMatrix();
-			glTranslatef((position.x + 230 * j), position.y, (position.z + 230 * i));
+			glTranslatef((position.x + scale.x * j), position.y, (position.z + scale.z * i));
 			glScalef(scale.x, scale.y, scale.z);
 			RenderWater();
 			glPopMatrix();

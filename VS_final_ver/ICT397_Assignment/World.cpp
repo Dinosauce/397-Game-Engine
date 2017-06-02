@@ -28,12 +28,12 @@ water World::WaterObj;
 double World::elapsed_time_second;
 int World::fps;
 
+double WaterHight = 200;
 //Draw Terrain Model
 
 bool World::RandomGrids[10][10];
 
 bool World::RandomNPCs[10][10];
-
 
 bool World::RandomTrees[10][10];
 
@@ -45,12 +45,12 @@ void World::LoadLuaFiles()
 	terrainInfo.scalex = script.get<int>("Terrain.ScaleFactor.x");
 	terrainInfo.scaley = script.get<int>("Terrain.ScaleFactor.y");
 	terrainInfo.scalez = script.get<int>("Terrain.ScaleFactor.z");
-	terrainInfo.iterations = script.get<int>("Terrain.iterations");
-	terrainInfo.hSize = script.get<int>("Terrain.hSize");
-	terrainInfo.minHeight = script.get<int>("Terrain.minHeight");
-	terrainInfo.maxHeight = script.get<int>("Terrain.maxHeight");
-	terrainInfo.weight = script.get<float>("Terrain.weight");
-	terrainInfo.random = script.get<bool>("Terrain.random");
+	terrainInfo.iterations = script.get<int>("Terrain.HeightField.iterations");
+	terrainInfo.hSize = script.get<int>("Terrain.HeightField.hSize");
+	terrainInfo.minHeight = script.get<int>("Terrain.HeightField.minHeight");
+	terrainInfo.maxHeight = script.get<int>("Terrain.HeightField.maxHeight");
+	terrainInfo.weight = script.get<float>("Terrain.HeightField.weight");
+	terrainInfo.random = script.get<bool>("Terrain.HeightField.random");
 	terrainInfo.ProceduralTexture1 = script.get<std::string>("Terrain.ProceduralTexture1");
 	terrainInfo.ProceduralTexture2 = script.get<std::string>("Terrain.ProceduralTexture2");
 	terrainInfo.ProceduralTexture3 = script.get<std::string>("Terrain.ProceduralTexture3");
@@ -156,7 +156,7 @@ void World::Update(){
 
 	//DrawNPCs();
 	DrawPlayer();
-	DrawTrees();
+	//DrawTrees();
 
 
 	//Draw NPCs Models
@@ -252,8 +252,7 @@ void World::InitialTerrain()
 	Terrain->loadHeightfield(terrainInfo.TerrainFile.c_str(), terrainInfo.ImageSize);
 	Terrain->setScalingFactor(terrainInfo.scalex, terrainInfo.scaley, terrainInfo.scalez);
 	//Terrain->generateHeightfield(terrainInfo.heightfieldX, terrainInfo.heightfieldY, terrainInfo.heightfieldZ);
-	//Terrain->genFaultFormation(64, 128, 1, 128, 0.1, false);
-	Terrain->genFaultFormation(terrainInfo.iterations, terrainInfo.hSize, terrainInfo.minHeight, terrainInfo.maxHeight, terrainInfo.weight, terrainInfo.random);
+	//Terrain->genFaultFormation(terrainInfo.iterations, terrainInfo.hSize, terrainInfo.minHeight, terrainInfo.maxHeight, terrainInfo.weight, terrainInfo.random);
 	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture1.c_str());
 	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture2.c_str());
 	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture3.c_str());
@@ -361,6 +360,14 @@ void World::DrawPlayer()
 
 	// state machine
 	Player["NPC"].UpdateState();
+
+	cout << Player["NPC"].getPosition().z;
+
+	if (Player["NPC"].getPosition().y <= WaterHight)
+	{
+		cam.SetCameraPosX(CurrentX);
+		cam.SetCameraPosZ(CurrentZ);
+	}
 }
 
 void World::InitialTrees()
@@ -374,7 +381,7 @@ void World::InitialTrees()
 		int randNum1 = (rand() % 50) + 0;
 		int randNum2 = (rand() % 50) + 0;
 		char* TreeFiles[] = { const_cast<char *>(LD.ObjectsFile.c_str()) };
-		Tree.LoadGameObject(TreeFiles, "OBJ");
+		Tree.LoadGameObject(TreeFiles, "Assimp");
 		
 		TreePos.x = 500 + (i*randNum1);
 		TreePos.z = 500 + (i*randNum2);
@@ -424,8 +431,8 @@ void World::DrawTrees()
 		{
 			cam.SetCameraPosX(CurrentX);
 			cam.SetCameraPosZ(CurrentZ);
-			cout << "Collsion!!" << endl;
-			cout << "Current11   " << CurrentX << " " << cam.GetCameraPos().x<< endl;
+			//cout << "Collsion!!" << endl;
+			//cout << "Current11   " << CurrentX << " " << cam.GetCameraPos().x<< endl;
 		}
 		
 	}
@@ -444,9 +451,9 @@ void World::InitialSkyBox()
 	SkyPos.z = cam.GetCameraPos().z;
 	SkyPos.y = (double)Terrains["T1"].getAverageHight(SkyPos.x, SkyPos.z) ;
 
-	SkySca.x = 230;
-	SkySca.y = 230;
-	SkySca.z = 230;
+	SkySca.x = 300;
+	SkySca.y = 300;
+	SkySca.z = 300;
 
 	Sky.setPosition(SkyPos);
 	Sky.setScale(SkySca);
@@ -473,13 +480,13 @@ void World::InitialWater()
 
 	WaterObj.LoadWater();
 
-	waters.x = cam.GetCameraPos().x;
-	waters.z = cam.GetCameraPos().z;
-	waters.y = (double)Terrains["T1"].getAverageHight(waters.x, waters.z);
+	waters.x = 1;
+	waters.z = 1;
+	waters.y = WaterHight;
 
-	waterss.x = 230;
-	waterss.y = 230;
-	waterss.z = 230;
+	waterss.x = 300;
+	waterss.y = 1;
+	waterss.z = 300;
 
 	WaterObj.setPosition(waters);
 	WaterObj.setScale(waterss);
@@ -487,10 +494,5 @@ void World::InitialWater()
 
 void World::DrawWater()
 {
-	static Vector3 NewWaterPos;
 	WaterObj.ShowWater();
-	NewWaterPos.x = 0;
-	NewWaterPos.z = 0;
-	NewWaterPos.y = 100;
-	WaterObj.setPosition(NewWaterPos);
 }

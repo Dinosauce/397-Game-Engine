@@ -6,9 +6,9 @@ Terrain = {
 	ImageSize = 128.0,
 	ScaleFactor= {
     
-		x = 10.0, 
-		y = 1.0, 
-		z = 10.0
+		x = 23.0, 
+		y = 3.0, 
+		z = 23.0
     
 	},
     

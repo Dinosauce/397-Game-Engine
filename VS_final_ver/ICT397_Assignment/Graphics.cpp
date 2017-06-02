@@ -14,6 +14,8 @@ void(*OpenGL::OpenGLKeyboardUpFunc)(unsigned char, int, int);
 void(*OpenGL::OpenGLPassiveMouseFunc)(int, int);
 
 
+GLfloat  fogColor[] = { 0.8f, 0.8f, 0.8f, 0.1f };
+
 void OpenGL::CreateGameWindow(int width, int height, char* window_name, int* argc, char* argv[]){
 	glutInit(argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
@@ -64,6 +66,16 @@ void OpenGL::Display(){
 		glVertex3i(10, 10, 10);
 		glVertex3i(0, 10, 10);
 	glEnd();
+
+	/*
+	glEnable(GL_FOG);
+	glFogi(GL_FOG_MODE, GL_EXP);
+	glFogfv(GL_FOG_COLOR, fogColor);
+	glFogf(GL_FOG_DENSITY, 0.01f);
+	glHint(GL_FOG_HINT, GL_NICEST);
+	glFogf(GL_FOG_START,300.0f);*/
+	//glFogf(GL_FOG_END, 600.0f);
+	//glClearColor(0.5, 0.5, 0.5, 1.0);
 	
 
 

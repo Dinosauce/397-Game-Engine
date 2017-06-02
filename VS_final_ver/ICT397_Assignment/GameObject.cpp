@@ -54,12 +54,6 @@ void GameObject::ShowGameObject()
 }
 
 void GameObject::ShowAnimation(int framStart, int framEnd)
-
-
-
-
-
-
 {
 	glPushMatrix();
 	glTranslatef(position.x, position.y, position.z);
