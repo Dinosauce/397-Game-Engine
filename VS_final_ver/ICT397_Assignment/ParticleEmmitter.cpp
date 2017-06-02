@@ -2,7 +2,7 @@
 
 ParticleEmmitter::ParticleEmmitter()
 {
-
+	particleScale = 1;
 }
 ParticleEmmitter::~ParticleEmmitter()
 {
@@ -90,9 +90,9 @@ void ParticleEmmitter::createParticle(Particle *p, float Xpos, float Ypos, float
 
 		p->lifespan = ((((randomness + rand()) % 40 + 1))) / 10.0f;
 
-		p->movement[X] = (rand() % 10 - rand() % 10)*0.1;
-		p->movement[Y] = (rand() % 10 - rand() % 10)*0.1;
-		p->movement[Z] = (rand() % 10 - rand() % 10)*0.1;
+		p->movement[X] = (rand() % 10 - rand() % 10)*particleScale;
+		p->movement[Y] = (rand() % 10 - rand() % 10)*particleScale;
+		p->movement[Z] = (rand() % 10 - rand() % 10)*particleScale;
 	}
 
 	//If the particle system is creating a water fountain:
@@ -137,12 +137,13 @@ void ParticleEmmitter::createParticle(Particle *p, float Xpos, float Ypos, float
 
 }
 
-void ParticleEmmitter::createParticles(float Xpos, float Ypos, float Zpos, ParticleTypeEnum type)
+void ParticleEmmitter::createParticles(float Xpos, float Ypos, float Zpos, ParticleTypeEnum type, float scale)
 {
 	systemPull[Y] = -0.0105;
 	systemPull[X] = systemPull[Z] = 0.000f;
 	srand(time(0));
 	randomness = rand();
+	particleScale = scale;
 
 	initialPos[0] = Xpos;
 	initialPos[1] = Ypos;

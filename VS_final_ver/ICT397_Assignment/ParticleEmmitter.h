@@ -64,7 +64,7 @@ public:
 		* @param Zpos, the initial Z position of the particles 
 		* @return void
 		*/
-	void createParticles(float Xpos, float Ypos, float Zpos, ParticleTypeEnum type);
+	void createParticles(float Xpos, float Ypos, float Zpos, ParticleTypeEnum type, float scale);
 
 		/**
 		* @brief  updates the particles positions based on their velocitys
@@ -165,6 +165,7 @@ private:
 	fVector systemPull;
 	fVector initialPos;
 	int randomness;
+	float particleScale;
 	Particle particles[MAX_PARTICLES];
 };
 
