@@ -13,9 +13,12 @@ Terrain = {
 	},
     
 	HeightField = {
-		x = 128.0,
-		y = 0.3,
-		z = 150
+		iterations = 64,
+		hSize = 128.0,
+		minHeight = 1,
+		maxHeight = 128,
+		weight = 0.1,
+		random = false
 	},
 	ProceduralTexture1 = "pictures/lowestTile.tga",
 	ProceduralTexture2 = "pictures/lowTile.tga",

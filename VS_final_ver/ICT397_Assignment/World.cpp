@@ -45,9 +45,12 @@ void World::LoadLuaFiles()
 	terrainInfo.scalex = script.get<int>("Terrain.ScaleFactor.x");
 	terrainInfo.scaley = script.get<int>("Terrain.ScaleFactor.y");
 	terrainInfo.scalez = script.get<int>("Terrain.ScaleFactor.z");
-	terrainInfo.heightfieldX = script.get<int>("Terrain.HeightField.x");
-	terrainInfo.heightfieldY = script.get<float>("Terrain.HeightField.y");
-	terrainInfo.heightfieldZ = script.get<int>("Terrain.HeightField.z");
+	terrainInfo.iterations = script.get<int>("Terrain.iterations");
+	terrainInfo.hSize = script.get<int>("Terrain.hSize");
+	terrainInfo.minHeight = script.get<int>("Terrain.minHeight");
+	terrainInfo.maxHeight = script.get<int>("Terrain.maxHeight");
+	terrainInfo.weight = script.get<float>("Terrain.weight");
+	terrainInfo.random = script.get<bool>("Terrain.random");
 	terrainInfo.ProceduralTexture1 = script.get<std::string>("Terrain.ProceduralTexture1");
 	terrainInfo.ProceduralTexture2 = script.get<std::string>("Terrain.ProceduralTexture2");
 	terrainInfo.ProceduralTexture3 = script.get<std::string>("Terrain.ProceduralTexture3");
@@ -249,7 +252,8 @@ void World::InitialTerrain()
 	Terrain->loadHeightfield(terrainInfo.TerrainFile.c_str(), terrainInfo.ImageSize);
 	Terrain->setScalingFactor(terrainInfo.scalex, terrainInfo.scaley, terrainInfo.scalez);
 	//Terrain->generateHeightfield(terrainInfo.heightfieldX, terrainInfo.heightfieldY, terrainInfo.heightfieldZ);
-	Terrain->genFaultFormation(64, 128, 1, 128, 0.1, false);
+	//Terrain->genFaultFormation(64, 128, 1, 128, 0.1, false);
+	Terrain->genFaultFormation(terrainInfo.iterations, terrainInfo.hSize, terrainInfo.minHeight, terrainInfo.maxHeight, terrainInfo.weight, terrainInfo.random);
 	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture1.c_str());
 	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture2.c_str());
 	Terrain->addProceduralTexture(terrainInfo.ProceduralTexture3.c_str());

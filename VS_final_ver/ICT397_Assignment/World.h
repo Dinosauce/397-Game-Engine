@@ -33,8 +33,9 @@ struct terrainData
 {
 	string TerrainFile;
 	int ImageSize, scalex, scaley, scalez;
-	int heightfieldX, heightfieldZ;
-	float heightfieldY;
+	int iterations, hSize, minHeight, maxHeight;
+	float weight;
+	bool random;
 	string ProceduralTexture1, ProceduralTexture2, ProceduralTexture3, ProceduralTexture4;
 	int repeat;
 	bool textureMapping;
